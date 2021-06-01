@@ -1,0 +1,89 @@
+variable,ques_ne,ques_en,selected,input_type,group,asked_condition,asked_total
+i_econ_stop_business,के तपाईंले कोभिड-१९ महामारीको कारण आफ्नो व्यवसाय बन्द गर्नु पर्यो ?,Did you have to stop your business due to COVID-19 pandemic?,1,single-select,impact,general,110
+i_econ_stop_business_how_lng,कति समय सम्म तपाईंले आफ्नो व्यापार बन्द गर्नु पर्यो ?,For how long did you have to stop your business?,1,single-select,impact,business temporarily stopped,85
+i_covid_effect_business,महामारीको क्रममा यी मध्ये कुन कारकले तपाईको व्यवसाय अपरेसनलाई असर गर्यो?,Which of the following factors affected your business operations during the pandemic?,1,multi-select,impact,general,110
+i_covid_effect_business_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,other factors that affected business,0
+i_covid_effect_business_rnk1,तलका मध्ये कुन कुन कारकले तपाईको व्यवसायलाई सब भन्दा बढी प्रभावित गर्यो?,"Among the following, which factor affected your business the most?",0,ordinal,impact,more than one factors affected business,0
+i_covid_effect_business_rnk2,तलका मध्ये कुन कुन कारकले तपाईको व्यवसायलाई सब भन्दा बढी प्रभावित गर्यो?,"Among the following, which factor affected your business the most?",0,ordinal,impact,more than two factors affected business,0
+i_covid_effect_business_rnk3,तलका मध्ये कुन कुन कारकले तपाईको व्यवसायलाई सब भन्दा बढी प्रभावित गर्यो?,"Among the following, which factor affected your business the most?",0,ordinal,impact,more than three factors affected business,0
+i_wrkfrc_actn_during_covid,महामारीको कारणले तलका मध्ये कुन कार्यबल सम्बन्धित कार्य तपाईंको व्यापारले गरेको छ ?,Which of the following workforce-related actions did your business take due to the pandemic?,1,multi-select,impact,general,110
+i_wrkfrc_actn_during_covid_other,तपाईंको व्यवसाय ले अरु कुन कार्य (हरू) गर्यो ?,What other action(s) did your business take?,0,text,impact,other actions business take,0
+i_fin_effect_loan_avlblty,तलको कुन ऋण सम्बन्धित प्रभावहरू तपाईंको व्यवसायलाई महामारीको कारण सामना गर्नुपर्‍यो?,Which of the following loan related impacts did your business have to face due to the pandemic?,1,multi-select,impact,general,110
+i_fin_effect_loan_avlblty_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,,0
+i_fin_effect_asset_lqdty,महामारीका कारण तलका कुन सम्पत्ति सम्बन्धित असर तपाईंको व्यवसायले सामना गर्नु पर्‍यो?,Which of the following assets related impacts did your business have to face due to the pandemic?,1,multi-select,impact,general,110
+i_fin_effect_asset_lqdty_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,,0
+i_fin_effect_cost_invstmnt,महामारीका कारण तलका कुन कुन लागत सम्बन्धित असर तपाईंको व्यवसायले सामना गर्नु पर्‍यो?,Which of the following costs related impacts did your business have to face due to the pandemic?,1,multi-select,impact,general,110
+i_fin_effect_cost_invstmnt_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,,0
+i_geog_effect_loc_chng,तलका कुन स्थान सम्बन्धित प्रभावहरू तपाईंको व्यवसायले सामना गर्नु पर्‍यो?,Which of the following location related impacts did your business have to face due to the pandemic?,1,multi-select,impact,general,110
+i_geog_effect_loc_chng_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,,0
+i_fin_effct_eqty_ownrshp,तलको कुन इक्विटी र स्वामित्वसँग सम्बन्धित प्रभावहरू तपाईंको व्यवसायले सामना गर्नु पर्‍यो?,Which of the following equity and ownership related impacts did your business have to face due to the pandemic?,1,multi-select,impact,general,110
+i_fin_effct_eqty_ownrshp_other,अन्य खुलाउनुहोस्,Specify other,0,text,impact,,0
+i_fin_effect_other,के कुनै अन्य वित्तीय प्रभावहरू रहेका छन ?,Were there any other financial impacts?,0,single-select,impact,,110
+i_fin_effect_other_what,अन्य वित्तीय प्रभावहरू के के रहेका छन् ?,What were other financial impacts?,0,text,impact,,0
+b_n_emplyes_pre_covid,महामारी भन्दा पहिले तपाईको व्यवसायले कति जनालाई रोजगार दिने गर्थ्यो ?,How many people did your business employ before the pandemic?,0,single-select,impact,,110
+i_wrkfrc_size_chng_2020_v_2019,२०१९को तुलानामा महमारिको कारणले २०२० मा तपाईंको व्यवसायको कार्यबल क्षमतामा परिवर्तन भएको छ ?,"Compared to 2019, how has the size of your workforce changed in 2020?",1,single-select,impact,general,110
+i_fin_revenue_chng_2020_v_2019,२०१९को तुलानामा महमारिको कारणले २०२० मा तपाईंको व्यापार राजस्वमा परिवर्तन भएको छ ?,"Compared to 2019, how have your business revenues changed in 2020?",1,single-select,impact,general,110
+i_fin_savings_chng_2020_v_2019,२०१९को तुलानामा महमारिको कारणले २०२० मा तपाईंको व्यवसायको बचतमा परिवर्तन भएको छ ?,"Compared to 2019, how has your business’s savings changed in 2020?",1,single-select,impact,general,110
+b_services_offered_pre_covid,तपाईंको व्यवसायले महामारीको अगाडि कुन सेवाहरू प्रदान गर्थ्यो?,Which services did your business offer before the pandemic?,0,multi-select,impact,,110
+b_services_offered_pre_covid_other,तपाईंको व्यवसायले महामारीको अगाडि प्रदान गर्ने अन्य सेवाहरू तोक्नुहोस्?,Specify other services your business offered before the pandemic,0,text,impact,,0
+b_services_offered_post_covid,तपाईंको व्यवसायले महामारी पछि कुन सेवाहरू प्रदान गर्नेछ?,Which services does your business offer after the pandemic?,0,multi-select,impact,,91
+b_services_offered_post_covid_other,तपाईंको व्यवसायले महामारीको पछि प्रदान गर्ने अन्य सेवाहरू तोक्नुहोस्?,Specify other services your business will offer after the pandemic,0,text,impact,,0
+p_hlth_hhs_measures,स्वास्थ्य र सरसफाईसँग सम्बन्धित कुन उपायहरू तपाईंको व्यवसायले महामारीको बखत प्रयोग गर्यो?,Which of the following health and sanitation related measures did your business employ during the pandemic?,1,multi-select,preparedness,general,110
+p_hlth_hhs_measures_others,तपाईंको व्यवसायले महामारीको बखत अन्य के कस्तो उपायहरु प्रयोग गर्यो?,What other measure did your business employ in response to COVID-19?,0,text,preparedness,,0
+p_hlth_safety_measures,कामदारहरूको लागि हाल के कस्तो सुरक्षा उपायहरू रहेका छन् ?,What are some safety measures for workers that are currently in place?,1,multi-select,preparedness,general,91
+p_hlth_safety_measures_other,कामदारहरूको लागि अन्य सुरक्षा उपायहरू भए उल्लेख गर्नुहोस,Other safety measures for workers,0,text,preparedness,,0
+p_recvry_strategic_actions_internl,निम्न रणनीतिक कार्यहरू मध्ये कुन तपाईंको व्यवसायमा हाल महामारीको लागि एक प्रतिक्रियाको रूपमा उपक्रम (वा योजना) हो?,Which of the following strategic actions is your business currently undertaking (or planning to undertake) as a response to the pandemic?,1,multi-select,preparedness,general,91
+p_recvry_strategic_actions_internl_other,कृपया अन्य रणनीतिक कार्य निर्दिष्ट गर्नुहोस्,Please specify other strategic action,0,text,preparedness,,0
+p_recvry_strategic_actions_externl,तपाईको व्यवसायले हाल महामारीको प्रतिक्रियाका रूपमा बाह्य सरोकारवालाहरुसँग कस्तो रणनीतिक कार्यहरू गरिरहेको छ (वा गर्ने योजना बनाउँदैछ)?,What strategic actions is your business currently undertaking (or planning to undertake) with the external stakeholders as a response to the pandemic?,1,multi-select,preparedness,general,91
+p_recvry_strategic_actions_externl_other,कृपया अन्य रणनीतिक कार्य निर्दिष्ट गर्नुहोस्,Please specify other strategic action,0,text,preparedness,,0
+p_dedictd_covid_desk,के तपाईंको व्यवसायमा समर्पित कोभिड-१९ डेस्क वा कर्मचारी छन्?,Does your business have a dedicated COVID-19 desk or personnel?,1,single-select,preparedness,general,91
+n_rcvry_preferred_gov_policy,सरकारबाट कस्तो किसिमको नीति स्तर समर्थन तपाईंको व्यवसायको लागि सब भन्दा बढी सहयोगी हुन सक्छ?,What kind of policy level support from the government would be most helpful to your business?,1,multi-select,need,general,91
+n_rcvry_preferred_gov_policy_other,अन्य समर्थन नीति निर्दिष्ट गर्नुहोस्,Specify other support policy,0,text,need,,0
+o_expectd_problms_next_6_mnths,"आउँदो छ महिना भित्र, निम्न मध्ये कुन समस्या तपाईंको व्यवसायले सामना गर्नेछ?","Within the next six months, which of the following problems will your business face?",1,multi-select,need,general,91
+n_rcvry_preferred_loan_pybck_incntv,निम्न मध्ये कुन ऋण रकम फिर्ता सम्बन्धीत सहयोग तपाईंलाई सबैभन्दा बढी मद्दत पुर्याउँछ?,Which of the following loan payback-related assistance will be most helpful to you?,1,single-select,need,business will have difficulties in paying back existing loans,61
+n_rcvry_preferred_fund_aprvl_incntv,तलका कोषहरू सम्बन्धित कुन मद्दत तपाईंलाई सबैभन्दा बढी सहयोगी हुनेछ?,Which of the following funds-related assistance will be most helpful to you?,1,single-select,need,business will have difficulties to acquire additional loans or funds,33
+n_rcvry_preferred_fin_source,तपाईंको व्यावसायको लागि निम्न आर्थिक स्रोत मध्ये कुन उपयुक्त हुनेछ?,What is your preferred source (first choice) of financial assistance that is most appropriate for your business?,1,single-select,need,business will have difficulties to acquire additional loans or funds,33
+n_rcvry_preferred_fin_source_other,वित्तीय सहायताको अन्य स्रोत निर्दिष्ट गर्नुहोस्,Specify other source of financial assistance,0,text,need,,0
+n_rcvry_preferred_tax_asstnc,तलका करहरू सम्बन्धित कुन मद्दत तपाईंलाई सबैभन्दा बढी सहयोगी हुनेछ?,Which of the following tax-related assistance will be most helpful to you?,1,single-select,need,business will have difficulties in paying its taxes,50
+n_rcvry_preferred_tax_asstn_other,निम्न मध्ये कुन अपरेटिंग लागत सम्बन्धित सहयोग तपाइँलाई सब भन्दा बढी सहयोगी हुनेछ?,Which of the following operating costs-related assistance will be most helpful to you?,1,single-select,need,business will have difficulties in covering its operating costs,63
+n_rcvry_preferred_labor_asstnc,निम्न मध्ये कुन श्रम सम्बन्धी सहयोग तपाईंलाई सबैभन्दा बढी सहयोगी हुनेछ?,Which of the following labor-related assistance will be most helpful to you?,1,single-select,need,business will most likely face labor-related issues,25
+n_rcvry_preferred_outreach_other,निम्न मध्ये कुन व्यापार आउटरीच सम्बन्धित सहयोग तपाईलाई सब भन्दा बढी सहयोगी हुनेछ?,Which of the following business outreach-related assistance will be most helpful to you?,1,single-select,need,business will have difficulties in getting enough customers,60
+o_do_u_know_of_gov_schemes,पर्यटन व्यवसायको पुनरुद्धारका लागि सरकारले विभिन्न योजनाको घोषणा गरेको छ। के तपाईंले यस्ता कुनै योजनाहरू प्रयोग गर्नुभयो?,The government has announced different schemes for the revival of the tourism businesses. Have you used any of such schemes?,1,single-select,need,general,91
+o_how_efctv_gov_schemes,तपाईंले ती योजनाहरू कसरी प्रभावकारी पाउनुभयो?,How effective did you find those schemes?,1,multi-select,need,know about government schemes,34
+r_gov_scheme_which,तपाईंले कुन योजना प्रयोग गर्नुभयो?,Which scheme did you use?,0,text,need,used government schemes,0
+r_gov_scheme_which_how_efctv,तपाईंले यो योजना कत्तिको प्रभावकारी पाउनुभयो?,How effective did you find this scheme?,0,multi-select,need,used government schemes,0
+o_covid_how_long_it_last,महामारीको कारणले भएको विघटन कति लामो हुने आशा गर्नुहुन्छ?,How much longer do you expect the disruption due to COVID-19 to last?,1,single-select,outlook,general,110
+o_econ_impact_revenue_chng_21_v_19,२०१९को तुलानामा २०२१मा तपाईंको व्यवसायले कति राजस्व पाउने आशा गर्छ?,"Compared to 2019, how much revenues does your business expect to earn in 2021?",1,single-select,outlook,general,91
+o_econ_impact_wrkfrc_chng_21_v_19,२०१९को तुलानामा २०२१मा तपाईंको व्यवसायले कति प्रतिशत कामदार नियुक्त गर्नेछ?,"Compared to 2019, what percentage of workforce will your business employ in 2021?",1,single-select,outlook,general,91
+o_rcvry_biggest_diffclties,निम्न मध्ये कुन २०२१ मा तपाईंको सबैभन्दा ठूलो कठिनाइ हुन सक्छ?,Which of the following are likely to be your biggest difficulties in 2021?,1,multi-select,outlook,general,91
+o_rcvry_biggest_diffclties_other,अन्य कठिनाई तोक्नुहोस्,Specify other difficulty,0,text,outlook,,0
+o_rcvry_biggest_diffclties_rnk1,तपाईले छनौट गरेका कठिनाइहरूका बीच यी मध्ये कुन कठिनाइ तपाईंको व्यवसायको लागि सबैभन्दा गम्भीर हुन सक्छ?,"Among the difficulties you have chosen, which of these difficulties is likely to be most serious for your business?",0,ordinal,outlook,,0
+o_rcvry_biggest_diffclties_rnk2,तपाईले छनौट गरेका कठिनाइहरूका बीच यी मध्ये कुन कठिनाइ तपाईंको व्यवसायको लागि सबैभन्दा गम्भीर हुन सक्छ?,"Among the difficulties you have chosen, which of these difficulties is likely to be most serious for your business?",0,ordinal,outlook,,0
+o_rcvry_biggest_diffclties_rnk3,तपाईले छनौट गरेका कठिनाइहरूका बीच यी मध्ये कुन कठिनाइ तपाईंको व्यवसायको लागि सबैभन्दा गम्भीर हुन सक्छ?,"Among the difficulties you have chosen, which of these difficulties is likely to be most serious for your business?",0,ordinal,outlook,,0
+o_rcvry_biggest_support,तपाईको व्यवसायको लागी सब भन्दा ठूलो सहयोगी को हुनसक्छ ?,Who do you think will be the biggest support for your business in 2021?,1,single-select,outlook,general,91
+o_rcvry_biggest_support_other,अन्य खुलाउनुहोस्,Specify other,0,text,outlook,,0
+o_perm_stop_biz_start_new,के तपाईंले अन्य व्यवसाय सुरू गर्नुभयो?,Have you started other business(es)?,1,single-select,outlook,business permanently stopped,19
+o_perm_stop_biz_future_retrn_trsm_biz,के तपाइँ भविष्यमा पर्यटन व्यवसायमा फर्कनु हुनेछ ?,Do you intend to return to the tourism business in the future?,0,single-select,outlook,,16
+o_perm_stop_biz_new_biz_trsm_sector,तपाईंको नयाँ पर्यटन व्यवसाय कुन नयाँ क्षेत्रमा रहेको छ?,Which sub-sector is your new tourism business in?,0,multi-select,outlook,,0
+o_perm_stop_biz_new_biz_trsm_sector_other,अन्य क्षेत्र निर्दिष्ट गर्नुहोस्,Specify other sector,0,text,outlook,,0
+o_perm_stop_biz_new_biz_which,"पर्यटन बाहेक, तपाई अहिले कुन व्यवसायमा संलग्न हुनुहुन्छ?","Other than tourism, which business are you involved in now?",0,multi-select,outlook,,3
+o_perm_stop_biz_new_biz_which_other,तपाई अहिले संलग्न रहेको अन्य व्यवसाय निर्दिष्ट गर्नुहोस्,Specify other business that you are involved now,0,text,outlook,,0
+o_perm_stop_biz_start_new_job,के तपाईंले नयाँ काम शुरू गर्नुभयो?,Have you started a new job?,1,single-select,outlook,business permanently stopped,19
+o_perm_stop_biz_start_new_job_trsm_sector,तपाई हाल कुन काममा संलग्न हुनुहुन्छ?,Which job are you currently involved in now?,0,multi-select,outlook,,0
+o_perm_stop_biz_start_new_job_trsm_sector_other,अन्य खुलाउनुहोस्,Specify other,0,text,outlook,,0
+o_perm_stop_biz_new_job_sector,तपाई अहिले कुन क्षेत्रमा संलग्न हुनुहुन्छ?,Which sector are you involved in now?,0,multi-select,outlook,,2
+o_perm_stop_biz_new_job_sector_other,अन्य क्षेत्र निर्दिष्ट गर्नुहोस्,Specify other sector,0,text,outlook,,0
+m_name_business,व्यवसायको नाम,Name of the business,0,text,general,,0
+m_address_business,व्यवसायको ठेगाना,Address of the business,0,text,general,,0
+m_dist_business,जिल्ला,District,0,single-select,general,,0
+m_mun_business,गाउँपलिका / नगरपालिका,Gaunpalika/Nagarpalika,0,single-select,general,,0
+m_mun_business_other,गाउँपलिका / नगरपालिका,Gaunpalika/Nagarpalika,0,text,general,,0
+m_ward,वार्ड,Ward,0,integer,general,,0
+m_house_no,घर नम्बर,House no.,0,text,general,,0
+m_street,सडकको नाम,Street/Road name,0,text,general,,0
+m_coodinates,स्थान (अक्षांश / देशांतर) तपाईंको व्यवसायको ठेगाना,Location (Latitude/Longitude) address of your business,0,coordinates,general,,0
+m_biz_type,व्यवसायको प्रकार,Type of business,0,single-select,general,,0
+m_biz_type_other,अन्य व्यवसाय प्रकार निर्दिष्ट गर्नुहोस्,Specify other business type,0,text,general,,0
+m_biz_years_in_operation,यो कहिलेदेखि काम गर्दै आएको छ?,How long has this been in operation for?,0,single-select,general,,0
+m_biz_unn_membrshps,के तपाईको व्यवसाय तलका मध्ये कुनै सदस्य रहेको छ?,Is your business a member of any of the following?,0,multi-select,general,,0
+m_biz_unn_membrshps_other,अन्य निर्दिष्ट गर्नुहोस्,Specify other,0,text,general,,0
