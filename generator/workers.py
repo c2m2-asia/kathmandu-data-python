@@ -4,6 +4,7 @@ import psycopg2
 from sqlalchemy import create_engine
 from core.univariate import Univariate
 from core.bivariate import Bivariate
+from core.downloads import generate_download_data
 pd.options.mode.chained_assignment = None
 
 
@@ -28,6 +29,13 @@ rename_columns = {
 workers_raw_data = pd.read_excel('./raw/workers_data.xlsx')
 workers_variable_map =  pd.read_excel('./data/generated_workers_variable_map.xlsx')
 workers_labels_map = pd.read_excel('./data/generated_workers_labels_map.xlsx')
+workers_variable_column_map = pd.read_csv('./data/workforce_variable_column_map.csv')
+
+workers_downloads_data = generate_download_data(
+                                raw_data=workers_raw_data, 
+                                variable_label_map=workers_labels_map,
+                                variable_column_map=workers_variable_column_map)
+workers_downloads_data.to_sql('workers_downloads_data', engine, index=False, if_exists='replace')
 
 workers_raw_data.rename(rename_columns, axis=1, inplace=True)
 binary_map = {1:0, 2: 1, None: None}
@@ -40,9 +48,9 @@ workers_univariate_stats = workers_univariate.generate_univariate()
 workers_univariate.generate_variable_map(workers_univariate_stats, 'workers')
 workers_univariate.labels_map.to_excel('./data/generated_workers_labels_map.xlsx', index=False)
 workers_univariate_stats.to_sql('workers_univariate_stats', engine, index=False, if_exists='replace')
-# workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
+workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
 
 workers_bivariate = Bivariate(raw_data=workers_raw_data, variable_map=workers_variable_map, labels_map=workers_labels_map)
 workers_bivariate_stats = workers_bivariate.generate_bivariate()
 workers_bivariate_stats.to_sql('workers_bivariate_stats',  engine, index=False, if_exists='replace')
-# workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)
+workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)

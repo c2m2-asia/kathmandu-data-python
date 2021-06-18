@@ -73,7 +73,7 @@ class Bivariate():
     def create_label_dict(self, x_variable, y_variable, select_type):
         if select_type=='multiselect':
             y_variable = y_variable.split('__')[0]
-        labels_list = ['value', 'label__en', 'label__ne', 'variable_group', 'label_index']
+        labels_list = ['value', 'label__en', 'label__ne', 'label_index']
         x_label_dict = self.labels_map.loc[self.labels_map['variable']==x_variable][labels_list].sort_values('label_index').set_index('value').to_dict()
         y_label_dict = self.labels_map.loc[self.labels_map['variable']==y_variable][labels_list].sort_values('label_index').set_index('value').to_dict()
         return x_label_dict, y_label_dict
@@ -110,6 +110,7 @@ class Bivariate():
     
     
     def add_labels(self, df, x_label_dict, y_label_dict, x_variable, y_variable, select_type):
+        # print()
         df['y_label__en'] = df['y_value'].apply(lambda x: y_label_dict['label__en'][x])
         df['y_label__ne'] = df['y_value'].apply(lambda x: y_label_dict['label__ne'][x])
         df['x_label__en'] = df['x_value'].apply(lambda x: x_label_dict['label__en'][x])
@@ -117,7 +118,7 @@ class Bivariate():
         asked_total_dict = self.variable_map[['variable', 'asked_total']].set_index('variable').to_dict()['asked_total']
         df['asked_total'] = df['y_variable'].apply(func=lambda x: asked_total_dict[x])
         df['perc_of_total'] = df['total'] / df['asked_total']
-        df['variable_group'] = y_label_dict['variable_group'][1]
+        df['variable_group'] = self.variable_map[self.variable_map['variable']==y_variable.split('__')[0]]['group'].tolist()[0]
         df = df[['x_variable', 'x_value', 'x_label__en','x_label__ne', 'y_variable', 'y_value','y_label__en','y_label__ne', 'total','perc_of_total','asked_total', 'variable_group', 'label_index']]
         return df
     

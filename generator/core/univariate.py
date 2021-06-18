@@ -58,7 +58,7 @@ class Univariate():
         self.labels_map['variable_label'] = self.variable_value(self.labels_map['variable'], self.labels_map['value'])
         
     def s_select_generate_total(self, df):
-        label_dict = self.labels_map.set_index('variable_label')[['label__en', 'label__ne', 'variable_group', 'universe']].transpose().to_dict()
+        label_dict = self.labels_map.set_index('variable_label')[['label__en', 'label__ne']].transpose().to_dict()
         group_dict = self.variable_map.set_index('variable')[['group']].transpose().to_dict()
         s_select_univariate = []
         variables = df['variable'].unique()
@@ -84,7 +84,7 @@ class Univariate():
 
                 
     def m_select_generate_total(self, df):
-        label_dict = self.labels_map.set_index('variable_label')[['label__en', 'label__ne', 'variable_group', 'universe']].transpose().to_dict()
+        label_dict = self.labels_map.set_index('variable_label')[['label__en', 'label__ne']].transpose().to_dict()
         group_dict = self.variable_map.set_index('variable')[['group']].transpose().to_dict()
         variable_label = {}
         for i in df['variable']:
