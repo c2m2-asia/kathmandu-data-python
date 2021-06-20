@@ -1,0 +1,109 @@
+Variable,ques__en,ques__ne
+b_empl_occpatn_pre_covid,What was your main occupation before Covid-19?,कोभिड-१९ भन्दा पहिले तपाईंँको मुख्य पेशा के थियो ?
+b_empl_occpatn_pre_covid_other,explain others if any,अन्य खुलाउनुहोस्
+b_empl_frml_agrmnt_status_pre_covid,Did you have a formal employment contract with your employer while working in the tourism sector before COVID-19?,कोभिड-१९ भन्दा पहिले हजुरले पर्यटन क्षेत्रमा काम गर्दा रोजगारदातासँग रोजगारीको लिखित सम्झौता (contract) गर्नुभएको छ/थियो?
+b_empl_had_pan_pre_covid,Did you have a PAN (Personal Account Number) number before covid?,कोभिड-१९ भन्दा पहिले हजुरको पान न. (Personal Account Number) थियो/थिएन ?
+b_empl_wrk_type,Which of the following characteristics apply to your employment before the commencement of COVID-19?,कोभिड-१९ सुरु हुनु भन्दा पहिलेको आफ्नो रोजगारलाई निम्न मध्ये कुन-कुन लागु हुन्छ?
+b_empl_wrk_type_other,explain others if any,अन्य खुलाउनुहोस्
+b_empl_wrk_sesonal_period,"On average, how many months (in a year) did you used to work in the tourism sector?",वर्षमा कति महिना जति पर्यटन सम्बन्धि काम गर्नु हुन्थ्यो?
+i_empl_jb_prsnt_status,Are you still working in the tourism sector?,के तपाईंं अझै पर्यटन क्षेत्रमै काम गर्दै हुनुहुन्छ ?
+i_empl_jb_in_tourism_change,Did you have to change your profession within the tourism sector?,के हजुरले पेशा परिवर्तन गर्नुपर्यो?
+i_empl_jb_in_tourism_changed_to,What are your current occupations in the tourism sector?,अहिले पर्यटन क्षेत्रमा कुन-कुन पेशा गर्दै हुनुहुन्छ ?
+i_empl_jb_in_tourism_changed_to_other,explain others if any,अन्य खुलाउनुहोस्
+i_empl_emplyr_in_tourism_change_post_covid,Did you have to change the employer in the tourism sector?,के हजुरले पर्यटन क्षेत्रको रोजगारदाता परिवर्तन गर्नुपर्यो?
+i_empl_emplyr_in_tourism_prsnt_frml_agrmnt_status,Have you signed a written contract for current employment?,अहिले गर्दै आएको रोजगारीको लिखित सम्झौता (contract) गर्नुभएको छ?
+i_empl_in_tourism_paid_tax_post_covid,Do you have to pay taxes on your income in your current employment?,अहिले गर्दै आएको रोजगारीमा के तपाईंले राज्यलाई कर तिर्नुपर्छ?
+i_empl_jb_prsnt_status_prtl_switch_new_sctr,What other areas are you working in currently?,अन्य कुन-कुन क्षेत्रमा काम गर्दै हुनुहुन्छ ?
+i_empl_jb_prsnt_status_prtl_switch_new_sctr_other,explain others if any,अन्य खुलाउनुहोस्
+i_empl_jb_in_tourism_change_add,Did you have to change your tourism-related occupation?,के हजुरले पर्यटन क्षेत्रमा गर्दै आएको पेशा परिवर्तन गर्नु पर्यो?
+i_empl_jb_in_tourism_changed_to_add,What are your current occupations in the tourism sector?,अहिले पर्यटन क्षेत्रमा कुन-कुन पेशा गर्दै हुनुहुन्छ ?
+i_empl_jb_in_tourism_changed_to_add_other,explain others if any,अन्य खुलाउनुहोस्
+i_empl_emplyr_in_tourism_change_post_covid_add,Did you have to change the employer in the tourism sector?,के हजुरले पर्यटन क्षेत्रको रोजगारदाता परिवर्तन गर्नुपर्यो?
+i_empl_emplyr_in_tourism_prsnt_frml_agrmnt_status_add,Do you have a formal employment contract in your current job/occupation?,अहिले गर्दै आएको पर्यटन क्षेत्रको रोजगारीको लिखित सम्झौता (contract) गर्नुभएको छ?
+i_empl_in_tourism_paid_tax_post_covid_add,Do you have to pay taxes to the state for your current employment in the tourism sector?,अहिले गर्दै आएको पर्यटन क्षेत्रको रोजगारीमा के तपाईंंले राज्यलाई कर तिर्नुपर्छ?
+i_empl_jb_prsnt_status_cmplt_switch_new_sctr,Which of the following works/occupations are you currently involved in?,हाल कुन क्षेत्रमा काम गर्दै हुनुहुन्छ ?
+i_empl_jb_prsnt_status_cmplt_switch_new_sct_other,explain others if any,अन्य खुलाउनुहोस्
+i_lvlhd_domicile_chng_self,"Due to COVID-19, did you have to migrate to a different location?",कोभिड-१९ को कारणले के तपाईंं आफु बस्दै आएको ठाउँ परिवर्तन गर्नुपर्यो?
+i_lvlhd_domicile_chng_self_temp_tm_prd,For how long did you have to migrate to this location?,कति समयको लागि बसाई सराई भयो?
+i_lvlhd_domicile_chng_self_perm_new_dist,Which district have you migrated to?,अहिले कुन जिल्लामा सर्नु भएको छ ?
+i_lvlhd_domicile_chng_self_perm_new_mun,Which Rural Municipality / Municipality  have you migrated to?,अहिले कुन गाउँपालिका / नगरपालिकामा सर्नु भएको छ ?
+i_lvlhd_domicile_chng_self_perm_new_mun_other,Other Rural Municipality / Municipality,अन्य गाउँपालिका / नगरपालिका
+i_lvlhd_domicile_chng_fml,"Due to COVID-19, did your family have to migrate to a different location?",कोभिड-१९ को कारणले के तपाईंंको परिवारले बस्दै आएको ठाउँ परिवर्तन गर्नुपर्यो ?
+i_lvlhd_domicile_chng_fml_new_dist,Which district have they migrated to?,अहिले कुन जिल्लामा सरेका छन् ?
+i_lvlhd_domicile_chng_fml_new_mun,Which Rural Municipality / Municipality  have they migrated to?,अहिले कुन गाउँपालिका / नगरपालिकामा सरेका छन् ?
+i_lvlhd_domicile_chng_fml_new_mun_other,Other Rural Municipality / Municipality,अन्य गाउँपालिका / नगरपालिका
+i_hlth_covid_infectn_self,Have you ever been infected by COVID-19?,के तपाईंंलाई कोभिड-१९ लागेको छ/थियो?
+i_hlth_covid_infectn_self_time,When did you contract COVID-19?,तपाईंँलाई कोभिड-१९ कहिले लागेको थियो?
+i_hlth_covid_infectn_family,Have any other family members been infected by COVID-19?,के तपाईंँको परिवारमा अन्य कसैलाई कोभिड-१९ लागेको छ/थियो?
+i_empl_covid_effects,Did you experience any of the following due to the economic downturn brought about by covid-19?,कोभिड-१९ ले ल्याएको आर्थिक मन्दीका कारणले गर्दा के तपाईंंले निम्न मध्ये कुनै भोग्नुपर्यो?
+i_empl_covid_effects_other,"explain others, if any",अन्य खुलाउनुहोस्
+i_empl_lst_date_full_salary,When was the last time you received your full salary (or full income)?,पछिल्लो पल्ट आफ्नो पूर्ण तलब (वा आम्दानी) पाउनुभएको कति भयो?
+i_econ_covid_effects,Due to have to any of the following due to COVID-19?,कोभिड-१९ को कारणले गर्दा के तपाईंंले निम्न मध्ये कुनै भोग्नु/गर्नु पर्यो?
+i_econ_covid_effects_other,"explain others, if any",अन्य खुलाउनुहोस्
+i_econ_incm_chng_self,How did your total income change in 2020 compared to 2019?,सन् २०१९ को तुलनामा सन् २०२० मा तपाईंंको कुल आय कसरी परिवर्तन भयो?
+i_mental_hlth_think,Do you have to try hard (force yourself) not to think about the effects of COVID-19 on your livelihood?,कोभिड-१९ ले आफ्नो जीविकोपार्जनमा ल्याएको प्रतिकुल असरको बारे धेरै नसोच्न वा यसबाट आफूलाई टाढा राख्न निकै प्रयास गर्नुपरेको छ?
+i_mental_hlth_overconcerned,"Do you find yourself being unnaturally alert, frightened or terrified thinking about the effects of COVID-19 on your livelihood?","अस्वभाविक रुपमा सतर्क रहने, झस्किने वा आत्तिने हुनुभएको छ ?"
+i_mental_hlth_detached,"Do you feel isolated from the people, activities and environment around you?","आफ्नो वरिपरी भएका मानिसहरु, क्रियाकलाप र वातावरणबाट टाढिएको अनुभव गर्नुभएको छ?"
+i_mental_hlth_neg_think,Do you have bad dreams (or find yourself worrying unwillingly) about the ill effects of COVID-19?,कोभिड-१९ले ल्याएको वा ल्याउन सक्ने परिस्थितिको बारे डरलाग्दो सपना देख्ने वा यसको बारेमा नचाहँदा नचाहँदै पनि सोच्न पुग्ने स्थितिमा पुग्नुभएको छ?
+i_mental_hlth_blame,"For the hardships caused by COVID-19, do you often find yourself blaming others or yourself?","कोभिड-१९ले गर्दा भएका समस्याहरु हुनुमा आत्मग्लानी महसुस गर्नुभएको, वा आफैलाई वा अरुलाई दोष दिने गर्नुभएको छ?"
+i_mental_hlth_social,Have you felt that family or social pressure has increased due to Covid-19?,कोभिड-१९ले गर्दा पारिवारिक वा सामाजिक दवाब अत्याधिक बढेको महसुस गर्नुभएको छ?
+i_mental_hlth_fml,Has Covid-19 caused animosity or strife among your family members?,कोभिड-१९ले गर्दा परिवार सदस्यबीच वैमनस्यता वा कलह बढेको छ ?
+i_mental_hlth_therapy,Have you taken any kind of health counseling service for the mental stress brought by Covid-19?,कोभिड-१९ले ल्याएको मानसिक तनावको लागि कुनै किसिमको स्वास्थ्य परामर्श सेवा लिनुभएको छ?
+p_econ_altrnt_incm_src_self_fml_flg,Do you or your family have an alternative source of income other than tourism?,तपाईंं अथवा तपाईंँको परिवारको पर्यटन बाहेक वैकल्पिक आय श्रोत छ?
+p_econ_altrnt_incm_src_self_fml,What alternative source of income do you have?,वैकल्पिक आय श्रोत छान्नुहोस्
+p_econ_altrnt_incm_src_self_fml_other,explain others if any,अन्य खुलाउनुहोस्
+p_econ_self_savings_chng_today_v_19,"Compared to the end of 2019, how much savings do you have now?",सन् २०१९ को तुलनामा तपाईंँको बचत अहिले कति बाँकी रहेको छ ?
+p_econ_hhd_items_pre_covid,Which of the following assets and amenities did your family have before Covid-19?,कोभिड-१९ भन्दा पहिले तपाईंँको परिवारमा निम्न मध्ये कुन-कुन सुविधाहरू थिए ?
+p_econ_hhd_items_post_covid,Which of the following assets and amenities does your family have after Covid-19?,कोभिड-१९ भन्दा पछी तपाईंँको परिवारमा निम्न मध्ये कुन-कुन सुविधाहरू छन् ?
+p_econ_outstndng_loans_self,Do you have an outstanding debt?,के तपाईंँको कुनै ऋण तिर्न बाँकी छ ?
+p_lvlhd_num_depndnt_fml_membrs_pre_covid,"How many family members, including yourself, depended on your income before Covid-19?",कोभिड-१९ भन्दा पहिले तपाईंँको आयमा तपाईंँ लगायत कति जना परिवार सदस्यहरू निर्भर थिए?
+p_lvlhd_num_depndnt_fml_membrs_post_covid,"How many family members, including yourself, depend on your income after Covid-19?",कोभिड-१९ भन्दा पछी तपाईंँको आयमा तपाईंँ लगायत कति जना परिवार सदस्यहरू निर्भर छन् ?
+p_lvlhd_num_depndnt_need_fml_membrs_post_covid,How many of your family members’ basic needs can be met by your current income?,तपाईंँको हालको आय कति जना परिवार सदस्यको आधारभूत आवश्यकता पूर्ति गर्न पर्याप्त छ ?
+p_hlth_vaccinated_self,Have you been vaccinated against Covid-19?,के तपाईंँले कोभिड-१९ को खोप लगाउनुभएको छ ?
+p_hlth_received_hhs_training_self,Have you received any health and safety training related to Covid-19?,के तपाईंँले कोभिड-१९ सम्बन्धी स्वास्थ्य तथा सुरक्षाको तालिम प्राप्त गर्नुभएको छ ?
+p_hlth_hhs_training_src,Who provided this training?,यो तालिम कहाँबाट प्राप्त गर्नुभयो?
+p_hlth_hhs_training_src_other,explain others if any,अन्य खुलाउनुहोस्
+p_hlth_info_covid_src,Which of the following sources do you mainly use to get information about Covid-19? (Choose three main sources),कोभिड-१९ को बारेमा जानकारी पाउन निम्न मध्ये कुन-कुन स्रोतहरू प्रयोग गर्नुहुन्छ? (मुख्य तीनवटा छान्नुहोस्)
+p_hlth_info_covid_src_other,explain others if any,अन्य खुलाउनुहोस्
+p_lvlhd_lrnd_new_skills,Did you learn any new skills when the your tourism-related job/profession was halted due to Covid-19?,कोभिड-१९ को कारण पर्यटन व्यवसाय बन्द रहँदा के तपाईंंले कुनै नयाँ सीप सिक्नुभयो?
+p_lvlhd_what_new_skills,What skills did you learn?,कुन सीप सिक्नुभयो ?
+n_rcvry_preferred_incentives,Which of the following would help in reducing the effects of COVID-19 on you?,कोभिड-१९ ले पारेको असर कम गर्न तपाईंँलाई निम्न मध्ये कुन-कुन उपयुक्त हुन्छन् ?
+n_rcvry_preferred_incentives_other,explain others if any,अन्य खुलाउनुहोस्
+n_rcvry_preferred_incentives_rnk_1,Which of the following will be most beneficial for you?,निम्नमध्ये सबैभन्दा महत्त्वपूर्ण सुबिधा कुन हो ?
+n_rcvry_preferred_incentives_rnk_2,Which of the following will be most beneficial for you?,निम्नमध्ये सबैभन्दा महत्त्वपूर्ण सुबिधा कुन हो ?
+n_rcvry_preferred_incentives_rnk_3,Which of the following will be most beneficial for you?,निम्नमध्ये सबैभन्दा महत्त्वपूर्ण सुबिधा कुन हो ?
+n_rcvry_preferred_new_skills,What skills do you want to learn?,तपाईंँ कुन सीप सिक्न चाहनुहुन्छ ?
+n_rcvry_preferred_new_job,What kind of job/profession are you looking for?,तपाईंँ कस्तो रोजगारी खोज्दै हुनुहुन्छ ?
+o_econ_impact_fml_income_chng_21_v_19,What is the estimated income of your family in 2021 compared to 2019?,सन् २०१९ को तुलनामा सन् २०२१ मा तपाईंंको परिवारको आय कति रहने अनुमान छ?
+o_econ_impact_how_long_months,How much longer will COVID-19 affect your livelihood? Provide your best estimate.,कोभिड-१९ ले तपाईंंको जिविकोपार्जनमा पारेको असर अझै कति समय सम्म रहला जस्तो छ ?
+o_empl_status_to_nrml_how_long_months,How long will it take for your employment to return to normal after the tourism sector is up and running again? Provide your best estimate.,पर्यटन क्षेत्र सुचारु भएपश्चात आफ्नो रोजगार पहिलेको जस्तो अवस्थामा पुर्याउन कति समय लाग्ला?
+o_rcvry_chllng_trsm_revival,What are the major challenges for the revival of the tourism sub-sector you are involved in?,तपाईंं संलग्न रहेको पर्यटन क्षेत्रको पुन:उत्थानको निम्ति प्रमुख चुनौतीहरू के-के छन् ?
+o_rcvry_chllng_trsm_revival_other,explain others if any,अन्य खुलाउनुहोस्
+o_rcvry_chllng_trsm_revival_rnk_1,Solving which of the following will help you the most?,निम्नमध्ये कुन चुनौतीको समाधान सबैभन्दा महत्त्वपूर्ण छ ?
+o_rcvry_chllng_trsm_revival_rnk_2,Solving which of the following will help you the most?,निम्नमध्ये कुन चुनौतीको समाधान सबैभन्दा महत्त्वपूर्ण छ ?
+o_rcvry_chllng_trsm_revival_rnk_3,Solving which of the following will help you the most?,निम्नमध्ये कुन चुनौतीको समाधान सबैभन्दा महत्त्वपूर्ण छ ?
+o_impct_to_self_nxt_6_mnths,"If the current situation continues for the next 6 months, which of the following difficulties will you face?",आउँदो ६ महिना सम्म यही परिस्थिति रहेमा निम्नमध्ये कुन-कुन अवस्था तपाईंंले भोग्नु पर्ने हुन्छ?
+o_impct_to_self_nxt_6_mnths_other,explain others if any,अन्य खुलाउनुहोस्
+o_impct_to_self_nxt_6_mnths_rnk_1,Which of the following will be your biggest problem?,निम्नमध्ये कुन समस्याले तपईंलाई सबैभन्दा गाह्रो पार्छ ?
+o_impct_to_self_nxt_6_mnths_rnk_2,Which of the following will be your biggest problem?,निम्नमध्ये कुन समस्याले तपईंलाई सबैभन्दा गाह्रो पार्छ ?
+o_impct_to_self_nxt_6_mnths_rnk_3,Which of the following will be your biggest problem?,निम्नमध्ये कुन समस्याले तपईंलाई सबैभन्दा गाह्रो पार्छ ?
+o_impct_has_assets_for_addtnl_loan,Do you have the necessary collateral/securities to secure additional loans?,थप ऋण लिन आवश्यक धितो उपलब्ध छ?
+m_name,Name,नाम
+m_gender,Gender,लिङ्ग
+m_age,Age,उमेर
+m_edu_levl,Completed educational level,पूरा गरेको शैक्षिक तह
+m_years_of_experience,How long have you been working in the tourism sector?,तपाईंँ पर्यटन क्षेत्रमा काम गर्नुभएको कति समय भयो?
+b_empl_trsm_major_districts,Select all the districts where you do your major tourism-related works,तपाईंंले पर्यटन सम्बन्धी काम गर्ने मुख्य जिल्ला कुन हुन् ?
+b_empl_trsm_org,Are you a member of any of the following?,तपाईंं निम्न मध्ये कुन-कुन संगठनमा आवद्ध हुनुहुन्छ ?
+b_empl_trsm_org_other,explain others if any,अन्य खुलाउनुहोस्
+m_dist_perm,Permanent District,स्थायी जिल्ला
+m_mun_perm,Permanent Rural Municipality / Municipality,स्थायी गाउँपालिका / नगरपालिका
+m_mun_perm_other,Other permanent Rural Municipality / Municipality,अन्य स्थायी गाउँपालिका / नगरपालिका
+m_ward_perm,Permanent Ward number,स्थायी वडा नम्बर
+m_dist_temp,Temporary District,अस्थाई जिल्ला
+m_mun_temp,Temporary Rural Municipality / Municipality,अस्थाई गाउँपालिका / नगरपालिका
+m_mun_temp_other,Other temporary Rural Municipality / Municipality,अन्य अस्थाई गाउँपालिका / नगरपालिका
+m_ward_temp,Temporary Ward number,अस्थाई वडा नम्बर
+m_phone,Phone number,फोन न.
+m_email,E-mail,ई-मेल
+i_mental_hlth,Did you suffer any of the following psychological impact due to covid-19?,कोभिड-१९ to को कारणले गर्दा तपाईंले निम्न मध्ये कुनै पनि मनोवैज्ञानिक प्रभावहरू भोग्नुभयो?
