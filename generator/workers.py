@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 from core.univariate import Univariate
 from core.bivariate import Bivariate
 from core.downloads import generate_download_data
+from core.helper_functions import workers_derived_variables, workers_derive_infection
+from core.constants import workers_mental_health_columns, workers_econ_effect_columns
 pd.options.mode.chained_assignment = None
 
 
@@ -14,16 +16,6 @@ engine = create_engine('postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}
         host='localhost',
         port='5432',
         db='c2m2'))
-
-rename_columns = {
-                    'i_mental_hlth_think': 'i_mental_hlth__1', 
-                    'i_mental_hlth_overconcerned': 'i_mental_hlth__2', 
-                    'i_mental_hlth_detached': 'i_mental_hlth__3',
-                    'i_mental_hlth_neg_think': 'i_mental_hlth__4',
-                    'i_mental_hlth_blame': 'i_mental_hlth__5',
-                    'i_mental_hlth_social': 'i_mental_hlth__6',
-                    'i_mental_hlth_fml': 'i_mental_hlth__7'
-                }
 
 
 workers_raw_data = pd.read_excel('./raw/workers_data.xlsx')
@@ -37,12 +29,14 @@ workers_downloads_data = generate_download_data(
                                 variable_column_map=workers_variable_column_map)
 workers_downloads_data.to_sql('workers_downloads_data', engine, index=False, if_exists='replace')
 
-workers_raw_data.rename(rename_columns, axis=1, inplace=True)
+workers_raw_data.rename(workers_mental_health_columns, axis=1, inplace=True)
+workers_raw_data.rename(workers_econ_effect_columns, axis=1, inplace=True)
 binary_map = {1:0, 2: 1, None: None}
-for i in rename_columns.values():
+for i in workers_mental_health_columns.values():
     workers_raw_data[i] = workers_raw_data[i].apply(func=lambda x: binary_map[x])
 
-
+workers_raw_data['i_lvlhd_domicile_chng_self_fml'] = workers_derived_variables(workers_raw_data['i_lvlhd_domicile_chng_self'], workers_raw_data['i_lvlhd_domicile_chng_fml'])
+workers_raw_data['i_hlth_covid_infectn_self_fml']= workers_derive_infection(workers_raw_data['i_hlth_covid_infectn_self'], workers_raw_data['i_hlth_covid_infectn_family'])
 workers_univariate = Univariate(raw_data=workers_raw_data, variable_map=workers_variable_map, labels_map=workers_labels_map)
 workers_univariate_stats = workers_univariate.generate_univariate()
 workers_univariate.generate_variable_map(workers_univariate_stats, 'workers')
