@@ -23,11 +23,15 @@ workers_variable_map =  pd.read_excel('./data/generated_workers_variable_map.xls
 workers_labels_map = pd.read_excel('./data/generated_workers_labels_map.xlsx')
 workers_variable_column_map = pd.read_csv('./data/workforce_variable_column_map.csv')
 
-workers_downloads_data = generate_download_data(
+workers_impact_downloads_data, workers_preparedness_downloads_data, workers_needs_downloads_data, workers_outlook_downloads_data, workers_metadata_downloads_data = generate_download_data(
                                 raw_data=workers_raw_data, 
                                 variable_label_map=workers_labels_map,
                                 variable_column_map=workers_variable_column_map)
-workers_downloads_data.to_sql('workers_downloads_data', engine, index=False, if_exists='replace')
+workers_impact_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
+workers_preparedness_downloads_data.to_sql('workers_preparedness_downloads_data', engine, index=False, if_exists='replace')
+workers_needs_downloads_data.to_sql('workers_needs_downloads_data', engine, index=False, if_exists='replace')
+workers_outlook_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
+workers_metadata_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
 
 workers_raw_data.rename(workers_mental_health_columns, axis=1, inplace=True)
 workers_raw_data.rename(workers_econ_effect_columns, axis=1, inplace=True)

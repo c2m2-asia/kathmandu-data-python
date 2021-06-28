@@ -22,11 +22,15 @@ business_labels_map = pd.read_excel('./data/generated_business_labels_map.xlsx')
 downloads_business_labels_map = pd.read_excel('./data/generated_business_labels_map_downloads.xlsx')
 business_variable_column_map = pd.read_csv('./data/business_variable_column_map.csv')
 
-business_downloads_data = generate_download_data(
+business_impact_downloads_data, business_preparedness_downloads_data, business_needs_downloads_data, business_outlook_downloads_data, business_metadata_downloads_data = generate_download_data(
                                 raw_data=business_raw_data, 
                                 variable_label_map=downloads_business_labels_map,
                                 variable_column_map=business_variable_column_map)
-business_downloads_data.to_sql('business_downloads_data', engine, index=False, if_exists='replace')
+business_impact_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
+business_preparedness_downloads_data.to_sql('workers_preparedness_downloads_data', engine, index=False, if_exists='replace')
+business_needs_downloads_data.to_sql('workers_needs_downloads_data', engine, index=False, if_exists='replace')
+business_outlook_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
+business_metadata_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
 
 business_raw_data['o_perm_stop_biz_start_new_biz_job'] = stopped_business_cond(business_raw_data['o_perm_stop_biz_start_new__1'], 
                                                                  business_raw_data['o_perm_stop_biz_start_new__2'],
