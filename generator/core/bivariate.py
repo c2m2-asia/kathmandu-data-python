@@ -23,7 +23,7 @@ class Bivariate():
         bivariate_stats['queueId'] = bivariate_stats['queueIndex'] +  weight* bivariate_stats['index']
         bivariate_stats = bivariate_stats.sort_values(by='queueId')
         bivariate_stats['index'] = list(range(1, len(bivariate_stats)+1))
-        bivariate_stats.drop(['queueId', 'queueIndex'], axis=1, inplace=True)
+        bivariate_stats.drop(['queueId', 'queueIndex', 'labelIndex', 'askedTotal'], axis=1, inplace=True)
         return bivariate_stats
         
     def generate_singleselect(self):

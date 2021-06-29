@@ -1,0 +1,17 @@
+version: "3"
+services:
+  web:
+    build: ./generator/
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./generator/:/home/generator/
+    depends_on:
+      - db
+  db:
+    container_name: c2m2-db-postgres
+    image: "postgres:latest"
+    env_file: 
+        - ./.env
+    ports:
+        - "5555:5432"

@@ -23,7 +23,7 @@ class Univariate():
         univariate_stats['queueId'] = univariate_stats['queueIndex'] +  weight* univariate_stats['index']
         univariate_stats = univariate_stats.sort_values(by='queueId')
         univariate_stats['index'] = list(range(1, len(univariate_stats)+1))
-        univariate_stats.drop(['queueId', 'queueIndex'], axis=1, inplace=True)
+        univariate_stats.drop(['queueId', 'queueIndex', 'labelIndex', 'universe'], axis=1, inplace=True)
         return univariate_stats
 
     def generate_singleselect(self):

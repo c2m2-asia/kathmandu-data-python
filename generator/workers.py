@@ -45,10 +45,11 @@ workers_univariate = Univariate(raw_data=workers_raw_data, variable_map=workers_
 workers_univariate_stats = workers_univariate.generate_univariate()
 workers_univariate.generate_variable_map(workers_univariate_stats, 'workers')
 workers_univariate.labels_map.to_excel('./data/generated_workers_labels_map.xlsx', index=False)
+workers_univariate_stats.drop('askedTotal', axis=1, inplace=True)
 workers_univariate_stats.to_sql('workers_univariate_stats', engine, index=False, if_exists='replace')
-workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
+# workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
 
 workers_bivariate = Bivariate(raw_data=workers_raw_data, variable_map=workers_variable_map, labels_map=workers_labels_map)
 workers_bivariate_stats = workers_bivariate.generate_bivariate()
 workers_bivariate_stats.to_sql('workers_bivariate_stats',  engine, index=False, if_exists='replace')
-workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)
+# workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)
