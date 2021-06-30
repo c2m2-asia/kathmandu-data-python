@@ -60,11 +60,15 @@ business_univariate_stats = business_univariate.generate_univariate()
 business_univariate.generate_variable_map(business_univariate_stats, 'business')
 business_univariate.labels_map.to_excel('./data/generated_business_labels_map.xlsx', index=False)
 business_univariate_stats.drop('askedTotal', axis=1, inplace=True)
-business_univariate_stats.to_sql('business_univariate_stats', engine, index=False, if_exists='replace')
+business_univariate_stats.columns = [ i.lower() for i in business_univariate_stats.columns]
+business_univariate_stats.to_sql('businesses_univariate_stats ', engine, index=False, if_exists='replace')
 # business_univariate_stats.to_csv('business_univariate_stats.csv', index=False)
 
 
 business_bivariate = Bivariate(raw_data=business_raw_data, variable_map=business_variable_map, labels_map=business_labels_map)
 business_bivariate_stats = business_bivariate.generate_bivariate()
-business_bivariate_stats.to_sql('business_bivariate_stats',  engine, index=False, if_exists='replace')
-# business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False) 
+business_bivariate_stats['total'] = business_bivariate_stats['total'].astype(int)
+business_bivariate_stats['yValue'] = business_bivariate_stats['yValue'].astype(int)
+business_bivariate_stats.columns = [ i.lower() for i in business_bivariate_stats.columns]
+business_bivariate_stats.to_sql('businesses_bivariate_stats ',  engine, index=False, if_exists='replace')
+# business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
