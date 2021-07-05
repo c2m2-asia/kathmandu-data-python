@@ -21,34 +21,12 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: business_bivariate_stats; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.business_bivariate_stats (
-    "xVariable" text,
-    "xValue" bigint,
-    "xLabel_en" text,
-    "xLabel_ne" text,
-    "yVariable" text,
-    "yValue" double precision,
-    "yLabel_en" text,
-    "yLabel_ne" text,
-    total double precision,
-    "percOfTotal" double precision,
-    "variableGroup" text,
-    index bigint
-);
-
-
-ALTER TABLE public.business_bivariate_stats OWNER TO postgres;
-
---
 -- Name: business_impact_downloads_data; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.business_impact_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     stop_business text,
     how_lng_stop_business text,
     business_effect_by_reduced_vol_business bigint,
@@ -152,7 +130,7 @@ ALTER TABLE public.business_impact_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.business_metadata_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     business_dist text,
     business_coodinates text,
     business_type text,
@@ -168,7 +146,7 @@ ALTER TABLE public.business_metadata_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.business_needs_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone
+    submission_date timestamp without time zone
 );
 
 
@@ -180,7 +158,7 @@ ALTER TABLE public.business_needs_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.business_outlook_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     how_lng_covid_dsrupt_last text,
     revenue_gen_21_v_19 text,
     wrkfrc_size_chng_21_v_19 text,
@@ -268,7 +246,7 @@ ALTER TABLE public.business_outlook_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.business_preparedness_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     hhs_measures_placed_sanitizers bigint,
     hhs_measures_trained_employes_on_hhs bigint,
     hhs_measures_placed_thermal_screening bigint,
@@ -314,39 +292,354 @@ CREATE TABLE public.business_preparedness_downloads_data (
 ALTER TABLE public.business_preparedness_downloads_data OWNER TO postgres;
 
 --
--- Name: business_univariate_stats; Type: TABLE; Schema: public; Owner: postgres
+-- Name: businesses_bivariate_stats ; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.business_univariate_stats (
-    variable text,
-    value text,
-    label_en text,
-    label_ne text,
-    "variableGroup" text,
+CREATE TABLE public."businesses_bivariate_stats " (
+    xvariable text,
+    xvalue bigint,
+    xlabel_en text,
+    xlabel_ne text,
+    yvariable text,
+    yvalue bigint,
+    ylabel_en text,
+    ylabel_ne text,
     total bigint,
-    "percOfTotal" double precision,
+    percoftotal double precision,
+    variablegroup text,
     index bigint
 );
 
 
-ALTER TABLE public.business_univariate_stats OWNER TO postgres;
+ALTER TABLE public."businesses_bivariate_stats " OWNER TO postgres;
+
+--
+-- Name: businesses_impact_downloads_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.businesses_impact_downloads_data (
+    id bigint,
+    submission_date timestamp without time zone,
+    stop_business text,
+    how_lng_stop_business text,
+    business_effect_by_reduced_vol_business bigint,
+    business_effect_by_increased_covid_cases bigint,
+    business_effect_by_emplys_covid_situation bigint,
+    business_effect_by_human_resources_shortage bigint,
+    business_effect_by_supply_chain_disruption bigint,
+    business_effect_by_lack_sevices_access bigint,
+    business_effect_by_lack_mobility bigint,
+    business_effect_by_patners_disagrmnt bigint,
+    business_effect_by_lack_fin_resources bigint,
+    business_effect_by_other bigint,
+    business_no_effect bigint,
+    most_significant_effect_business text,
+    wrkfrc_actn_reduced_temporary_workers bigint,
+    wrkfrc_actn_reduced_permanent_workers bigint,
+    wrkfrc_actn_reduced_working_hours bigint,
+    wrkfrc_actn_introduced_rotational_employment bigint,
+    wrkfrc_actn_asked_workers_paid_leave bigint,
+    wrkfrc_actn_asked_workers_unpaid_leave bigint,
+    wrkfrc_actn_asked_workers_reduced_pay bigint,
+    wrkfrc_actn_decreased_employee_benefits bigint,
+    wrkfrc_actn_other bigint,
+    no_wrkfrc_actn bigint,
+    loan_impact_took_loan_easily bigint,
+    loan_impact_couldnt_take_loan bigint,
+    loan_impact_took_loan_difficultly bigint,
+    loan_impact_difficult_paying_existing_loan bigint,
+    loan_impact_other bigint,
+    no_loan_impact bigint,
+    asset_impact_sold_assets bigint,
+    asset_impact_couldnt_sell_assets bigint,
+    asset_impact_rented_assets bigint,
+    asset_impact_other bigint,
+    no_asset_impact bigint,
+    cost_impact_couldnt_cover_operating_cost bigint,
+    cost_impact_cancelled_investment_plans bigint,
+    cost_impact_made_visit_nepal_investments bigint,
+    cost_impact_other bigint,
+    no_cost_impact bigint,
+    location_impact_moved_business bigint,
+    location_impact_closed_branches bigint,
+    location_impact_tried_couldnt_move_business bigint,
+    location_impact_other bigint,
+    no_location_impact bigint,
+    eqty_ownrshp_impact_sold_entire_business bigint,
+    eqty_ownrshp_impact_tried_cant_sell_business bigint,
+    eqty_ownrshp_impact_sold_some_business_equity bigint,
+    eqty_ownrshp_impact_tried_cant_sell_some_equity bigint,
+    eqty_ownrshp_impact_other bigint,
+    no_eqty_ownrshp_impact bigint,
+    fin_effect_other text,
+    n_employes_pre_covid text,
+    wrkfrc_size_chng_2020_v_2019 text,
+    revenue_chng_2020_v_2019 text,
+    savings_chng_2020_v_2019 text,
+    accomondation_service_offered_pre_covid bigint,
+    adventure_equipment_service_offered_pre_covid bigint,
+    adventure_sports_service_offered_pre_covid bigint,
+    bar_service_offered_pre_covid bigint,
+    flight_booking_service_offered_pre_covid bigint,
+    food_delivery_service_offered_pre_covid bigint,
+    gymnasium_service_offered_pre_covid bigint,
+    hotel_booking_service_offered_pre_covid bigint,
+    online_service_offered_pre_covid bigint,
+    restaurant_service_offered_pre_covid bigint,
+    souvenir_shop_service_offered_pre_covid bigint,
+    spa_services_offered_pre_covid bigint,
+    swimming_pool_service_offered_pre_covid bigint,
+    tour_package_service_offered_pre_covid bigint,
+    travel_guide_porter_service_offered_pre_covid bigint,
+    vehicle_booking_service_offered_pre_covid bigint,
+    other_service_offered_pre_covid bigint,
+    accomondation_service_offered_post_covid double precision,
+    restaurant_service_offered_post_covid double precision,
+    bar_service_offered_post_covid double precision,
+    gymnasium_service_offered_post_covid double precision,
+    spa_service_offered_post_covid double precision,
+    swimming_pool_service_offered_post_covid double precision,
+    flight_booking_service_offered_post_covid double precision,
+    travel_guide_porter_service_offered_post_covid double precision,
+    adventure_sport_service_offered_post_covid double precision,
+    adventure_equipment_service_offered_post_covid double precision,
+    tour_package_service_offered_post_covid double precision,
+    vehicle_booking_service_offered_post_covid double precision,
+    hotel_booking_service_offered_post_covid double precision,
+    souvenir_shop_service_offered_post_covid double precision,
+    food_delivery_service_offered_post_covid double precision,
+    online_service_offered_post_covid double precision,
+    isolation_service_offered_post_covid double precision,
+    quarantine_service_offered_post_covid double precision,
+    other_service_offered_post_covid double precision
+);
+
+
+ALTER TABLE public.businesses_impact_downloads_data OWNER TO postgres;
+
+--
+-- Name: businesses_metadata_downloads_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.businesses_metadata_downloads_data (
+    id bigint,
+    submission_date timestamp without time zone,
+    business_dist text,
+    business_coodinates text,
+    business_type text,
+    business_yrs_in_operation text
+);
+
+
+ALTER TABLE public.businesses_metadata_downloads_data OWNER TO postgres;
+
+--
+-- Name: businesses_needs_downloads_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.businesses_needs_downloads_data (
+    id bigint,
+    submission_date timestamp without time zone
+);
+
+
+ALTER TABLE public.businesses_needs_downloads_data OWNER TO postgres;
+
+--
+-- Name: businesses_outlook_downloads_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.businesses_outlook_downloads_data (
+    id bigint,
+    submission_date timestamp without time zone,
+    how_lng_covid_dsrupt_last text,
+    revenue_gen_21_v_19 text,
+    wrkfrc_size_chng_21_v_19 text,
+    rcvry_diffclty_winning_tourist_confidence double precision,
+    rcvry_diffclty_understanding_source_markets double precision,
+    rcvry_diffclty_ensuring_tourist_health_saftey double precision,
+    rcvry_diffclty_ensuring_workers_health_saftey double precision,
+    rcvry_diffclty_goods_shortage double precision,
+    rcvry_diffclty_human_resource_shortage double precision,
+    rcvry_diffclty_cash_flow_shortage double precision,
+    rcvry_diffclty_additional_fund_shortage double precision,
+    other_rcvry_diffclty double precision,
+    most_significant_rcvry_difficulty text,
+    biggest_support_rcvry text,
+    perm_stopped_not_started_new_business double precision,
+    perm_stopped_started_new_trsm_business double precision,
+    perm_stopped_started_new_non_trsm_business double precision,
+    perm_stopped_will_retrn_to_trsm_business text,
+    perm_stopped_started_hotel_accommodation_business double precision,
+    perm_stopped_started_restaurant_bar_business double precision,
+    perm_stopped_started_travel_tours_business double precision,
+    perm_stopped_started_trekking_mountaineering_business double precision,
+    perm_stopped_started_adventure_sports_business double precision,
+    perm_stopped_started_other_trsm_business double precision,
+    perm_stopped_started_accountancy_finance_business double precision,
+    perm_stopped_started_consulting_management_business double precision,
+    perm_stopped_started_charity_voluntary_business double precision,
+    perm_stopped_started_art_design_business double precision,
+    perm_stopped_started_energy_utillities_business double precision,
+    perm_stopped_started_engineering_manufacturing_business double precision,
+    perm_stopped_started_environment_agriculture_business double precision,
+    perm_stopped_started_healthcare_business double precision,
+    perm_stopped_started_information_technology_business double precision,
+    perm_stopped_started_law_business double precision,
+    perm_stopped_started_marketing_pr_business double precision,
+    perm_stopped_started_internet_media_business double precision,
+    perm_stopped_started_construction_property_business double precision,
+    perm_stopped_started_public_services_business double precision,
+    perm_stopped_started_retail_sales_business double precision,
+    perm_stopped_started_teaching_business double precision,
+    perm_stopped_started_logistics_transport_business double precision,
+    perm_stopped_started_other_non_tourism_business double precision,
+    perm_stopped_started_new_job text,
+    perm_stopped_started_shopkeeper_job double precision,
+    perm_stopped_started_tour_guide_job double precision,
+    perm_stopped_started_trekking_guide_job double precision,
+    perm_stopped_started_rafting_guide_job double precision,
+    perm_stopped_started_mountain_guide_job double precision,
+    perm_stopped_started_driver_job double precision,
+    perm_stopped_started_travel_agent_job double precision,
+    perm_stopped_started_flight_attendant_job double precision,
+    perm_stopped_started_pilot_job double precision,
+    perm_stopped_started_chef_cook_job double precision,
+    perm_stopped_started_hotel_manager_job double precision,
+    perm_stopped_started_hotel_staff_job double precision,
+    perm_stopped_started_waiter_job double precision,
+    perm_stopped_started_bartender_job double precision,
+    perm_stopped_started_other_tourism_job double precision,
+    perm_stopped_started_accountancy_finance_job double precision,
+    perm_stopped_started_consulting_management_job double precision,
+    perm_stopped_started_charity_voluntary_job double precision,
+    perm_stopped_started_art_design_job double precision,
+    perm_stopped_started_energy_utillities_job double precision,
+    perm_stopped_started_engineering_manufacturing_job double precision,
+    perm_stopped_started_environment_agriculture_job double precision,
+    perm_stopped_started_healthcare_job double precision,
+    perm_stopped_started_information_technology_job double precision,
+    perm_stopped_started_law_job double precision,
+    perm_stopped_started_marketing_pr_job double precision,
+    perm_stopped_started_internet_media_job double precision,
+    perm_stopped_started_construction_property_job double precision,
+    perm_stopped_started_public_services_job double precision,
+    perm_stopped_started_sales_retail_job double precision,
+    perm_stopped_started_teaching_job double precision,
+    perm_stopped_started_logistics_transport_job double precision,
+    perm_stopped_started_other_non_trsm_job double precision
+);
+
+
+ALTER TABLE public.businesses_outlook_downloads_data OWNER TO postgres;
+
+--
+-- Name: businesses_preparedness_downloads_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.businesses_preparedness_downloads_data (
+    id bigint,
+    submission_date timestamp without time zone,
+    hhs_measures_placed_sanitizers bigint,
+    hhs_measures_trained_employes_on_hhs bigint,
+    hhs_measures_placed_thermal_screening bigint,
+    hhs_measures_maintained_social_distancing bigint,
+    hhs_measures_implemented_cashless_payment bigint,
+    hhs_measures_discontinued_buffed_services bigint,
+    hhs_measures_added_covid_friendly_marketing bigint,
+    hhs_measures_outsourced_services bigint,
+    other_hhs_measures bigint,
+    no_hhs_measures bigint,
+    wrkrs_hlth_informed_covid_saftey_measures double precision,
+    wrkrs_hlth_encouraged_home_stay_if_sick double precision,
+    wrkrs_hlth_maintained_social_distancing double precision,
+    wrkrs_hlth_implemented_working_shifts double precision,
+    wrkrs_hlth_implemented_remote_working double precision,
+    wrkrs_hlth_performed_temperature_checks double precision,
+    wrkrs_hlth_provided_ppe double precision,
+    wrkrs_hlth_provided_paid_sick_leave double precision,
+    wrkrs_hlth_provided_covid_insurance double precision,
+    other_wrkrs_hlth_measures double precision,
+    no_wrkrs_hlth_measures double precision,
+    internl_recvry_strategy_reduce_prdocution double precision,
+    internl_recvry_strategy_increase_production double precision,
+    internl_recvry_strategy_diversify_offerings double precision,
+    internl_recvry_strategy_start_different_business double precision,
+    internl_recvry_strategy_diversify_sales_channels double precision,
+    internl_recvry_strategy_retrain_workers double precision,
+    other_internl_recvry_strategy double precision,
+    no_internl_recvry_strategy double precision,
+    externl_recvry_strategy_negotiate_bank_paymnts double precision,
+    externl_recvry_strategy_lobby_support_trade_unions double precision,
+    externl_recvry_strategy_negotiate_with_wrkrs_union double precision,
+    externl_recvry_strategy_negotiate_with_property_owner double precision,
+    externl_recvry_strategy_partner_with_other_business double precision,
+    externl_recvry_strategy_increase_shareholders double precision,
+    externl_recvry_strategy_share_assets_other_business double precision,
+    other_externl_recvry_strategy double precision,
+    no_externl_recvry_strategy double precision,
+    has_dedictd_covid_desk text
+);
+
+
+ALTER TABLE public.businesses_preparedness_downloads_data OWNER TO postgres;
+
+--
+-- Name: businesses_univariate_stats ; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."businesses_univariate_stats " (
+    variable text,
+    value text,
+    label_en text,
+    label_ne text,
+    variablegroup text,
+    total bigint,
+    percoftotal double precision,
+    index bigint
+);
+
+
+ALTER TABLE public."businesses_univariate_stats " OWNER TO postgres;
+
+--
+-- Name: map_visualization_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.map_visualization_data (
+    businessname text,
+    submissiondate bigint,
+    businesstype text,
+    variable text,
+    value bigint,
+    percoftotal bigint,
+    total bigint,
+    label_en text,
+    label_ne text,
+    latitude double precision,
+    longitude double precision,
+    index bigint
+);
+
+
+ALTER TABLE public.map_visualization_data OWNER TO postgres;
 
 --
 -- Name: workers_bivariate_stats; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.workers_bivariate_stats (
-    "xVariable" text,
-    "xValue" bigint,
-    "xLabel_en" text,
-    "xLabel_ne" text,
-    "yVariable" text,
-    "yValue" bigint,
-    "yLabel_en" text,
-    "yLabel_ne" text,
+    xvariable text,
+    xvalue bigint,
+    xlabel_en text,
+    xlabel_ne text,
+    yvariable text,
+    yvalue bigint,
+    ylabel_en text,
+    ylabel_ne text,
     total bigint,
-    "percOfTotal" double precision,
-    "variableGroup" text,
+    percoftotal double precision,
+    variablegroup text,
     index bigint
 );
 
@@ -359,7 +652,7 @@ ALTER TABLE public.workers_bivariate_stats OWNER TO postgres;
 
 CREATE TABLE public.workers_impact_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     occpatn_shopkeeper_pre_covid bigint,
     occpatn_tour_guide_pre_covid bigint,
     occpatn_trekking_guide_pre_covid bigint,
@@ -476,7 +769,7 @@ ALTER TABLE public.workers_impact_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.workers_needs_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     needs_health_training_for_recovery bigint,
     needs_employment_related_training_for_recovery bigint,
     needs_skills_learning_opportunity_for_recovery bigint,
@@ -502,7 +795,7 @@ ALTER TABLE public.workers_needs_downloads_data OWNER TO postgres;
 
 CREATE TABLE public.workers_preparedness_downloads_data (
     id bigint,
-    "timestamp" timestamp without time zone,
+    submission_date timestamp without time zone,
     have_alternative_income_source text,
     alternate_income_source_agriculture_animal_husbandry double precision,
     alternate_income_source_daily_wages double precision,
@@ -568,9 +861,9 @@ CREATE TABLE public.workers_univariate_stats (
     value text,
     label_en text,
     label_ne text,
-    "variableGroup" text,
+    variablegroup text,
     total bigint,
-    "percOfTotal" double precision,
+    percoftotal double precision,
     index bigint
 );
 
@@ -578,10 +871,610 @@ CREATE TABLE public.workers_univariate_stats (
 ALTER TABLE public.workers_univariate_stats OWNER TO postgres;
 
 --
--- Data for Name: business_bivariate_stats; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: business_impact_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_bivariate_stats ("xVariable", "xValue", "xLabel_en", "xLabel_ne", "yVariable", "yValue", "yLabel_en", "yLabel_ne", total, "percOfTotal", "variableGroup", index) FROM stdin;
+COPY public.business_impact_downloads_data (id, submission_date, stop_business, how_lng_stop_business, business_effect_by_reduced_vol_business, business_effect_by_increased_covid_cases, business_effect_by_emplys_covid_situation, business_effect_by_human_resources_shortage, business_effect_by_supply_chain_disruption, business_effect_by_lack_sevices_access, business_effect_by_lack_mobility, business_effect_by_patners_disagrmnt, business_effect_by_lack_fin_resources, business_effect_by_other, business_no_effect, most_significant_effect_business, wrkfrc_actn_reduced_temporary_workers, wrkfrc_actn_reduced_permanent_workers, wrkfrc_actn_reduced_working_hours, wrkfrc_actn_introduced_rotational_employment, wrkfrc_actn_asked_workers_paid_leave, wrkfrc_actn_asked_workers_unpaid_leave, wrkfrc_actn_asked_workers_reduced_pay, wrkfrc_actn_decreased_employee_benefits, wrkfrc_actn_other, no_wrkfrc_actn, loan_impact_took_loan_easily, loan_impact_couldnt_take_loan, loan_impact_took_loan_difficultly, loan_impact_difficult_paying_existing_loan, loan_impact_other, no_loan_impact, asset_impact_sold_assets, asset_impact_couldnt_sell_assets, asset_impact_rented_assets, asset_impact_other, no_asset_impact, cost_impact_couldnt_cover_operating_cost, cost_impact_cancelled_investment_plans, cost_impact_made_visit_nepal_investments, cost_impact_other, no_cost_impact, location_impact_moved_business, location_impact_closed_branches, location_impact_tried_couldnt_move_business, location_impact_other, no_location_impact, eqty_ownrshp_impact_sold_entire_business, eqty_ownrshp_impact_tried_cant_sell_business, eqty_ownrshp_impact_sold_some_business_equity, eqty_ownrshp_impact_tried_cant_sell_some_equity, eqty_ownrshp_impact_other, no_eqty_ownrshp_impact, fin_effect_other, n_employes_pre_covid, wrkfrc_size_chng_2020_v_2019, revenue_chng_2020_v_2019, savings_chng_2020_v_2019, accomondation_service_offered_pre_covid, adventure_equipment_service_offered_pre_covid, adventure_sports_service_offered_pre_covid, bar_service_offered_pre_covid, flight_booking_service_offered_pre_covid, food_delivery_service_offered_pre_covid, gymnasium_service_offered_pre_covid, hotel_booking_service_offered_pre_covid, online_service_offered_pre_covid, restaurant_service_offered_pre_covid, souvenir_shop_service_offered_pre_covid, spa_services_offered_pre_covid, swimming_pool_service_offered_pre_covid, tour_package_service_offered_pre_covid, travel_guide_porter_service_offered_pre_covid, vehicle_booking_service_offered_pre_covid, other_service_offered_pre_covid, accomondation_service_offered_post_covid, restaurant_service_offered_post_covid, bar_service_offered_post_covid, gymnasium_service_offered_post_covid, spa_service_offered_post_covid, swimming_pool_service_offered_post_covid, flight_booking_service_offered_post_covid, travel_guide_porter_service_offered_post_covid, adventure_sport_service_offered_post_covid, adventure_equipment_service_offered_post_covid, tour_package_service_offered_post_covid, vehicle_booking_service_offered_post_covid, hotel_booking_service_offered_post_covid, souvenir_shop_service_offered_post_covid, food_delivery_service_offered_post_covid, online_service_offered_post_covid, isolation_service_offered_post_covid, quarantine_service_offered_post_covid, other_service_offered_post_covid) FROM stdin;
+174444706	2021-04-28 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	1	0	1	0	0	Lack of adequate financial resources	1	1	1	1	0	1	1	1	0	0	0	1	0	1	0	0	0	0	0	0	1	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+176510702	2021-05-07 00:00:00	Yes, temporarily stopped operations	Less than a month	1	0	1	0	1	0	1	0	0	0	0	Reduced volume of business	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	51 to 100 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	Savings became 25% of 2019	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+173876161	2021-04-26 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175156051	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	0	0	0	0	1	1	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	0	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	1	0	0	0	1	0	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	11 to 30 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+178003908	2021-05-16 00:00:00	Yes, temporarily stopped operations	1 to 3 months	1	0	0	0	0	0	1	0	0	0	0	Reduced volume of business	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	11 to 30 people	Workforce size became 25% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	1	0	0	1	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174239755	2021-04-27 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	0	0	0	0	0	0	Reduced volume of business	1	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	Savings became 25% of 2019	0	1	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	1	1	1	1	1	1	1	0	0	0	0	0	0
+174968501	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	1	0	1	0	1	0	0	Supply chain disruption	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+174752078	2021-04-29 00:00:00	Yes, permanently stopped	\N	1	0	0	0	1	1	1	1	1	0	0	Reduced volume of business	0	0	1	0	0	1	1	1	0	0	0	1	0	1	0	0	1	0	1	0	0	1	1	1	0	0	1	0	1	0	0	0	1	1	0	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	0	0	0	1	0	0	0	0	0	1	1	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175185876	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	1	0	0	0	1	1	1	0	1	0	0	Reduced volume of business	1	1	1	0	1	0	0	0	0	0	0	1	1	1	0	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 75% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+175199056	2021-05-01 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	1	1	0	0	0	Disagreement with partners/fallout	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	1	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	1	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+175293763	2021-05-02 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	0	0	0	0	0	0	0	1	0	0	\N	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	1	0	1	0	1	0	1	11 to 30 people	Workforce size became 75% of 2019	Revenue became 75% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+175218157	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	0	0	0	1	1	0	Lack of adequate financial resources	0	0	0	0	0	0	0	0	1	0	1	0	1	0	1	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174441841	2021-04-28 00:00:00	Yes, permanently stopped	\N	0	0	0	0	1	0	0	0	0	0	0	\N	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175469363	2021-05-03 00:00:00	Yes, permanently stopped	\N	0	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 75% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+181204012	2021-05-30 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	1	1	0	1	0	0	Reduced volume of business	0	0	1	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 75% of 2019	Revenue became 25% of 2019	Savings became 25% of 2019	1	0	1	0	1	0	0	1	0	1	0	0	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+175538470	2021-05-03 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176031355	2021-05-05 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+173959067	2021-04-26 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	0	0	0	0	0	0	Reduced volume of business	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	0	0	1	1	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+175385290	2021-05-02 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174937761	2021-04-30 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	0	0	0	0	1	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	Upto 10 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174454679	2021-04-28 00:00:00	No, operations were always running	\N	1	0	0	0	0	0	0	0	0	0	0	\N	0	1	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+176017595	2021-05-05 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue remained the same	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174220881	2021-04-27 00:00:00	No, operations were always running	\N	1	0	1	0	0	1	1	0	0	0	0	Reduced volume of business	1	1	0	0	1	1	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	11 to 30 people	Workforce size became 50% of 2019	Revenue became 25% of 2019	Savings became 25% of 2019	1	0	1	1	1	0	0	0	0	1	0	0	0	1	1	1	0	1	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0
+175154235	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	1	0	0	0	0	0	0	0	1	0	0	Reduced volume of business	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size became 50% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174262574	2021-04-27 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	1	0	1	0	1	1	0	1	0	0	Lack of mobility due to government-imposed lockdown	1	1	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	1	0	0	0	1	1	1	0	0	1	1	0	0	0	0	1	0	1	0	0	0	31 to 50 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	1	0	0	0	0	0	1	1	1	0	1	1	1	0	0	1	0	0	0
+174650503	2021-04-29 00:00:00	Yes, permanently stopped	\N	1	0	0	0	1	1	0	0	1	0	0	Lack of adequate financial resources	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	1	0	0	1	0	0	0	0	0	1	1	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174455823	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	1	1	0	1	0	0	Lack of adequate financial resources	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+175301982	2021-05-02 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	0	1	0	0	0	0	\N	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	Upto 10 people	Workforce size became 50% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	1	0	0	0	0	0	1	0	0	0	1	1	1	0	0	1	1	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0
+174746242	2021-04-29 00:00:00	No, operations were always running	\N	1	1	0	0	0	1	1	0	1	0	0	Increased COVID-19 cases in our area	0	1	1	1	1	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	1	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size became 50% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	1	1	1	0	0	1	0	1	0	0	0	1	1	1	0	1	1	1	0	0	0	1	1	0	0	1	1	0	0	0	0	0	0	0
+174455774	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	1	1	1	1	1	0	1	0	0	Lack of mobility due to government-imposed lockdown	1	0	1	1	0	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1
+175231678	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	1	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	11 to 30 people	Workforce size became 75% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174650662	2021-04-29 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	0	0	0	1	1	0	1	0	0	Lack of mobility due to government-imposed lockdown	1	1	1	0	0	1	1	0	0	0	0	0	1	1	0	0	1	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	1	0	0	1	11 to 30 people	Workforce size became 75% of 2019	Revenue became 75% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175195620	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	1	0	0	1	0	0	Lack of adequate financial resources	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	11 to 30 people	Workforce size became 75% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174471637	2021-04-28 00:00:00	Yes, temporarily stopped operations	4 to 6 months	1	1	0	0	1	1	1	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	1	0	0	0	1	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	31 to 50 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	1	0	1	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0
+174393340	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	0	0	0	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	1	1	0	1	0	0	1	1	0	0	0	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+174936059	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	1	0	1	0	0	Lack of adequate financial resources	1	0	1	1	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	1	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174936102	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	1	0	1	0	0	Lack of adequate financial resources	1	0	1	1	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	1	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+177451400	2021-05-12 00:00:00	Yes, permanently stopped	\N	0	1	0	0	0	0	1	0	0	0	0	Increased COVID-19 cases in our area	0	1	1	0	1	0	0	0	0	0	0	0	0	1	0	0	1	1	1	0	0	1	1	1	0	0	0	1	1	0	0	0	0	0	0	0	1	1	31 to 50 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174199800	2021-04-27 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	1	0	0	0	0	0	Reduced volume of business	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	1	1	0	0	1	0	0	0	0	0	0	0	0	0	1	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	Savings became 25% of 2019	0	0	1	0	1	0	0	0	0	0	0	0	0	1	1	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175129532	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	1	0	0	0	0	0	1	0	1	0	0	Reduced volume of business	1	1	1	0	0	1	0	1	0	0	0	0	0	1	0	0	1	0	0	0	0	1	1	1	0	0	0	0	1	0	0	0	1	0	1	0	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+174356829	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	1	0	0	0	0	Reduced volume of business	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	1	0	0	1	0	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0
+175023072	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	1	0	1	0	0	0	0	Reduced volume of business	1	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	1	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	0	0	0	1	1	1	0	0	0	0	0	0
+175193180	2021-05-01 00:00:00	Yes, permanently stopped	\N	0	0	0	0	1	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175209466	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	1	1	1	1	1	0	1	0	0	Reduced volume of business	0	0	1	0	1	0	1	1	0	0	1	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	31 to 50 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	1	1	0	1	0	0	1	1	1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+175189240	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	1	0	1	0	0	0	0	Reduced volume of business	0	1	0	0	0	1	0	0	0	0	0	1	0	1	0	0	1	0	1	0	0	1	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0
+174932457	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	1	1	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	11 to 30 people	Workforce size became 50% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174208978	2021-04-27 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	0	0	0	1	1	0	1	0	0	Lack of adequate financial resources	0	1	1	1	0	1	0	1	0	0	0	1	0	1	0	0	0	1	0	0	0	1	0	1	0	0	0	0	0	0	1	0	1	0	0	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	1	0	0	1	0	0	1	0	0	0	0	0	1	1	1	1	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0
+174297863	2021-04-27 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	0	0	1	1	1	0	0	0	0	Reduced volume of business	1	0	0	1	1	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	1	31 to 50 people	Workforce size remained the same	Revenue became 25% of 2019	Savings became 75% of 2019	1	0	1	1	1	0	0	1	1	1	1	1	1	1	1	1	0	1	1	1	0	0	0	1	1	1	0	1	1	1	1	0	1	0	0	0
+174166825	2021-04-27 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	0	1	1	0	0	Lack of adequate financial resources	0	1	0	0	0	0	0	0	1	0	0	1	0	1	0	0	0	0	0	0	1	1	1	0	1	0	0	0	0	0	1	0	1	0	0	1	0	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	1	1	0	0	0	0	1	0	1	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+174657820	2021-04-28 00:00:00	No, operations were always running	\N	1	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size became 50% of 2019	Revenue became 50% of 2019	Savings became 50% of 2019	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+175764231	2021-05-04 00:00:00	Yes, temporarily stopped operations	Less than a month	1	1	0	0	0	1	0	0	0	0	0	Reduced volume of business	0	0	1	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	1	11 to 30 people	Workforce size became 50% of 2019	Revenue became 50% of 2019	Savings became 25% of 2019	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+174150768	2021-04-27 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	1	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	31 to 50 people	Workforce size remained the same	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	1	0	0	1	1	1	0	0	0	1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0
+176956231	2021-05-09 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	0	0	0	0	1	1	0	0	0	0	Lack of mobility and access to services due to government-imposed lockdown	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0
+175184805	2021-05-01 00:00:00	Yes, permanently stopped	\N	0	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	1	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173657407	2021-04-25 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	1	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	More than 100 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	1	1	1	1	1	1	0	1	0	0	1	1	1	1	1	0	0	0	0	0	0	0	0	0	1	0	0	1	0	1	0
+173787254	2021-04-26 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	1	0	0	1	1	1	1	0	0	Reduced volume of business	0	0	1	1	0	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	31 to 50 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	1	1	1	0	0	1	1	1	1	1	0	0	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+173858768	2021-04-26 00:00:00	Yes, temporarily stopped operations	4 to 6 months	1	1	1	1	1	1	1	0	1	0	0	Lack of adequate financial resources	1	1	0	0	0	1	1	1	0	0	0	0	1	1	0	0	0	1	0	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	51 to 100 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	1	0	1	0	1	0	0	0	1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0
+173932651	2021-04-26 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	0	1	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174569629	2021-04-28 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	0	0	0	0	0	1	0	0	0	0	\N	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0
+174149406	2021-04-27 00:00:00	No, operations were always running	\N	1	0	0	0	0	0	1	0	0	0	0	Reduced volume of business	0	1	0	1	0	1	1	0	0	0	0	0	1	1	0	0	1	0	0	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size became 50% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	1	0	0	0	1	1	0	0	0	1	0	1	0	1	1	1	0	0	0	1	1	1	0	1	1	1	0	0	1	0	0	0
+174162658	2021-04-27 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	0	0	0	0	0	0	\N	1	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 75% of 2019	Revenue stopped completely	Savings became 75% of 2019	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	1	0	1	0	1	0	0	0	0	0	0
+174163826	2021-04-27 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	1	0	0	0	1	0	0	0	0	Reduced volume of business	1	1	0	1	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	31 to 50 people	Workforce size became 50% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174182637	2021-04-27 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	1	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174244750	2021-04-27 00:00:00	Yes, permanently stopped	\N	1	0	1	0	0	0	0	0	1	0	0	Reduced volume of business	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 50% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	0	0	0	0	0	0	0	0	0	1	1	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174244863	2021-04-27 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	0	0	1	0	0	0	0	1	0	0	Lack of adequate financial resources	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 50% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	1	0
+174245457	2021-04-27 00:00:00	No, operations were always running	\N	0	0	0	0	0	0	1	0	0	0	0	\N	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	Upto 10 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174259596	2021-04-27 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	0	0	0	0	0	0	Reduced volume of business	1	0	1	0	1	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	51 to 100 people	Workforce size became zero	Revenue stopped completely	Savings became 50% of 2019	1	1	1	0	0	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+174269073	2021-04-27 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	1	0	0	1	1	0	1	0	0	Lack of adequate financial resources	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	1	1	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size remained the same	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	1	0	0	0	0	0	1	1	1	0	1	1	1	0	0	0	0	0	0
+174359019	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	1	1	0	0	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	Savings became 25% of 2019	0	0	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0	0	0
+174369922	2021-04-28 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	1	0	0	0	1	0	0	0	0	0	Reduced volume of business	1	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	More than 100 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	1	1	1	0	1	1	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+174395412	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size became zero	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+174443117	2021-04-28 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174448865	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	0	0	0	0	1	0	0	\N	0	0	0	0	0	0	0	0	0	1	0	1	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	11 to 30 people	Workforce size became 50% of 2019	Revenue became 75% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174450781	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	0	1	0	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+174450874	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	1	0	0	0	1	0	0	Reduced volume of business	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	1	0	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+174452644	2021-04-28 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	1	1	0	1	0	0	Lack of adequate financial resources	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size became 50% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
+174459267	2021-04-28 00:00:00	Yes, permanently stopped	\N	0	0	0	0	0	1	0	0	0	0	0	\N	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174514983	2021-04-28 00:00:00	Yes, permanently stopped	\N	0	0	1	0	0	0	0	0	1	0	0	Lack of adequate financial resources	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174529476	2021-04-28 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	11 to 30 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174603059	2021-04-29 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	1	1	1	0	0	0	0	Lack of mobility and access to services due to government-imposed lockdown	1	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	Savings became 25% of 2019	1	1	1	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0
+174665948	2021-04-29 00:00:00	Yes, temporarily stopped operations	1 to 3 months	1	0	0	0	0	1	0	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	1	1	0	0	1	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+174736432	2021-04-29 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	1	0	0	1	1	0	1	0	0	Reduced volume of business	1	1	1	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	1	1	0	0	0	1	1	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174764882	2021-04-29 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	1	0	0	1	0	0	1	0	Shortage of human resources	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	1	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0
+174832497	2021-04-29 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	1	1	1	0	1	0	0	Reduced volume of business	0	1	0	0	0	1	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	1	0	1	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	1	1	0	1	1	1	0	0	0	0	0	0
+174934728	2021-04-30 00:00:00	Yes, temporarily stopped operations	1 to 3 months	1	0	1	0	0	1	0	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	0	1	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	31 to 50 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+174964928	2021-04-30 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	1	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	11 to 30 people	Workforce size remained the same	Revenue became 25% of 2019	Savings became 25% of 2019	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	1	1	0	0	0	0	1	0	0	1	0	0	0	1	0	0	0	0
+174970386	2021-04-30 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+175158745	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	0	1	1	1	0	0	0	0	Supply chain disruption	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+175168682	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	0	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	1	1	0	1	1	1	0	0	0	0	0	0
+175182678	2021-05-01 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	0	0	0	0	\N	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	1	11 to 30 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175182900	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	0	0	0	0	1	0	0	0	0	0	\N	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	Upto 10 people	Workforce size became 75% of 2019	Revenue became 75% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+175183217	2021-05-01 00:00:00	Yes, temporarily stopped operations	4 to 6 months	0	0	0	0	0	1	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	Savings became 25% of 2019	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+175184361	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	0	0	1	0	1	0	0	1	0	0	Lack of adequate financial resources	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+175184495	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	1	1	1	0	1	0	0	Reduced volume of business	1	1	0	0	0	1	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	1	1	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	1	0	0	1	1	0	1	1	0	1	1	1	0	0	0	0	0	0	0	1	1	1	1	1	1	1	0	1	0	1	1	0
+175185521	2021-05-01 00:00:00	Yes, permanently stopped	\N	0	0	0	0	0	0	1	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	1	0	0	1	1	0	0	0	0	1	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187120	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	1	1	0	1	0	0	Lack of mobility due to government-imposed lockdown	1	0	0	0	1	1	1	0	0	0	0	1	0	1	0	0	1	1	1	0	0	1	0	1	0	0	0	1	1	0	0	0	1	0	1	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	1	0	1	0	0	1	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+175187448	2021-05-01 00:00:00	Yes, permanently stopped	\N	0	0	0	0	0	0	0	0	1	0	0	\N	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187600	2021-05-01 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	Upto 10 people	Workforce size increased compared to 2019	Revenue became 75% of 2019	Savings became 25% of 2019	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175190972	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	0	0	0	0	1	0	1	0	0	Increased COVID-19 cases in our area	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+175191527	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	1	1	0	0	0	0	Reduced volume of business	0	1	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	Upto 10 people	Workforce size became 25% of 2019	Revenue became 25% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+175200146	2021-05-01 00:00:00	Yes, temporarily stopped operations	1 to 3 months	0	0	0	0	0	1	1	0	0	0	0	Lack of mobility due to government-imposed lockdown	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+175226456	2021-05-01 00:00:00	Yes, temporarily stopped operations	7 to 12 months	0	1	0	1	0	1	1	1	0	0	0	Shortage of human resources	0	0	0	0	0	0	0	0	0	1	0	0	1	1	0	0	0	0	1	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	1	Upto 10 people	Workforce size became 25% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175238240	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	1	1	1	1	1	1	1	0	1	0	0	Lack of mobility and access to services due to government-imposed lockdown	1	1	1	0	1	1	0	0	0	0	1	0	0	1	0	0	1	0	1	0	0	1	1	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	0	1	1	0	0	1	0	1	1	1	1	1	1	1	1	0	0	1	1	0
+175239040	2021-05-01 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	0	0	1	0	Reduced volume of business	0	0	1	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	0	0	1	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size remained the same	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1
+175250793	2021-05-01 00:00:00	Yes, temporarily stopped operations	12+ months	0	1	0	0	0	0	0	0	0	0	0	\N	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175263617	2021-05-01 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	1	1	0	0	Lack of adequate financial resources	1	0	0	0	0	1	1	1	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	Upto 10 people	Workforce size became 50% of 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+175296075	2021-05-02 00:00:00	Yes, temporarily stopped operations	1 to 3 months	0	0	1	0	0	0	0	0	0	0	0	\N	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	31 to 50 people	Workforce size became 50% of 2019	Revenue became 75% of 2019	Savings became 75% of 2019	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+175313907	2021-05-02 00:00:00	Yes, permanently stopped	\N	1	0	0	0	0	0	1	0	0	0	0	Reduced volume of business	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175521999	2021-05-03 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	1	0	1	1	0	1	0	0	Reduced volume of business	0	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0
+175948361	2021-05-05 00:00:00	Yes, permanently stopped	\N	0	1	0	0	0	0	0	0	0	1	0	Increased COVID-19 cases in our area	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1	1	Upto 10 people	Workforce size increased compared to 2019	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176228435	2021-05-06 00:00:00	Yes, temporarily stopped operations	12+ months	0	1	0	0	0	0	0	0	0	0	0	\N	0	1	0	0	0	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+180321416	2021-05-26 00:00:00	Yes, temporarily stopped operations	12+ months	1	0	0	0	0	1	0	0	0	0	0	Reduced volume of business	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	Upto 10 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	1	0	0	1	0	1	0	0	0	0	0	0
+\.
+
+
+--
+-- Data for Name: business_metadata_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.business_metadata_downloads_data (id, submission_date, business_dist, business_coodinates, business_type, business_yrs_in_operation) FROM stdin;
+174444706	2021-04-28 00:00:00	Kathmandu	27.7153038584918 85.3103238891712	Restaurant and Bar	11 years or above
+176510702	2021-05-07 00:00:00	Mahottari	26.98806 85.89996	Restaurant and Bar	3 to 5 years
+173876161	2021-04-26 00:00:00	Chitawan	27.58148 84.49332	Hotel	11 years or above
+175156051	2021-05-01 00:00:00	Lalitpur	27.684759 85.312688	Hotel	3 to 5 years
+178003908	2021-05-16 00:00:00	Lalitpur	27.684944 85.315922	Hotel	1 to 2 years
+174239755	2021-04-27 00:00:00	Kathmandu	27.71305 85.31126	Travel and Tour Operator	6 to 10 years
+174968501	2021-04-30 00:00:00	Kathmandu	27.69443 85.24896	Trekking	1 to 2 years
+174752078	2021-04-29 00:00:00	Kathmandu	27.69035 85.23849	Travel and Tour Operator	1 to 2 years
+175185876	2021-05-01 00:00:00	Kathmandu	27.71297 85.31228	Handicraft	11 years or above
+175199056	2021-05-01 00:00:00	Kathmandu	27.71442 85.31192	Handicraft	6 to 10 years
+175293763	2021-05-02 00:00:00	Kathmandu	27.71223 85.31062	Travel and Tour Operator	11 years or above
+175218157	2021-05-01 00:00:00	Kathmandu	27.71409 85.31012	Shop/Merchandise	11 years or above
+174441841	2021-04-28 00:00:00	Kathmandu	27.71274 85.31124	Shop/Merchandise	11 years or above
+175469363	2021-05-03 00:00:00	Bardiya	28.46335 81.25026	Hotel	11 years or above
+181204012	2021-05-30 00:00:00	Kathmandu	27.71061 85.31213	Travel and Tour Operator	6 to 10 years
+175538470	2021-05-03 00:00:00	Kathmandu	27.71361 85.31132	Handicraft	11 years or above
+176031355	2021-05-05 00:00:00	Kathmandu	27.7115056 85.3089164	Rafting	11 years or above
+173959067	2021-04-26 00:00:00	Kathmandu	27.71217 85.30787	Hotel	3 to 5 years
+175385290	2021-05-02 00:00:00	Kathmandu	27.71331 85.3114	Hotel	3 to 5 years
+174937761	2021-04-30 00:00:00	Kathmandu	27.7151 85.312	Other	6 to 10 years
+174454679	2021-04-28 00:00:00	Kathmandu	27.71316 85.31265	Shop/Merchandise	3 to 5 years
+176017595	2021-05-05 00:00:00	Kathmandu	27.71736 85.31034	Shop/Merchandise	6 to 10 years
+174220881	2021-04-27 00:00:00	Kathmandu	27.7133876 85.31238	Hotel	1 to 2 years
+175154235	2021-05-01 00:00:00	Kathmandu	27.7137093 85.3123409	Handicraft	6 to 10 years
+174262574	2021-04-27 00:00:00	Kathmandu	27.71423 85.31159	Travel and Tour Operator	1 to 2 years
+174455823	2021-04-28 00:00:00	Kathmandu	27.71689 85.30937	Trekking	3 to 5 years
+175301982	2021-05-02 00:00:00	Kathmandu	27.71459 85.31326	Trekking	3 to 5 years
+174746242	2021-04-29 00:00:00	Kathmandu	27.71587 85.30982	Hotel	11 years or above
+174455774	2021-04-28 00:00:00	Kathmandu	27.71575 85.30998	Handicraft	3 to 5 years
+175231678	2021-05-01 00:00:00	Kathmandu	27.71587 85.30991	Shop/Merchandise	3 to 5 years
+174650662	2021-04-29 00:00:00	Kathmandu	27.7161657 85.3108951	Other	11 years or above
+175195620	2021-05-01 00:00:00	Kathmandu	27.71665 85.3099	Restaurant and Bar	1 to 2 years
+174471637	2021-04-28 00:00:00	Kathmandu	27.7167297 85.3120921	Hotel	1 to 2 years
+174393340	2021-04-28 00:00:00	Kathmandu	27.71702 85.33378	Trekking	3 to 5 years
+174936059	2021-04-30 00:00:00	Kathmandu	27.71578 85.30944	Other	1 to 2 years
+174936102	2021-04-30 00:00:00	Kathmandu	27.71578 85.30945	Other	1 to 2 years
+177451400	2021-05-12 00:00:00	Kathmandu	27.71538 85.3104	Shop/Merchandise	6 to 10 years
+174199800	2021-04-27 00:00:00	Kathmandu	27.71805 85.31192	Trekking	11 years or above
+175129532	2021-05-01 00:00:00	Kathmandu	27.719115 85.332184	Restaurant and Bar	3 to 5 years
+174356829	2021-04-28 00:00:00	Kathmandu	27.7174198 85.3260471	Trekking	6 to 10 years
+175023072	2021-04-30 00:00:00	Kathmandu	27.7175 85.32594	Travel and Tour Operator	3 to 5 years
+175209466	2021-05-01 00:00:00	Kathmandu	27.71321 85.31137	Travel and Tour Operator	11 years or above
+175189240	2021-05-01 00:00:00	Kathmandu	27.7043 85.33088	Travel and Tour Operator	3 to 5 years
+174932457	2021-04-30 00:00:00	Kathmandu	27.67812 85.30827	Other	6 to 10 years
+174208978	2021-04-27 00:00:00	Kaski	28.19899 83.97616	Travel and Tour Operator	3 to 5 years
+174297863	2021-04-27 00:00:00	Kaski	28.21064 84.04247	Hotel	11 years or above
+174166825	2021-04-27 00:00:00	Kaski	28.2097 83.95798	Hotel	11 years or above
+174657820	2021-04-28 00:00:00	Kaski	28.2148186 83.9618638	Hotel	3 to 5 years
+175764231	2021-05-04 00:00:00	Kaski	28.22345 83.9888	Restaurant and Bar	Less than a year
+174650503	2021-04-29 00:00:00	Kailali	28.706472 80.577207	Travel and Tour Operator	3 to 5 years
+174150768	2021-04-27 00:00:00	Kaski	28.2048324 83.9986713	Hotel	1 to 2 years
+176956231	2021-05-09 00:00:00	Kathmandu	27.6891069867822 85.2478348127655	Trekking	1 to 2 years
+175184805	2021-05-01 00:00:00	Kathmandu	27.7149361495911 85.3104505819971	Mountaineering	11 years or above
+173657407	2021-04-25 00:00:00	Lalitpur	27.68413 85.31941	Hotel	11 years or above
+173787254	2021-04-26 00:00:00	Kathmandu	27.7165403 85.3129886	Hotel	3 to 5 years
+173858768	2021-04-26 00:00:00	Kathmandu	27.7177391 85.3101198	Hotel	11 years or above
+173932651	2021-04-26 00:00:00	Kathmandu	27.7152382 85.3115879	Shop/Merchandise	1 to 2 years
+174569629	2021-04-28 00:00:00	Kathmandu	27.7156778 85.3113177	Shop/Merchandise	6 to 10 years
+174149406	2021-04-27 00:00:00	Kaski	28.2077552 83.9684899	Hotel	3 to 5 years
+174162658	2021-04-27 00:00:00	Kathmandu	 	Travel and Tour Operator	11 years or above
+174163826	2021-04-27 00:00:00	Chitawan	27.5845046127971 84.4711607974195	Hotel	11 years or above
+174182637	2021-04-27 00:00:00	Kaski	28.2044184 83.9644088	Handicraft	6 to 10 years
+174244750	2021-04-27 00:00:00	Kathmandu	27.7115975664926 85.3089139946971	Travel and Tour Operator	6 to 10 years
+174244863	2021-04-27 00:00:00	Kathmandu	27.717619 85.3115799	Hotel	11 years or above
+174245457	2021-04-27 00:00:00	Kaski	28.21224 83.9626	Hotel	3 to 5 years
+174259596	2021-04-27 00:00:00	Kaski	28.2198688 83.9580593	Trekking	11 years or above
+174269073	2021-04-27 00:00:00	Kathmandu	27.7054130197592 85.3489936269846	Travel and Tour Operator	3 to 5 years
+174359019	2021-04-28 00:00:00	Kathmandu	27.7650888094923 85.363349712796	Travel and Tour Operator	3 to 5 years
+174369922	2021-04-28 00:00:00	Kaski	28.20794 83.95855	Hotel	11 years or above
+174395412	2021-04-28 00:00:00	Sindhupalchok	27.7146686256428 85.3109832980832	Rafting	1 to 2 years
+174443117	2021-04-28 00:00:00	Kathmandu	27.7142268 85.3113891	Other	11 years or above
+174448865	2021-04-28 00:00:00	Kathmandu	27.7141228 85.3116181	Restaurant and Bar	6 to 10 years
+174450781	2021-04-28 00:00:00	Kathmandu	27.7169496294368 85.310175951392	Shop/Merchandise	6 to 10 years
+174450874	2021-04-28 00:00:00	Kathmandu	27.7155286407712 85.3113662974226	Handicraft	11 years or above
+174452644	2021-04-28 00:00:00	Kathmandu	27.7119692416278 85.3110869262584	Trekking	3 to 5 years
+174459267	2021-04-28 00:00:00	Kathmandu	27.71292 85.35984	Other	6 to 10 years
+174514983	2021-04-28 00:00:00	Kathmandu	27.71301 85.31211	Travel and Tour Operator	11 years or above
+174529476	2021-04-28 00:00:00	Kathmandu	27.713195 85.3122775	Handicraft	11 years or above
+174603059	2021-04-29 00:00:00	Kaski	28.2072939 83.9578631	Hotel	3 to 5 years
+174665948	2021-04-29 00:00:00	Lalitpur	27.68076 85.31722	Restaurant and Bar	11 years or above
+174736432	2021-04-29 00:00:00	Kathmandu	27.7135681946502 85.3125867485289	Handicraft	3 to 5 years
+174764882	2021-04-29 00:00:00	Kathmandu	27.7104423 85.3109739	Trekking	6 to 10 years
+174832497	2021-04-29 00:00:00	Kathmandu	27.7392974199588 85.3239723928859	Travel and Tour Operator	1 to 2 years
+174934728	2021-04-30 00:00:00	Kathmandu	27.7130878 85.3281444	Hotel	11 years or above
+174964928	2021-04-30 00:00:00	Kathmandu	27.7160368463001 85.3104862262585	Restaurant and Bar	1 to 2 years
+174970386	2021-04-30 00:00:00	Kathmandu	27.7210567730833 85.3653754560733	Hotel	1 to 2 years
+175158745	2021-05-01 00:00:00	Kathmandu	27.7207596166803 85.3607724987554	Handicraft	1 to 2 years
+175168682	2021-05-01 00:00:00	Kathmandu	27.7166059299288 85.3117833730153	Trekking	6 to 10 years
+175182678	2021-05-01 00:00:00	Kathmandu	27.7209932 85.3118557	Hotel	6 to 10 years
+175182900	2021-05-01 00:00:00	Kathmandu	27.716084576286 85.3099118032157	Shop/Merchandise	6 to 10 years
+175183217	2021-05-01 00:00:00	Kathmandu	27.7130115973909 85.3125155738383	Shop/Merchandise	11 years or above
+175184361	2021-05-01 00:00:00	Kathmandu	27.71892 85.3122	Handicraft	6 to 10 years
+175184495	2021-05-01 00:00:00	Kathmandu	27.710411302506 85.3129580931116	Trekking	3 to 5 years
+175185521	2021-05-01 00:00:00	Kathmandu	27.7110507076044 85.3150705587519	Travel and Tour Operator	3 to 5 years
+175187120	2021-05-01 00:00:00	Kathmandu	27.7176441116934 85.3093493859829	Travel and Tour Operator	6 to 10 years
+175187448	2021-05-01 00:00:00	Kathmandu	27.7140738 85.3098685	Trekking	6 to 10 years
+175187600	2021-05-01 00:00:00	Kathmandu	27.71574 85.30944	Trekking	11 years or above
+175190972	2021-05-01 00:00:00	Kathmandu	27.6882985387026 85.3324406541961	Travel and Tour Operator	3 to 5 years
+175191527	2021-05-01 00:00:00	Kathmandu	 	Other	6 to 10 years
+175193180	2021-05-01 00:00:00	Kathmandu	27.7148479186674 85.3113777116411	Other	6 to 10 years
+175200146	2021-05-01 00:00:00	Kathmandu	27.7162829183416 85.3101437234923	Handicraft	11 years or above
+175226456	2021-05-01 00:00:00	Chitawan	27.5753519138286 84.5016726992705	Hotel	1 to 2 years
+175238240	2021-05-01 00:00:00	Kathmandu	27.7180005590084 85.3097967996561	Trekking	6 to 10 years
+175239040	2021-05-01 00:00:00	Kathmandu	27.6924011815381 85.3301440109144	Other	1 to 2 years
+175250793	2021-05-01 00:00:00	Kathmandu	27.7349334767156 85.3143232244077	Hotel	6 to 10 years
+175263617	2021-05-01 00:00:00	Kaski	 	Restaurant and Bar	1 to 2 years
+175296075	2021-05-02 00:00:00	Kathmandu	27.7147492 85.3102089	Restaurant and Bar	11 years or above
+175313907	2021-05-02 00:00:00	Kathmandu	27.7179141297178 85.3101209550944	Hotel	1 to 2 years
+175521999	2021-05-03 00:00:00	Bhaktapur	27.6632585317559 85.4449016109137	Hotel	3 to 5 years
+175948361	2021-05-05 00:00:00	Kaski	28.2209793 83.9559105	Restaurant and Bar	3 to 5 years
+176228435	2021-05-06 00:00:00	Kathmandu	27.7153213473598 85.3117415550944	Trekking	3 to 5 years
+180321416	2021-05-26 00:00:00	Bhaktapur	27.6742617216237 85.3691647550934	Travel and Tour Operator	6 to 10 years
+\.
+
+
+--
+-- Data for Name: business_needs_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.business_needs_downloads_data (id, submission_date) FROM stdin;
+174444706	2021-04-28 00:00:00
+176510702	2021-05-07 00:00:00
+173876161	2021-04-26 00:00:00
+175156051	2021-05-01 00:00:00
+178003908	2021-05-16 00:00:00
+174239755	2021-04-27 00:00:00
+174968501	2021-04-30 00:00:00
+174752078	2021-04-29 00:00:00
+175185876	2021-05-01 00:00:00
+175199056	2021-05-01 00:00:00
+175293763	2021-05-02 00:00:00
+175218157	2021-05-01 00:00:00
+174441841	2021-04-28 00:00:00
+175469363	2021-05-03 00:00:00
+181204012	2021-05-30 00:00:00
+175538470	2021-05-03 00:00:00
+176031355	2021-05-05 00:00:00
+173959067	2021-04-26 00:00:00
+175385290	2021-05-02 00:00:00
+174937761	2021-04-30 00:00:00
+174454679	2021-04-28 00:00:00
+176017595	2021-05-05 00:00:00
+174220881	2021-04-27 00:00:00
+175154235	2021-05-01 00:00:00
+174262574	2021-04-27 00:00:00
+174455823	2021-04-28 00:00:00
+175301982	2021-05-02 00:00:00
+174746242	2021-04-29 00:00:00
+174455774	2021-04-28 00:00:00
+175231678	2021-05-01 00:00:00
+174650662	2021-04-29 00:00:00
+175195620	2021-05-01 00:00:00
+174471637	2021-04-28 00:00:00
+174393340	2021-04-28 00:00:00
+174936059	2021-04-30 00:00:00
+174936102	2021-04-30 00:00:00
+177451400	2021-05-12 00:00:00
+174199800	2021-04-27 00:00:00
+175129532	2021-05-01 00:00:00
+174356829	2021-04-28 00:00:00
+175023072	2021-04-30 00:00:00
+175209466	2021-05-01 00:00:00
+175189240	2021-05-01 00:00:00
+174932457	2021-04-30 00:00:00
+174208978	2021-04-27 00:00:00
+174297863	2021-04-27 00:00:00
+174166825	2021-04-27 00:00:00
+174657820	2021-04-28 00:00:00
+175764231	2021-05-04 00:00:00
+174650503	2021-04-29 00:00:00
+174150768	2021-04-27 00:00:00
+176956231	2021-05-09 00:00:00
+175184805	2021-05-01 00:00:00
+173657407	2021-04-25 00:00:00
+173787254	2021-04-26 00:00:00
+173858768	2021-04-26 00:00:00
+173932651	2021-04-26 00:00:00
+174569629	2021-04-28 00:00:00
+174149406	2021-04-27 00:00:00
+174162658	2021-04-27 00:00:00
+174163826	2021-04-27 00:00:00
+174182637	2021-04-27 00:00:00
+174244750	2021-04-27 00:00:00
+174244863	2021-04-27 00:00:00
+174245457	2021-04-27 00:00:00
+174259596	2021-04-27 00:00:00
+174269073	2021-04-27 00:00:00
+174359019	2021-04-28 00:00:00
+174369922	2021-04-28 00:00:00
+174395412	2021-04-28 00:00:00
+174443117	2021-04-28 00:00:00
+174448865	2021-04-28 00:00:00
+174450781	2021-04-28 00:00:00
+174450874	2021-04-28 00:00:00
+174452644	2021-04-28 00:00:00
+174459267	2021-04-28 00:00:00
+174514983	2021-04-28 00:00:00
+174529476	2021-04-28 00:00:00
+174603059	2021-04-29 00:00:00
+174665948	2021-04-29 00:00:00
+174736432	2021-04-29 00:00:00
+174764882	2021-04-29 00:00:00
+174832497	2021-04-29 00:00:00
+174934728	2021-04-30 00:00:00
+174964928	2021-04-30 00:00:00
+174970386	2021-04-30 00:00:00
+175158745	2021-05-01 00:00:00
+175168682	2021-05-01 00:00:00
+175182678	2021-05-01 00:00:00
+175182900	2021-05-01 00:00:00
+175183217	2021-05-01 00:00:00
+175184361	2021-05-01 00:00:00
+175184495	2021-05-01 00:00:00
+175185521	2021-05-01 00:00:00
+175187120	2021-05-01 00:00:00
+175187448	2021-05-01 00:00:00
+175187600	2021-05-01 00:00:00
+175190972	2021-05-01 00:00:00
+175191527	2021-05-01 00:00:00
+175193180	2021-05-01 00:00:00
+175200146	2021-05-01 00:00:00
+175226456	2021-05-01 00:00:00
+175238240	2021-05-01 00:00:00
+175239040	2021-05-01 00:00:00
+175250793	2021-05-01 00:00:00
+175263617	2021-05-01 00:00:00
+175296075	2021-05-02 00:00:00
+175313907	2021-05-02 00:00:00
+175521999	2021-05-03 00:00:00
+175948361	2021-05-05 00:00:00
+176228435	2021-05-06 00:00:00
+180321416	2021-05-26 00:00:00
+\.
+
+
+--
+-- Data for Name: business_outlook_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.business_outlook_downloads_data (id, submission_date, how_lng_covid_dsrupt_last, revenue_gen_21_v_19, wrkfrc_size_chng_21_v_19, rcvry_diffclty_winning_tourist_confidence, rcvry_diffclty_understanding_source_markets, rcvry_diffclty_ensuring_tourist_health_saftey, rcvry_diffclty_ensuring_workers_health_saftey, rcvry_diffclty_goods_shortage, rcvry_diffclty_human_resource_shortage, rcvry_diffclty_cash_flow_shortage, rcvry_diffclty_additional_fund_shortage, other_rcvry_diffclty, most_significant_rcvry_difficulty, biggest_support_rcvry, perm_stopped_not_started_new_business, perm_stopped_started_new_trsm_business, perm_stopped_started_new_non_trsm_business, perm_stopped_will_retrn_to_trsm_business, perm_stopped_started_hotel_accommodation_business, perm_stopped_started_restaurant_bar_business, perm_stopped_started_travel_tours_business, perm_stopped_started_trekking_mountaineering_business, perm_stopped_started_adventure_sports_business, perm_stopped_started_other_trsm_business, perm_stopped_started_accountancy_finance_business, perm_stopped_started_consulting_management_business, perm_stopped_started_charity_voluntary_business, perm_stopped_started_art_design_business, perm_stopped_started_energy_utillities_business, perm_stopped_started_engineering_manufacturing_business, perm_stopped_started_environment_agriculture_business, perm_stopped_started_healthcare_business, perm_stopped_started_information_technology_business, perm_stopped_started_law_business, perm_stopped_started_marketing_pr_business, perm_stopped_started_internet_media_business, perm_stopped_started_construction_property_business, perm_stopped_started_public_services_business, perm_stopped_started_retail_sales_business, perm_stopped_started_teaching_business, perm_stopped_started_logistics_transport_business, perm_stopped_started_other_non_tourism_business, perm_stopped_started_new_job, perm_stopped_started_shopkeeper_job, perm_stopped_started_tour_guide_job, perm_stopped_started_trekking_guide_job, perm_stopped_started_rafting_guide_job, perm_stopped_started_mountain_guide_job, perm_stopped_started_driver_job, perm_stopped_started_travel_agent_job, perm_stopped_started_flight_attendant_job, perm_stopped_started_pilot_job, perm_stopped_started_chef_cook_job, perm_stopped_started_hotel_manager_job, perm_stopped_started_hotel_staff_job, perm_stopped_started_waiter_job, perm_stopped_started_bartender_job, perm_stopped_started_other_tourism_job, perm_stopped_started_accountancy_finance_job, perm_stopped_started_consulting_management_job, perm_stopped_started_charity_voluntary_job, perm_stopped_started_art_design_job, perm_stopped_started_energy_utillities_job, perm_stopped_started_engineering_manufacturing_job, perm_stopped_started_environment_agriculture_job, perm_stopped_started_healthcare_job, perm_stopped_started_information_technology_job, perm_stopped_started_law_job, perm_stopped_started_marketing_pr_job, perm_stopped_started_internet_media_job, perm_stopped_started_construction_property_job, perm_stopped_started_public_services_job, perm_stopped_started_sales_retail_job, perm_stopped_started_teaching_job, perm_stopped_started_logistics_transport_job, perm_stopped_started_other_non_trsm_job) FROM stdin;
+174444706	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 75% of 2019	Workforce size will be 75% of 2019	1	0	0	0	0	0	1	1	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176510702	2021-05-07 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	1	1	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173876161	2021-04-26 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175156051	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 50% of 2019	Workforce size will be 50% of 2019	0	0	0	0	0	0	1	0	0	\N	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+178003908	2021-05-16 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 75% of 2019	Workforce size will be 50% of 2019	1	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Property owners	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174239755	2021-04-27 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	1	0	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Shareholders	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174968501	2021-04-30 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	1	0	0	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174752078	2021-04-29 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Yes, but it is a non-tourism related job	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+175185876	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be similar to 2019’s revenue	Workforce size will be similar to that of 2019	0	0	0	0	0	0	0	1	0	\N	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175199056	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 50% of 2019	Workforce size will be 25% of 2019	1	1	1	0	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175293763	2021-05-02 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 50% of 2019	Workforce size will be 25% of 2019	0	0	0	0	0	0	1	0	0	\N	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175218157	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	1	0	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174441841	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175469363	2021-05-03 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+181204012	2021-05-30 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be higher than 2019	Workforce size will be similar to that of 2019	1	1	0	1	1	0	1	0	0	Understanding and meeting the demands of source markets	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175538470	2021-05-03 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176031355	2021-05-05 00:00:00	More than 24 months (beyond Mar 2023 )	None (or negligible)	Workforce size will be 25% of 2019	0	1	0	1	0	0	1	1	0	Shortage of cash flow	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173959067	2021-04-26 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	0	0	0	0	0	0	1	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175385290	2021-05-02 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174937761	2021-04-30 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	0	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174454679	2021-04-28 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be 75% of 2019	None (or negligible)	1	1	1	0	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176017595	2021-05-05 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174220881	2021-04-27 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	0	1	1	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175154235	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	0	0	1	0	0	1	0	0	Shortage of cash flow	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174262574	2021-04-27 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Property owners	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174455823	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be higher than 2019	Workforce size will be 25% of 2019	0	0	1	1	0	0	1	0	0	Shortage of cash flow	Shareholders	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175301982	2021-05-02 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174746242	2021-04-29 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	0	1	1	0	0	1	1	0	Shortage of additional loans or funds	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174455774	2021-04-28 00:00:00	More than 24 months (beyond Mar 2023 )	None (or negligible)	Workforce size will be 25% of 2019	0	1	1	1	1	1	1	1	0	Shortage of cash flow	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175231678	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be higher than 2019	None (or negligible)	0	1	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174650662	2021-04-29 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 75% of 2019	Workforce size will be 75% of 2019	1	0	0	0	0	0	1	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175195620	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174471637	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 50% of 2019	1	1	1	1	1	1	1	1	0	Ensuring health and safety measures for the guests and tourists	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174393340	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	0	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174936059	2021-04-30 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	Workforce size will be 25% of 2019	1	0	1	1	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174936102	2021-04-30 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	Workforce size will be 25% of 2019	1	0	1	1	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+177451400	2021-05-12 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174199800	2021-04-27 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175129532	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	0	0	0	0	0	1	1	0	Shortage of cash flow	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174356829	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	0	1	0	0	0	0	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175023072	2021-04-30 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	0	0	0	0	0	1	1	1	0	Shortage of human resource	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175209466	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	None (or negligible)	1	1	1	0	0	0	1	1	0	Ensuring health and safety measures for the guests and tourists	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175189240	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	1	1	0	0	0	1	0	0	Shortage of cash flow	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174932457	2021-04-30 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	1	1	1	1	1	0	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174208978	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	1	1	0	0	0	1	1	0	Shortage of additional loans or funds	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174297863	2021-04-27 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 25% of 2019	Workforce size will be similar to that of 2019	1	0	1	1	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Other	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174166825	2021-04-27 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	0	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174657820	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	1	0	0	0	0	1	0	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175764231	2021-05-04 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	1	1	1	0	1	0	0	Shortage of goods, supplies / input materials	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174650503	2021-04-29 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174150768	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 50% of 2019	Workforce size will be 50% of 2019	0	0	0	0	0	1	1	1	0	Shortage of additional loans or funds	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176956231	2021-05-09 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 50% of 2019	Workforce size will be 25% of 2019	1	1	0	0	0	0	0	0	0	Understanding and meeting the demands of source markets	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175184805	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173657407	2021-04-25 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	0	0	0	0	0	0	1	1	0	Shortage of cash flow	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173787254	2021-04-26 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173858768	2021-04-26 00:00:00	More than 24 months (beyond Mar 2023 )	None (or negligible)	None (or negligible)	1	1	1	1	1	1	1	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173932651	2021-04-26 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be similar to 2019’s revenue	Workforce size will be similar to that of 2019	1	0	0	0	0	0	0	0	0	\N	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174569629	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	0	1	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174149406	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174162658	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 75% of 2019	0	0	1	1	0	0	0	0	0	Ensuring health and safety measures for the workforce	Other	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174163826	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	1	0	0	0	0	1	1	1	Shortage of cash flow	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174182637	2021-04-27 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be similar to 2019’s revenue	Workforce size will be similar to that of 2019	1	1	1	1	1	0	1	0	0	Ensuring health and safety measures for the guests and tourists	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174244750	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174244863	2021-04-27 00:00:00	Less than 6 months (till Sep 2021)	None (or negligible)	None (or negligible)	1	1	0	0	0	0	1	1	0	Shortage of cash flow	Other	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174245457	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	0	1	0	Shortage of additional loans or funds	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174259596	2021-04-27 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	0	1	1	0	0	0	0	0	Ensuring health and safety measures for the workforce	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174269073	2021-04-27 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	Workforce size will be similar to that of 2019	1	0	0	0	0	0	1	1	0	Shortage of cash flow	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174359019	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be similar to 2019’s revenue	None (or negligible)	1	0	1	1	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174369922	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 50% of 2019	Workforce size will be similar to that of 2019	1	1	0	1	0	1	1	0	0	Understanding and meeting the demands of source markets	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174395412	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 50% of 2019	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174443117	2021-04-28 00:00:00	More than 24 months (beyond Mar 2023 )	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	Yes, but it is a non-tourism related job	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+174448865	2021-04-28 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be higher than 2019	Workforce size will be 50% of 2019	1	0	0	0	0	0	0	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174450781	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	0	1	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174450874	2021-04-28 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	0	1	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174452644	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	0	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174459267	2021-04-28 00:00:00	6 to 12 months (till Mar 2022)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174514983	2021-04-28 00:00:00	13 to 24 months (till Mar 2023)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174529476	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	None (or negligible)	Workforce size will be 25% of 2019	1	0	0	0	1	0	1	1	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174603059	2021-04-29 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 75% of 2019	Workforce size will be 50% of 2019	1	0	1	1	0	1	1	0	0	Shortage of cash flow	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174665948	2021-04-29 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 50% of 2019	Workforce size will be 75% of 2019	0	0	0	0	0	0	1	0	0	\N	Property owners	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174736432	2021-04-29 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	1	0	0	0	0	1	0	0	Shortage of cash flow	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174764882	2021-04-29 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	Workforce size will be similar to that of 2019	0	0	0	0	1	1	0	0	0	Shortage of goods, supplies / input materials	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174832497	2021-04-29 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	1	1	1	1	1	1	1	0	Shortage of cash flow	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174934728	2021-04-30 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	1	0	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174964928	2021-04-30 00:00:00	Less than 6 months (till Sep 2021)	None (or negligible)	Workforce size will be 75% of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174970386	2021-04-30 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	0	1	0	0	0	0	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175158745	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	0	1	0	0	0	1	0	0	Shortage of cash flow	Property owners	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175168682	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	0	0	0	0	0	1	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175182678	2021-05-01 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be higher than 2019	Workforce size will be greater than that of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175182900	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175183217	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 50% of 2019	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175184361	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	0	0	0	0	1	1	1	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175184495	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	1	1	1	0	0	0	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175185521	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187120	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187448	2021-05-01 00:00:00	More than 24 months (beyond Mar 2023 )	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187600	2021-05-01 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175190972	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	0	1	1	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175191527	2021-05-01 00:00:00	13 to 24 months (till Mar 2023)	Revenue is expected to be 25% of 2019	Workforce size will be 25% of 2019	0	1	0	1	1	1	1	1	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175193180	2021-05-01 00:00:00	More than 24 months (beyond Mar 2023 )	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175200146	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	0	0	0	0	0	0	0	0	\N	Financial Institutions	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175226456	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	1	0	0	0	1	1	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Property owners	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175238240	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	Workforce size will be 25% of 2019	1	1	1	1	1	0	0	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175239040	2021-05-01 00:00:00	More than 24 months (beyond Mar 2023 )	Revenue is expected to be higher than 2019	Workforce size will be greater than that of 2019	0	0	0	1	1	1	1	1	0	Shortage of cash flow	Other	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175250793	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	0	0	0	1	0	0	0	0	0	\N	Nepal Tourism Board	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175263617	2021-05-01 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	0	0	0	0	0	0	1	1	0	Shortage of additional loans or funds	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175296075	2021-05-02 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 50% of 2019	Workforce size will be 50% of 2019	1	0	0	0	0	0	0	0	0	\N	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175313907	2021-05-02 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175521999	2021-05-03 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be similar to 2019’s revenue	None (or negligible)	1	0	1	1	0	1	0	1	0	Winning the confidence of tourists and guests in the context of COVID-19	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175948361	2021-05-05 00:00:00	Less than 6 months (till Sep 2021)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176228435	2021-05-06 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 75% of 2019	Workforce size will be 75% of 2019	0	0	0	0	0	0	0	1	0	\N	Unions and associations	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+180321416	2021-05-26 00:00:00	13 to 24 months (till Mar 2023)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Friends and family	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+\.
+
+
+--
+-- Data for Name: business_preparedness_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.business_preparedness_downloads_data (id, submission_date, hhs_measures_placed_sanitizers, hhs_measures_trained_employes_on_hhs, hhs_measures_placed_thermal_screening, hhs_measures_maintained_social_distancing, hhs_measures_implemented_cashless_payment, hhs_measures_discontinued_buffed_services, hhs_measures_added_covid_friendly_marketing, hhs_measures_outsourced_services, other_hhs_measures, no_hhs_measures, wrkrs_hlth_informed_covid_saftey_measures, wrkrs_hlth_encouraged_home_stay_if_sick, wrkrs_hlth_maintained_social_distancing, wrkrs_hlth_implemented_working_shifts, wrkrs_hlth_implemented_remote_working, wrkrs_hlth_performed_temperature_checks, wrkrs_hlth_provided_ppe, wrkrs_hlth_provided_paid_sick_leave, wrkrs_hlth_provided_covid_insurance, other_wrkrs_hlth_measures, no_wrkrs_hlth_measures, internl_recvry_strategy_reduce_prdocution, internl_recvry_strategy_increase_production, internl_recvry_strategy_diversify_offerings, internl_recvry_strategy_start_different_business, internl_recvry_strategy_diversify_sales_channels, internl_recvry_strategy_retrain_workers, other_internl_recvry_strategy, no_internl_recvry_strategy, externl_recvry_strategy_negotiate_bank_paymnts, externl_recvry_strategy_lobby_support_trade_unions, externl_recvry_strategy_negotiate_with_wrkrs_union, externl_recvry_strategy_negotiate_with_property_owner, externl_recvry_strategy_partner_with_other_business, externl_recvry_strategy_increase_shareholders, externl_recvry_strategy_share_assets_other_business, other_externl_recvry_strategy, no_externl_recvry_strategy, has_dedictd_covid_desk) FROM stdin;
+174444706	2021-04-28 00:00:00	1	1	1	1	1	0	1	1	0	0	1	1	1	1	0	1	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
+176510702	2021-05-07 00:00:00	1	1	1	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0
+173876161	2021-04-26 00:00:00	1	1	1	1	0	1	0	0	0	0	1	1	1	1	0	1	1	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0
+175156051	2021-05-01 00:00:00	1	0	0	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0
+178003908	2021-05-16 00:00:00	1	1	0	0	0	0	1	0	0	0	1	1	1	0	0	0	1	1	1	0	0	1	0	0	0	0	0	0	0	0	0	0	1	1	1	1	0	0	1
+174239755	2021-04-27 00:00:00	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0
+174968501	2021-04-30 00:00:00	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	1	0	0	0	0	0
+174752078	2021-04-29 00:00:00	1	1	1	1	1	0	1	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175185876	2021-05-01 00:00:00	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+175199056	2021-05-01 00:00:00	1	1	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0
+175293763	2021-05-02 00:00:00	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+175218157	2021-05-01 00:00:00	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0
+174441841	2021-04-28 00:00:00	0	0	0	0	0	0	0	1	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175469363	2021-05-03 00:00:00	1	1	1	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+181204012	2021-05-30 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	1	1	1	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175538470	2021-05-03 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176031355	2021-05-05 00:00:00	0	1	0	0	0	0	1	0	0	0	1	1	0	0	0	1	1	1	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1
+173959067	2021-04-26 00:00:00	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175385290	2021-05-02 00:00:00	1	1	1	1	0	1	1	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174937761	2021-04-30 00:00:00	1	1	0	0	0	0	0	0	0	0	1	1	0	1	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	1
+174454679	2021-04-28 00:00:00	0	0	0	1	0	0	0	0	0	0	1	1	1	0	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0
+176017595	2021-05-05 00:00:00	1	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174220881	2021-04-27 00:00:00	1	1	1	1	0	0	1	0	0	0	1	1	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175154235	2021-05-01 00:00:00	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0
+174262574	2021-04-27 00:00:00	0	0	0	1	1	0	1	0	0	0	0	1	0	1	1	0	1	0	0	0	0	0	0	1	0	1	0	0	0	1	0	1	1	1	1	1	0	0	1
+174455823	2021-04-28 00:00:00	1	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0
+175301982	2021-05-02 00:00:00	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174746242	2021-04-29 00:00:00	1	1	0	1	1	0	0	0	0	0	1	1	1	1	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0
+174455774	2021-04-28 00:00:00	1	1	0	1	1	0	1	0	0	0	1	1	1	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	1	1	0	0	0	0	0	0
+175231678	2021-05-01 00:00:00	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1
+174650662	2021-04-29 00:00:00	1	0	0	0	1	0	1	0	0	0	1	1	1	0	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	1	1	0	0	0
+175195620	2021-05-01 00:00:00	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1
+174471637	2021-04-28 00:00:00	1	1	0	1	1	1	1	0	0	0	1	1	0	1	0	1	1	1	0	0	0	0	0	0	0	0	1	0	0	1	0	1	1	0	0	0	0	0	0
+174393340	2021-04-28 00:00:00	1	1	1	1	1	0	1	1	0	0	1	1	1	1	1	1	1	0	1	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	1
+174936059	2021-04-30 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	1	1	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1
+174936102	2021-04-30 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	1	1	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	1
+177451400	2021-05-12 00:00:00	1	1	1	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174199800	2021-04-27 00:00:00	1	1	0	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175129532	2021-05-01 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	0	0	0	0	1	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	1	0	0	0	0	0	0
+174356829	2021-04-28 00:00:00	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175023072	2021-04-30 00:00:00	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0
+175209466	2021-05-01 00:00:00	1	0	0	0	0	0	1	0	0	0	0	1	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
+175189240	2021-05-01 00:00:00	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+174932457	2021-04-30 00:00:00	0	1	1	1	1	0	0	0	0	0	1	1	1	1	0	1	1	1	1	0	0	0	0	0	0	0	1	0	0	1	0	0	1	0	1	0	0	0	0
+174208978	2021-04-27 00:00:00	1	1	0	1	1	0	0	0	0	0	1	1	1	0	0	0	1	1	1	0	0	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1
+174297863	2021-04-27 00:00:00	1	1	1	1	1	1	1	0	0	0	1	1	1	1	1	1	1	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1
+174166825	2021-04-27 00:00:00	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+174657820	2021-04-28 00:00:00	1	1	0	1	0	0	0	0	0	0	1	1	1	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1
+175764231	2021-05-04 00:00:00	1	1	0	0	1	1	1	0	0	0	1	1	0	1	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	1	0	0	0	0	0	0
+174650503	2021-04-29 00:00:00	1	1	1	1	1	0	1	1	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174150768	2021-04-27 00:00:00	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	1	1
+176956231	2021-05-09 00:00:00	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0
+175184805	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+173657407	2021-04-25 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	1	1	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0
+173787254	2021-04-26 00:00:00	1	1	1	1	1	0	0	0	0	0	1	1	1	1	1	1	1	1	1	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1
+173858768	2021-04-26 00:00:00	1	0	1	1	0	1	0	0	0	0	1	1	1	1	0	1	1	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+173932651	2021-04-26 00:00:00	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1
+174569629	2021-04-28 00:00:00	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	1
+174149406	2021-04-27 00:00:00	1	1	1	1	1	1	0	0	0	0	1	1	1	1	0	1	1	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0
+174162658	2021-04-27 00:00:00	1	1	1	1	0	0	0	0	0	0	1	0	1	0	1	0	1	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0
+174163826	2021-04-27 00:00:00	1	1	1	1	0	1	1	0	0	0	1	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0
+174182637	2021-04-27 00:00:00	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
+174244750	2021-04-27 00:00:00	1	0	0	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174244863	2021-04-27 00:00:00	1	1	0	1	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0
+174245457	2021-04-27 00:00:00	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174259596	2021-04-27 00:00:00	1	0	1	1	0	0	0	0	0	0	0	1	1	1	1	0	1	1	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0
+174269073	2021-04-27 00:00:00	1	1	0	1	1	0	1	0	0	0	1	1	1	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174359019	2021-04-28 00:00:00	0	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174369922	2021-04-28 00:00:00	1	1	1	1	1	0	1	0	0	0	1	1	1	1	0	1	1	0	0	0	0	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0
+174395412	2021-04-28 00:00:00	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1
+174443117	2021-04-28 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174448865	2021-04-28 00:00:00	1	1	1	1	1	1	1	1	0	0	1	1	1	1	1	1	1	1	0	0	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	1	1
+174450781	2021-04-28 00:00:00	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+174450874	2021-04-28 00:00:00	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0
+174452644	2021-04-28 00:00:00	1	1	1	1	0	0	0	0	0	0	1	1	1	1	1	1	1	1	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0
+174459267	2021-04-28 00:00:00	0	0	1	1	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174514983	2021-04-28 00:00:00	0	0	0	0	0	0	0	1	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+174529476	2021-04-28 00:00:00	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+174603059	2021-04-29 00:00:00	1	0	1	1	0	0	0	0	0	0	1	1	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1
+174665948	2021-04-29 00:00:00	1	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
+174736432	2021-04-29 00:00:00	1	0	0	1	1	0	0	0	0	0	1	1	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+174764882	2021-04-29 00:00:00	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0
+174832497	2021-04-29 00:00:00	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	1	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0
+174934728	2021-04-30 00:00:00	1	1	1	1	1	1	0	0	0	0	1	1	1	1	0	1	1	1	1	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1
+174964928	2021-04-30 00:00:00	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+174970386	2021-04-30 00:00:00	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0
+175158745	2021-05-01 00:00:00	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+175168682	2021-05-01 00:00:00	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
+175182678	2021-05-01 00:00:00	1	1	1	1	1	1	1	1	0	0	1	1	1	1	1	1	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1
+175182900	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	1
+175183217	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175184361	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+175184495	2021-05-01 00:00:00	1	0	1	1	0	0	0	1	0	0	1	1	1	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	1
+175185521	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187120	2021-05-01 00:00:00	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0
+175187448	2021-05-01 00:00:00	0	0	0	0	0	0	1	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175187600	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175190972	2021-05-01 00:00:00	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0
+175191527	2021-05-01 00:00:00	0	1	1	1	0	0	0	0	0	0	0	1	1	0	0	1	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	1
+175193180	2021-05-01 00:00:00	0	0	0	0	1	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175200146	2021-05-01 00:00:00	1	0	0	1	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
+175226456	2021-05-01 00:00:00	1	1	1	1	0	0	1	0	0	0	1	1	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175238240	2021-05-01 00:00:00	1	1	1	1	1	1	1	1	0	0	1	1	1	1	1	1	1	1	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1
+175239040	2021-05-01 00:00:00	0	0	0	1	1	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0
+175250793	2021-05-01 00:00:00	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175263617	2021-05-01 00:00:00	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	1	0	1	1	1	0	0
+175296075	2021-05-02 00:00:00	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0
+175313907	2021-05-02 00:00:00	0	1	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+175521999	2021-05-03 00:00:00	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0
+175948361	2021-05-05 00:00:00	1	0	0	0	0	0	0	0	0	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+176228435	2021-05-06 00:00:00	0	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1
+180321416	2021-05-26 00:00:00	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+\.
+
+
+--
+-- Data for Name: businesses_bivariate_stats ; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."businesses_bivariate_stats " (xvariable, xvalue, xlabel_en, xlabel_ne, yvariable, yvalue, ylabel_en, ylabel_ne, total, percoftotal, variablegroup, index) FROM stdin;
 m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	i_covid_effect_business	10	Other	अन्य	0	0	impact	1
 m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	i_covid_effect_business	5	Supply chain disruption	आपूर्ति श्रृंखला अवरोध	0	0	impact	2
 m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	i_covid_effect_business	2	Increased COVID-19 cases in our area	हाम्रो क्षेत्रमा कोभिड-१९ केसहरू बढ्यो 	1	0.008928571428571428	impact	3
@@ -3120,7 +4013,6 @@ b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest
 b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_support	4	Financial Institutions	वित्तीय संस्था	4	0.043010752688172046	need	2535
 b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_support	2	Nepal Tourism Board	नेपाल पर्यटन बोर्ड	2	0.021505376344086023	need	2536
 b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_support	7	Friends and family	साथी र परिवार	6	0.06451612903225806	need	2537
-m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	1	0.008928571428571428	perception	2802
 b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_support	1	Government agencies (Ministry, Department of Tourism, etc.)	सरकारी एजेन्सीहरू (मंत्रालय, पर्यटन विभाग, आदि)	17	0.1827956989247312	need	2538
 b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_support	3	Unions and associations	युनियन र संघहरू	1	0.010752688172043012	need	2539
 b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_support	6	Shareholders	शेयरधारकहरू	0	0	need	2540
@@ -3357,431 +4249,432 @@ b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_how_efctv_gov
 b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_how_efctv_gov_schemes	1	These schemes are difficult to understand	यी योजनाहरू बुझ्न गाह्रो छ	5	0.14705882352941177	need	2772
 b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_how_efctv_gov_schemes	3	These schemes are not sufficient	यी योजनाहरू पर्याप्त छैनन्	5	0.14705882352941177	need	2773
 b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_how_efctv_gov_schemes	2	These schemes are not easy to use	यी योजनाहरू प्रयोग गर्न सजिलो छैन	12	0.35294117647058826	need	2774
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	perception	2775
-m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	17	0.15178571428571427	perception	2830
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	perception	2776
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	perception	2777
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	0	0	perception	2778
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	2	0.017857142857142856	perception	2779
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	3	0.026785714285714284	perception	2780
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	perception	2781
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	9	0.08035714285714286	perception	2782
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	perception	2783
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	5	0.044642857142857144	perception	2784
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	8	0.07142857142857142	perception	2785
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	10	0.08928571428571429	perception	2786
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	2	0.017857142857142856	perception	2787
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	7	0.0625	perception	2788
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	perception	2789
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	14	0.125	perception	2790
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	perception	2791
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	7	0.0625	perception	2792
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	perception	2793
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	15	0.13392857142857142	perception	2794
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	perception	2795
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	perception	2796
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	perception	2797
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	1	0.008928571428571428	perception	2798
-m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2799
-m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	perception	2800
-m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	perception	2801
-m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	3	0.026785714285714284	perception	2803
-m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	perception	2804
-m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	4	0.03571428571428571	perception	2805
-m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	perception	2806
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2807
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	perception	2808
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	perception	2809
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	4	0.03571428571428571	perception	2810
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2811
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	perception	2812
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	perception	2813
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	7	0.0625	perception	2814
-m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2815
-m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	perception	2816
-m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	3	0.026785714285714284	perception	2817
-m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	4	0.03571428571428571	perception	2818
-m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2819
-m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	perception	2820
-m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	4	0.03571428571428571	perception	2821
-m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	7	0.0625	perception	2822
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2823
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	5	0.044642857142857144	perception	2824
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	9	0.08035714285714286	perception	2825
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	5	0.044642857142857144	perception	2826
-m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	3	0.026785714285714284	perception	2827
-m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	perception	2828
-m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	5	0.044642857142857144	perception	2829
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	perception	2831
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	perception	2832
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	perception	2833
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	perception	2834
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2835
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	perception	2836
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	perception	2837
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	perception	2838
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	perception	2839
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	perception	2840
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	perception	2841
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	6	0.05357142857142857	perception	2842
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	6	0.05357142857142857	perception	2843
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	11	0.09821428571428571	perception	2844
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	8	0.07142857142857142	perception	2845
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	13	0.11607142857142858	perception	2846
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	perception	2847
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	11	0.09821428571428571	perception	2848
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	19	0.16964285714285715	perception	2849
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	25	0.22321428571428573	perception	2850
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2851
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	perception	2852
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	0	0	perception	2853
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	1	0.010752688172043012	perception	2854
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	perception	2855
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	perception	2856
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2857
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	3	0.03225806451612903	perception	2858
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	5	0.053763440860215055	perception	2859
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	perception	2860
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	11	0.11827956989247312	perception	2861
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	16	0.17204301075268819	perception	2862
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2863
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	7	0.07526881720430108	perception	2864
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	6	0.06451612903225806	perception	2865
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	perception	2866
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	9	0.0967741935483871	perception	2867
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	14	0.15053763440860216	perception	2868
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2869
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	perception	2870
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	9	0.0967741935483871	perception	2871
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	11	0.11827956989247312	perception	2872
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	17	0.1827956989247312	perception	2873
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	16	0.17204301075268819	perception	2874
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	perception	2875
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	perception	2876
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2899
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	perception	3060
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	7	0.07526881720430108	perception	2877
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	perception	2878
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	19	0.20430107526881722	perception	2879
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	17	0.1827956989247312	perception	2880
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2881
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	perception	2882
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	0	0	perception	2883
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	perception	2884
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	0	0	perception	2885
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	0	0	perception	2886
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2887
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	perception	2888
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	perception	2889
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	perception	2890
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	perception	2891
-m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	perception	2892
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2893
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	3	0.03225806451612903	perception	2894
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	perception	2895
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	perception	2896
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	7	0.07526881720430108	perception	2897
-m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	4	0.043010752688172046	perception	2898
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	perception	2900
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	perception	2901
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	2	0.021505376344086023	perception	2902
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	6	0.06451612903225806	perception	2903
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	perception	2904
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2905
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	perception	2906
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	3	0.03225806451612903	perception	2907
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	2	0.021505376344086023	perception	2908
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	perception	2909
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	6	0.06451612903225806	perception	2910
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2911
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	4	0.043010752688172046	perception	2912
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	perception	2913
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	5	0.053763440860215055	perception	2914
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	8	0.08602150537634409	perception	2915
-m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	perception	2916
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2917
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	perception	2918
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	perception	2919
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	5	0.053763440860215055	perception	2920
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	4	0.043010752688172046	perception	2921
-m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	7	0.07526881720430108	perception	2922
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2923
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	perception	2924
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	5	0.053763440860215055	perception	2925
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	8	0.08602150537634409	perception	2926
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	10	0.10752688172043011	perception	2927
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	11	0.11827956989247312	perception	2928
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	perception	2929
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	perception	2930
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	8	0.08602150537634409	perception	2931
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	8	0.08602150537634409	perception	2932
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	20	0.21505376344086022	perception	2933
-m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	19	0.20430107526881722	perception	2934
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2935
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	perception	2936
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	perception	2937
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	perception	2938
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	2	0.021505376344086023	perception	2939
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	perception	2940
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2941
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	perception	2942
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	31	0.3333333333333333	perception	2964
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	2	0.021505376344086023	perception	2943
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	perception	2944
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	2	0.021505376344086023	perception	2945
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	2	0.021505376344086023	perception	2946
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	perception	2947
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	perception	2948
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	perception	2949
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	perception	2950
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	6	0.06451612903225806	perception	2951
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	perception	2952
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2953
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	6	0.06451612903225806	perception	2954
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	7	0.07526881720430108	perception	2955
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	12	0.12903225806451613	perception	2956
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	21	0.22580645161290322	perception	2957
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	22	0.23655913978494625	perception	2958
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	perception	2959
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	6	0.06451612903225806	perception	2960
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	13	0.13978494623655913	perception	2961
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	15	0.16129032258064516	perception	2962
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	26	0.27956989247311825	perception	2963
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	10	0.10752688172043011	perception	2988
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	2965
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	2966
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	2967
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	perception	2968
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2969
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	2970
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2971
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2972
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2973
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	2974
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	2975
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	perception	2976
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2977
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	2978
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	2979
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2980
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	6	0.06451612903225806	perception	2981
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	perception	2982
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	2983
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	2984
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	2985
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2986
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	perception	2987
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	2989
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	2990
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	2991
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	5	0.053763440860215055	perception	2992
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	perception	2993
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	9	0.0967741935483871	perception	2994
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	2995
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	2996
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	2997
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	perception	2998
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	0	0	perception	2999
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3000
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3001
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3002
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	3003
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3004
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	0	0	perception	3005
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	perception	3006
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3007
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3008
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3009
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	perception	3010
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3011
-m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	perception	3012
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3013
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3014
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3015
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3016
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3017
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	4	0.043010752688172046	perception	3018
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3019
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3020
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3021
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3022
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3023
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	perception	3024
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3025
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3026
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	3027
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3028
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3029
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	perception	3030
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3031
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3032
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3033
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3034
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	3035
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	perception	3036
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3037
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3038
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3039
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3040
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	6	0.06451612903225806	perception	3041
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	perception	3042
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3043
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3044
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3045
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	3046
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	9	0.0967741935483871	perception	3047
-m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	10	0.10752688172043011	perception	3048
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3049
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3050
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	3051
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3052
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3053
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3054
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3055
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3056
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	3057
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	perception	3058
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3059
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	perception	3061
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	perception	3062
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	perception	3063
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3064
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	5	0.053763440860215055	perception	3065
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	2	0.021505376344086023	perception	3066
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	perception	3067
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	3068
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	4	0.043010752688172046	perception	3069
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	4	0.043010752688172046	perception	3070
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	perception	3071
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	15	0.16129032258064516	perception	3072
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	4	0.043010752688172046	perception	3073
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	3074
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	2	0.021505376344086023	perception	3075
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	perception	3076
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	9	0.0967741935483871	perception	3077
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	23	0.24731182795698925	perception	3078
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3079
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3080
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3081
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3082
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3083
-m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	1	0.010752688172043012	perception	3084
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3085
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3086
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3087
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	perception	3088
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	perception	3089
-m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	perception	3090
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3091
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3092
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	3	0.03225806451612903	perception	3093
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	perception	3094
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	perception	3095
-m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	10	0.10752688172043011	perception	3096
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3097
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3098
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3099
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	perception	3100
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	perception	3101
-m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	8	0.08602150537634409	perception	3102
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3103
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	4	0.043010752688172046	perception	3104
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	3	0.03225806451612903	perception	3105
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	perception	3106
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	perception	3107
-m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	7	0.07526881720430108	perception	3108
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3109
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3110
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3111
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3112
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3113
-m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	0	0	perception	3114
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3115
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3116
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3117
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3118
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3119
-m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	2	0.021505376344086023	perception	3120
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3121
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3122
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3123
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3124
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	perception	3125
-m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	4	0.043010752688172046	perception	3126
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3127
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	3	0.03225806451612903	perception	3128
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3129
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	3	0.03225806451612903	perception	3130
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	2	0.021505376344086023	perception	3131
-m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	2	0.021505376344086023	perception	3132
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3133
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3134
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3135
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3136
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	5	0.053763440860215055	perception	3137
-m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	3	0.03225806451612903	perception	3138
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3139
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3140
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	perception	3141
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3142
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	perception	3143
-m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	perception	3144
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3145
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3146
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3147
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	perception	3148
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	4	0.043010752688172046	perception	3149
-m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	perception	3150
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3151
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3152
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	perception	3153
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	perception	3154
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	perception	3155
-m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	5	0.053763440860215055	perception	3156
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3157
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3158
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	perception	3159
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	11	0.11827956989247312	perception	3160
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	8	0.08602150537634409	perception	3161
-m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	4	0.043010752688172046	perception	3162
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3163
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3164
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3165
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	perception	3166
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	perception	3167
-b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	0	0	perception	3168
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3169
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3170
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	perception	3171
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	perception	3172
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	perception	3173
-b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	1	0.010752688172043012	perception	3174
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	perception	3175
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	perception	3176
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3177
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	perception	3178
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	perception	3179
-b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	3	0.03225806451612903	perception	3180
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3181
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	5	0.053763440860215055	perception	3182
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	perception	3183
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	perception	3184
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	8	0.08602150537634409	perception	3185
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	15	0.16129032258064516	perception	3186
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	perception	3187
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	perception	3188
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	5	0.053763440860215055	perception	3189
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	perception	3190
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	20	0.21505376344086022	perception	3191
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	13	0.13978494623655913	perception	3192
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	outlook	2775
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	outlook	2776
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	outlook	2777
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	0	0	outlook	2778
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	2	0.017857142857142856	outlook	2779
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	3	0.026785714285714284	outlook	2780
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	outlook	2781
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	9	0.08035714285714286	outlook	2782
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	outlook	2783
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	5	0.044642857142857144	outlook	2784
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	8	0.07142857142857142	outlook	2785
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	10	0.08928571428571429	outlook	2786
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	2	0.017857142857142856	outlook	2787
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	7	0.0625	outlook	2788
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	outlook	2789
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	14	0.125	outlook	2790
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	outlook	2791
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	7	0.0625	outlook	2792
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	7	0.0625	outlook	2793
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	15	0.13392857142857142	outlook	2794
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	outlook	2795
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	outlook	2796
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	outlook	2797
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	1	0.008928571428571428	outlook	2798
+m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2799
+m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	outlook	2800
+m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	outlook	2801
+m_biz_type	5	Rafting	राफ्टिङ	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	1	0.008928571428571428	outlook	2802
+m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	3	0.026785714285714284	outlook	2803
+m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	outlook	2804
+m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	4	0.03571428571428571	outlook	2805
+m_biz_type	9	Other	अन्य	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	outlook	2806
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2807
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	outlook	2808
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	outlook	2809
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	4	0.03571428571428571	outlook	2810
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2811
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	outlook	2812
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	outlook	2813
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	7	0.0625	outlook	2814
+m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2815
+m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	outlook	2816
+m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	3	0.026785714285714284	outlook	2817
+m_biz_type	4	Handicraft	हस्तशिल्प	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	4	0.03571428571428571	outlook	2818
+m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2819
+m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	outlook	2820
+m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	4	0.03571428571428571	outlook	2821
+m_biz_type	6	Trekking	ट्रेकिंग	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	7	0.0625	outlook	2822
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2823
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	5	0.044642857142857144	outlook	2824
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	9	0.08035714285714286	outlook	2825
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	5	0.044642857142857144	outlook	2826
+m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	3	0.026785714285714284	outlook	2827
+m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	4	0.03571428571428571	outlook	2828
+m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	5	0.044642857142857144	outlook	2829
+m_biz_type	1	Hotel	होटल	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	17	0.15178571428571427	outlook	2830
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	0	0	outlook	2831
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	outlook	2832
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	outlook	2833
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	outlook	2834
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2835
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	0	0	outlook	2836
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	0	0	outlook	2837
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	2	0.017857142857142856	outlook	2838
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	1	0.008928571428571428	outlook	2839
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	1	0.008928571428571428	outlook	2840
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	2	0.017857142857142856	outlook	2841
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	6	0.05357142857142857	outlook	2842
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	6	0.05357142857142857	outlook	2843
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	11	0.09821428571428571	outlook	2844
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	8	0.07142857142857142	outlook	2845
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	13	0.11607142857142858	outlook	2846
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	4	0.03571428571428571	outlook	2847
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	11	0.09821428571428571	outlook	2848
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	19	0.16964285714285715	outlook	2849
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	25	0.22321428571428573	outlook	2850
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2851
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	outlook	2852
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	0	0	outlook	2853
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	1	0.010752688172043012	outlook	2854
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	outlook	2855
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	5	0.053763440860215055	outlook	3065
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	outlook	2856
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2857
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	3	0.03225806451612903	outlook	2858
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	5	0.053763440860215055	outlook	2859
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	outlook	2860
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	11	0.11827956989247312	outlook	2861
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	16	0.17204301075268819	outlook	2862
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2863
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	7	0.07526881720430108	outlook	2864
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	6	0.06451612903225806	outlook	2865
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	outlook	2866
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	9	0.0967741935483871	outlook	2867
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	14	0.15053763440860216	outlook	2868
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2869
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	outlook	2870
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	9	0.0967741935483871	outlook	2871
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	11	0.11827956989247312	outlook	2872
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	17	0.1827956989247312	outlook	2873
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	16	0.17204301075268819	outlook	2874
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	outlook	2875
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	outlook	2876
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	7	0.07526881720430108	outlook	2877
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	7	0.07526881720430108	outlook	2878
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	19	0.20430107526881722	outlook	2879
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	17	0.1827956989247312	outlook	2880
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2881
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	outlook	2882
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	0	0	outlook	2883
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	outlook	2884
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	0	0	outlook	2885
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	0	0	outlook	2886
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2887
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	outlook	2888
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	outlook	2889
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	outlook	2890
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	outlook	2891
+m_biz_type	5	Rafting	राफ्टिङ	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	outlook	2892
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2893
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	3	0.03225806451612903	outlook	2894
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	outlook	2895
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	outlook	2896
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	7	0.07526881720430108	outlook	2897
+m_biz_type	9	Other	अन्य	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	4	0.043010752688172046	outlook	2898
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2899
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	outlook	2900
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	2	0.021505376344086023	outlook	3066
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	outlook	2901
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	2	0.021505376344086023	outlook	2902
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	6	0.06451612903225806	outlook	2903
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	outlook	2904
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2905
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	outlook	2906
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	3	0.03225806451612903	outlook	2907
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	2	0.021505376344086023	outlook	2908
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	1	0.010752688172043012	outlook	2909
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	6	0.06451612903225806	outlook	2910
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2911
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	4	0.043010752688172046	outlook	2912
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	outlook	2913
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	5	0.053763440860215055	outlook	2914
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	8	0.08602150537634409	outlook	2915
+m_biz_type	4	Handicraft	हस्तशिल्प	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	outlook	2916
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2917
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	outlook	2918
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	outlook	2919
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	5	0.053763440860215055	outlook	2920
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	4	0.043010752688172046	outlook	2921
+m_biz_type	6	Trekking	ट्रेकिंग	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	7	0.07526881720430108	outlook	2922
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2923
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	outlook	2924
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	5	0.053763440860215055	outlook	2925
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	8	0.08602150537634409	outlook	2926
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	10	0.10752688172043011	outlook	2927
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	11	0.11827956989247312	outlook	2928
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	outlook	2929
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	2	0.021505376344086023	outlook	2930
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	8	0.08602150537634409	outlook	2931
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	8	0.08602150537634409	outlook	2932
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	20	0.21505376344086022	outlook	2933
+m_biz_type	1	Hotel	होटल	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	19	0.20430107526881722	outlook	2934
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2935
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	0	0	outlook	2936
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	1	0.010752688172043012	outlook	2937
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	0	0	outlook	2938
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	2	0.021505376344086023	outlook	2939
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	1	0.010752688172043012	outlook	2940
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2941
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	outlook	2942
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	2	0.021505376344086023	outlook	2943
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	outlook	2944
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	2	0.021505376344086023	outlook	2945
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	2	0.021505376344086023	outlook	2946
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	9	Others	अन्य	1	0.010752688172043012	outlook	2947
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	1	0.010752688172043012	outlook	2948
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	4	0.043010752688172046	outlook	2949
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	3	0.03225806451612903	outlook	2950
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	6	0.06451612903225806	outlook	2951
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	8	0.08602150537634409	outlook	2952
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2953
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	6	0.06451612903225806	outlook	2954
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	7	0.07526881720430108	outlook	2955
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	12	0.12903225806451613	outlook	2956
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	21	0.22580645161290322	outlook	2957
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	22	0.23655913978494625	outlook	2958
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	9	Others	अन्य	0	0	outlook	2959
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	6	0.06451612903225806	outlook	2960
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	13	0.13978494623655913	outlook	2961
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	15	0.16129032258064516	outlook	2962
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	26	0.27956989247311825	outlook	2963
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	31	0.3333333333333333	outlook	2964
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	2965
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	2966
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	2967
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	outlook	2968
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2969
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	2970
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2971
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2972
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2973
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	2974
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	2975
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	outlook	2976
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2977
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	2978
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	2979
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2980
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	6	0.06451612903225806	outlook	2981
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	outlook	2982
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	2983
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	2984
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	2985
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2986
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	outlook	2987
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	10	0.10752688172043011	outlook	2988
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	2989
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	2990
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	2991
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	5	0.053763440860215055	outlook	2992
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	outlook	2993
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	9	0.0967741935483871	outlook	2994
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	2995
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	2996
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	2997
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	outlook	2998
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	0	0	outlook	2999
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3000
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3001
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3002
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	3003
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3004
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	0	0	outlook	3005
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	outlook	3006
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3007
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3008
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3009
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	outlook	3010
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3011
+m_biz_type	9	Other	अन्य	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	outlook	3012
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3013
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3014
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3015
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3016
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3017
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	4	0.043010752688172046	outlook	3018
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3019
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3020
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3021
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3022
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3023
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	outlook	3024
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3025
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3026
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	3027
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3028
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3029
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	outlook	3030
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3031
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3032
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3033
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3034
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	3035
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	outlook	3036
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3037
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3038
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3039
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3040
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	6	0.06451612903225806	outlook	3041
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	outlook	3042
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3043
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3044
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3045
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	3046
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	9	0.0967741935483871	outlook	3047
+m_biz_type	1	Hotel	होटल	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	10	0.10752688172043011	outlook	3048
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3049
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3050
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	3051
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3052
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3053
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3054
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3055
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3056
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	3057
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	0	0	outlook	3058
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3059
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	outlook	3060
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	0	0	outlook	3061
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	0	0	outlook	3062
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	0	0	outlook	3063
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3064
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	1	0.010752688172043012	outlook	3067
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	3068
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	4	0.043010752688172046	outlook	3069
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	4	0.043010752688172046	outlook	3070
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	8	0.08602150537634409	outlook	3071
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	15	0.16129032258064516	outlook	3072
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	4	0.043010752688172046	outlook	3073
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	3074
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	2	0.021505376344086023	outlook	3075
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	3	0.03225806451612903	outlook	3076
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	9	0.0967741935483871	outlook	3077
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	23	0.24731182795698925	outlook	3078
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3079
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3080
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3081
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3082
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3083
+m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	1	0.010752688172043012	outlook	3084
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3085
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3086
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3087
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	outlook	3088
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	outlook	3089
+m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	outlook	3090
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3091
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3092
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	3	0.03225806451612903	outlook	3093
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	outlook	3094
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	outlook	3095
+m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	10	0.10752688172043011	outlook	3096
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3097
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3098
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3099
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	outlook	3100
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	11	0.11827956989247312	outlook	3101
+m_biz_years_in_operation	3	3 to 5 years	३-५ बर्ष	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	8	0.08602150537634409	outlook	3102
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3103
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	4	0.043010752688172046	outlook	3104
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	3	0.03225806451612903	outlook	3105
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	outlook	3106
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	6	0.06451612903225806	outlook	3107
+m_biz_years_in_operation	5	11 years or above	११ बर्ष वा माथि	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	7	0.07526881720430108	outlook	3108
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3109
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3110
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3111
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3112
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3113
+m_biz_type	7	Mountaineering	पर्वतारोहण	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	0	0	outlook	3114
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3115
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3116
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3117
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3118
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3119
+m_biz_type	5	Rafting	राफ्टिङ	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	2	0.021505376344086023	outlook	3120
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3121
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3122
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3123
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3124
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	outlook	3125
+m_biz_type	9	Other	अन्य	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	4	0.043010752688172046	outlook	3126
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3127
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	3	0.03225806451612903	outlook	3128
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3129
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	3	0.03225806451612903	outlook	3130
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	2	0.021505376344086023	outlook	3131
+m_biz_type	2	Restaurant and Bar	भोजनालय र बार	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	2	0.021505376344086023	outlook	3132
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3133
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3134
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3135
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3136
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	5	0.053763440860215055	outlook	3137
+m_biz_type	8	Shop/Merchandise	पसल / सामान	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	3	0.03225806451612903	outlook	3138
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3139
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3140
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	outlook	3141
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3142
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	3	0.03225806451612903	outlook	3143
+m_biz_type	4	Handicraft	हस्तशिल्प	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	outlook	3144
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3145
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3146
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3147
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	outlook	3148
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	4	0.043010752688172046	outlook	3149
+m_biz_type	6	Trekking	ट्रेकिंग	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	6	0.06451612903225806	outlook	3150
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3151
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3152
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	outlook	3153
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	0	0	outlook	3154
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	7	0.07526881720430108	outlook	3155
+m_biz_type	3	Travel and Tour Operator	यात्रा र यात्रा अपरेटर	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	5	0.053763440860215055	outlook	3156
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3157
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3158
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	2	0.021505376344086023	outlook	3159
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	11	0.11827956989247312	outlook	3160
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	8	0.08602150537634409	outlook	3161
+m_biz_type	1	Hotel	होटल	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	4	0.043010752688172046	outlook	3162
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3163
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3164
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3165
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	outlook	3166
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	0	0	outlook	3167
+b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	0	0	outlook	3168
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3169
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3170
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	0	0	outlook	3171
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	1	0.010752688172043012	outlook	3172
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	outlook	3173
+b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	1	0.010752688172043012	outlook	3174
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	0	0	outlook	3175
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	0	0	outlook	3176
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3177
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	outlook	3178
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	1	0.010752688172043012	outlook	3179
+b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	3	0.03225806451612903	outlook	3180
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3181
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	5	0.053763440860215055	outlook	3182
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	1	0.010752688172043012	outlook	3183
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	5	0.053763440860215055	outlook	3184
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	8	0.08602150537634409	outlook	3185
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	15	0.16129032258064516	outlook	3186
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	1	0.010752688172043012	outlook	3187
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	1	0.010752688172043012	outlook	3188
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	5	0.053763440860215055	outlook	3189
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	4	0.043010752688172046	outlook	3190
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	20	0.21505376344086022	outlook	3191
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	13	0.13978494623655913	outlook	3192
 \.
 
 
 --
--- Data for Name: business_impact_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_impact_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_impact_downloads_data (id, "timestamp", stop_business, how_lng_stop_business, business_effect_by_reduced_vol_business, business_effect_by_increased_covid_cases, business_effect_by_emplys_covid_situation, business_effect_by_human_resources_shortage, business_effect_by_supply_chain_disruption, business_effect_by_lack_sevices_access, business_effect_by_lack_mobility, business_effect_by_patners_disagrmnt, business_effect_by_lack_fin_resources, business_effect_by_other, business_no_effect, most_significant_effect_business, wrkfrc_actn_reduced_temporary_workers, wrkfrc_actn_reduced_permanent_workers, wrkfrc_actn_reduced_working_hours, wrkfrc_actn_introduced_rotational_employment, wrkfrc_actn_asked_workers_paid_leave, wrkfrc_actn_asked_workers_unpaid_leave, wrkfrc_actn_asked_workers_reduced_pay, wrkfrc_actn_decreased_employee_benefits, wrkfrc_actn_other, no_wrkfrc_actn, loan_impact_took_loan_easily, loan_impact_couldnt_take_loan, loan_impact_took_loan_difficultly, loan_impact_difficult_paying_existing_loan, loan_impact_other, no_loan_impact, asset_impact_sold_assets, asset_impact_couldnt_sell_assets, asset_impact_rented_assets, asset_impact_other, no_asset_impact, cost_impact_couldnt_cover_operating_cost, cost_impact_cancelled_investment_plans, cost_impact_made_visit_nepal_investments, cost_impact_other, no_cost_impact, location_impact_moved_business, location_impact_closed_branches, location_impact_tried_couldnt_move_business, location_impact_other, no_location_impact, eqty_ownrshp_impact_sold_entire_business, eqty_ownrshp_impact_tried_cant_sell_business, eqty_ownrshp_impact_sold_some_business_equity, eqty_ownrshp_impact_tried_cant_sell_some_equity, eqty_ownrshp_impact_other, no_eqty_ownrshp_impact, fin_effect_other, n_employes_pre_covid, wrkfrc_size_chng_2020_v_2019, revenue_chng_2020_v_2019, savings_chng_2020_v_2019, accomondation_service_offered_pre_covid, adventure_equipment_service_offered_pre_covid, adventure_sports_service_offered_pre_covid, bar_service_offered_pre_covid, flight_booking_service_offered_pre_covid, food_delivery_service_offered_pre_covid, gymnasium_service_offered_pre_covid, hotel_booking_service_offered_pre_covid, online_service_offered_pre_covid, restaurant_service_offered_pre_covid, souvenir_shop_service_offered_pre_covid, spa_services_offered_pre_covid, swimming_pool_service_offered_pre_covid, tour_package_service_offered_pre_covid, travel_guide_porter_service_offered_pre_covid, vehicle_booking_service_offered_pre_covid, other_service_offered_pre_covid, accomondation_service_offered_post_covid, restaurant_service_offered_post_covid, bar_service_offered_post_covid, gymnasium_service_offered_post_covid, spa_service_offered_post_covid, swimming_pool_service_offered_post_covid, flight_booking_service_offered_post_covid, travel_guide_porter_service_offered_post_covid, adventure_sport_service_offered_post_covid, adventure_equipment_service_offered_post_covid, tour_package_service_offered_post_covid, vehicle_booking_service_offered_post_covid, hotel_booking_service_offered_post_covid, souvenir_shop_service_offered_post_covid, food_delivery_service_offered_post_covid, online_service_offered_post_covid, isolation_service_offered_post_covid, quarantine_service_offered_post_covid, other_service_offered_post_covid) FROM stdin;
+COPY public.businesses_impact_downloads_data (id, submission_date, stop_business, how_lng_stop_business, business_effect_by_reduced_vol_business, business_effect_by_increased_covid_cases, business_effect_by_emplys_covid_situation, business_effect_by_human_resources_shortage, business_effect_by_supply_chain_disruption, business_effect_by_lack_sevices_access, business_effect_by_lack_mobility, business_effect_by_patners_disagrmnt, business_effect_by_lack_fin_resources, business_effect_by_other, business_no_effect, most_significant_effect_business, wrkfrc_actn_reduced_temporary_workers, wrkfrc_actn_reduced_permanent_workers, wrkfrc_actn_reduced_working_hours, wrkfrc_actn_introduced_rotational_employment, wrkfrc_actn_asked_workers_paid_leave, wrkfrc_actn_asked_workers_unpaid_leave, wrkfrc_actn_asked_workers_reduced_pay, wrkfrc_actn_decreased_employee_benefits, wrkfrc_actn_other, no_wrkfrc_actn, loan_impact_took_loan_easily, loan_impact_couldnt_take_loan, loan_impact_took_loan_difficultly, loan_impact_difficult_paying_existing_loan, loan_impact_other, no_loan_impact, asset_impact_sold_assets, asset_impact_couldnt_sell_assets, asset_impact_rented_assets, asset_impact_other, no_asset_impact, cost_impact_couldnt_cover_operating_cost, cost_impact_cancelled_investment_plans, cost_impact_made_visit_nepal_investments, cost_impact_other, no_cost_impact, location_impact_moved_business, location_impact_closed_branches, location_impact_tried_couldnt_move_business, location_impact_other, no_location_impact, eqty_ownrshp_impact_sold_entire_business, eqty_ownrshp_impact_tried_cant_sell_business, eqty_ownrshp_impact_sold_some_business_equity, eqty_ownrshp_impact_tried_cant_sell_some_equity, eqty_ownrshp_impact_other, no_eqty_ownrshp_impact, fin_effect_other, n_employes_pre_covid, wrkfrc_size_chng_2020_v_2019, revenue_chng_2020_v_2019, savings_chng_2020_v_2019, accomondation_service_offered_pre_covid, adventure_equipment_service_offered_pre_covid, adventure_sports_service_offered_pre_covid, bar_service_offered_pre_covid, flight_booking_service_offered_pre_covid, food_delivery_service_offered_pre_covid, gymnasium_service_offered_pre_covid, hotel_booking_service_offered_pre_covid, online_service_offered_pre_covid, restaurant_service_offered_pre_covid, souvenir_shop_service_offered_pre_covid, spa_services_offered_pre_covid, swimming_pool_service_offered_pre_covid, tour_package_service_offered_pre_covid, travel_guide_porter_service_offered_pre_covid, vehicle_booking_service_offered_pre_covid, other_service_offered_pre_covid, accomondation_service_offered_post_covid, restaurant_service_offered_post_covid, bar_service_offered_post_covid, gymnasium_service_offered_post_covid, spa_service_offered_post_covid, swimming_pool_service_offered_post_covid, flight_booking_service_offered_post_covid, travel_guide_porter_service_offered_post_covid, adventure_sport_service_offered_post_covid, adventure_equipment_service_offered_post_covid, tour_package_service_offered_post_covid, vehicle_booking_service_offered_post_covid, hotel_booking_service_offered_post_covid, souvenir_shop_service_offered_post_covid, food_delivery_service_offered_post_covid, online_service_offered_post_covid, isolation_service_offered_post_covid, quarantine_service_offered_post_covid, other_service_offered_post_covid) FROM stdin;
 174444706	2021-04-28 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	1	0	1	0	0	Lack of adequate financial resources	1	1	1	1	0	1	1	1	0	0	0	1	0	1	0	0	0	0	0	0	1	1	1	1	0	0	0	0	0	0	1	0	0	0	0	0	1	0	11 to 30 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	The business now has negative savings (i.e. it had to borrow money)	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 176510702	2021-05-07 00:00:00	Yes, temporarily stopped operations	Less than a month	1	0	1	0	1	0	1	0	0	0	0	Reduced volume of business	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	51 to 100 people	Workforce size became 75% of 2019	Revenue became 50% of 2019	Savings became 25% of 2019	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 173876161	2021-04-26 00:00:00	Yes, temporarily stopped operations	7 to 12 months	1	0	0	0	0	0	0	0	0	0	0	\N	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	1	11 to 30 people	Workforce size became zero	Revenue stopped completely	The business now has negative savings (i.e. it had to borrow money)	1	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
@@ -3898,10 +4791,10 @@ COPY public.business_impact_downloads_data (id, "timestamp", stop_business, how_
 
 
 --
--- Data for Name: business_metadata_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_metadata_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_metadata_downloads_data (id, "timestamp", business_dist, business_coodinates, business_type, business_yrs_in_operation) FROM stdin;
+COPY public.businesses_metadata_downloads_data (id, submission_date, business_dist, business_coodinates, business_type, business_yrs_in_operation) FROM stdin;
 174444706	2021-04-28 00:00:00	Kathmandu	27.7153038584918 85.3103238891712	Restaurant and Bar	11 years or above
 176510702	2021-05-07 00:00:00	Mahottari	26.98806 85.89996	Restaurant and Bar	3 to 5 years
 173876161	2021-04-26 00:00:00	Chitawan	27.58148 84.49332	Hotel	11 years or above
@@ -4018,10 +4911,10 @@ COPY public.business_metadata_downloads_data (id, "timestamp", business_dist, bu
 
 
 --
--- Data for Name: business_needs_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_needs_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_needs_downloads_data (id, "timestamp") FROM stdin;
+COPY public.businesses_needs_downloads_data (id, submission_date) FROM stdin;
 174444706	2021-04-28 00:00:00
 176510702	2021-05-07 00:00:00
 173876161	2021-04-26 00:00:00
@@ -4138,10 +5031,10 @@ COPY public.business_needs_downloads_data (id, "timestamp") FROM stdin;
 
 
 --
--- Data for Name: business_outlook_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_outlook_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_outlook_downloads_data (id, "timestamp", how_lng_covid_dsrupt_last, revenue_gen_21_v_19, wrkfrc_size_chng_21_v_19, rcvry_diffclty_winning_tourist_confidence, rcvry_diffclty_understanding_source_markets, rcvry_diffclty_ensuring_tourist_health_saftey, rcvry_diffclty_ensuring_workers_health_saftey, rcvry_diffclty_goods_shortage, rcvry_diffclty_human_resource_shortage, rcvry_diffclty_cash_flow_shortage, rcvry_diffclty_additional_fund_shortage, other_rcvry_diffclty, most_significant_rcvry_difficulty, biggest_support_rcvry, perm_stopped_not_started_new_business, perm_stopped_started_new_trsm_business, perm_stopped_started_new_non_trsm_business, perm_stopped_will_retrn_to_trsm_business, perm_stopped_started_hotel_accommodation_business, perm_stopped_started_restaurant_bar_business, perm_stopped_started_travel_tours_business, perm_stopped_started_trekking_mountaineering_business, perm_stopped_started_adventure_sports_business, perm_stopped_started_other_trsm_business, perm_stopped_started_accountancy_finance_business, perm_stopped_started_consulting_management_business, perm_stopped_started_charity_voluntary_business, perm_stopped_started_art_design_business, perm_stopped_started_energy_utillities_business, perm_stopped_started_engineering_manufacturing_business, perm_stopped_started_environment_agriculture_business, perm_stopped_started_healthcare_business, perm_stopped_started_information_technology_business, perm_stopped_started_law_business, perm_stopped_started_marketing_pr_business, perm_stopped_started_internet_media_business, perm_stopped_started_construction_property_business, perm_stopped_started_public_services_business, perm_stopped_started_retail_sales_business, perm_stopped_started_teaching_business, perm_stopped_started_logistics_transport_business, perm_stopped_started_other_non_tourism_business, perm_stopped_started_new_job, perm_stopped_started_shopkeeper_job, perm_stopped_started_tour_guide_job, perm_stopped_started_trekking_guide_job, perm_stopped_started_rafting_guide_job, perm_stopped_started_mountain_guide_job, perm_stopped_started_driver_job, perm_stopped_started_travel_agent_job, perm_stopped_started_flight_attendant_job, perm_stopped_started_pilot_job, perm_stopped_started_chef_cook_job, perm_stopped_started_hotel_manager_job, perm_stopped_started_hotel_staff_job, perm_stopped_started_waiter_job, perm_stopped_started_bartender_job, perm_stopped_started_other_tourism_job, perm_stopped_started_accountancy_finance_job, perm_stopped_started_consulting_management_job, perm_stopped_started_charity_voluntary_job, perm_stopped_started_art_design_job, perm_stopped_started_energy_utillities_job, perm_stopped_started_engineering_manufacturing_job, perm_stopped_started_environment_agriculture_job, perm_stopped_started_healthcare_job, perm_stopped_started_information_technology_job, perm_stopped_started_law_job, perm_stopped_started_marketing_pr_job, perm_stopped_started_internet_media_job, perm_stopped_started_construction_property_job, perm_stopped_started_public_services_job, perm_stopped_started_sales_retail_job, perm_stopped_started_teaching_job, perm_stopped_started_logistics_transport_job, perm_stopped_started_other_non_trsm_job) FROM stdin;
+COPY public.businesses_outlook_downloads_data (id, submission_date, how_lng_covid_dsrupt_last, revenue_gen_21_v_19, wrkfrc_size_chng_21_v_19, rcvry_diffclty_winning_tourist_confidence, rcvry_diffclty_understanding_source_markets, rcvry_diffclty_ensuring_tourist_health_saftey, rcvry_diffclty_ensuring_workers_health_saftey, rcvry_diffclty_goods_shortage, rcvry_diffclty_human_resource_shortage, rcvry_diffclty_cash_flow_shortage, rcvry_diffclty_additional_fund_shortage, other_rcvry_diffclty, most_significant_rcvry_difficulty, biggest_support_rcvry, perm_stopped_not_started_new_business, perm_stopped_started_new_trsm_business, perm_stopped_started_new_non_trsm_business, perm_stopped_will_retrn_to_trsm_business, perm_stopped_started_hotel_accommodation_business, perm_stopped_started_restaurant_bar_business, perm_stopped_started_travel_tours_business, perm_stopped_started_trekking_mountaineering_business, perm_stopped_started_adventure_sports_business, perm_stopped_started_other_trsm_business, perm_stopped_started_accountancy_finance_business, perm_stopped_started_consulting_management_business, perm_stopped_started_charity_voluntary_business, perm_stopped_started_art_design_business, perm_stopped_started_energy_utillities_business, perm_stopped_started_engineering_manufacturing_business, perm_stopped_started_environment_agriculture_business, perm_stopped_started_healthcare_business, perm_stopped_started_information_technology_business, perm_stopped_started_law_business, perm_stopped_started_marketing_pr_business, perm_stopped_started_internet_media_business, perm_stopped_started_construction_property_business, perm_stopped_started_public_services_business, perm_stopped_started_retail_sales_business, perm_stopped_started_teaching_business, perm_stopped_started_logistics_transport_business, perm_stopped_started_other_non_tourism_business, perm_stopped_started_new_job, perm_stopped_started_shopkeeper_job, perm_stopped_started_tour_guide_job, perm_stopped_started_trekking_guide_job, perm_stopped_started_rafting_guide_job, perm_stopped_started_mountain_guide_job, perm_stopped_started_driver_job, perm_stopped_started_travel_agent_job, perm_stopped_started_flight_attendant_job, perm_stopped_started_pilot_job, perm_stopped_started_chef_cook_job, perm_stopped_started_hotel_manager_job, perm_stopped_started_hotel_staff_job, perm_stopped_started_waiter_job, perm_stopped_started_bartender_job, perm_stopped_started_other_tourism_job, perm_stopped_started_accountancy_finance_job, perm_stopped_started_consulting_management_job, perm_stopped_started_charity_voluntary_job, perm_stopped_started_art_design_job, perm_stopped_started_energy_utillities_job, perm_stopped_started_engineering_manufacturing_job, perm_stopped_started_environment_agriculture_job, perm_stopped_started_healthcare_job, perm_stopped_started_information_technology_job, perm_stopped_started_law_job, perm_stopped_started_marketing_pr_job, perm_stopped_started_internet_media_job, perm_stopped_started_construction_property_job, perm_stopped_started_public_services_job, perm_stopped_started_sales_retail_job, perm_stopped_started_teaching_job, perm_stopped_started_logistics_transport_job, perm_stopped_started_other_non_trsm_job) FROM stdin;
 174444706	2021-04-28 00:00:00	Less than 6 months (till Sep 2021)	Revenue is expected to be 75% of 2019	Workforce size will be 75% of 2019	1	0	0	0	0	0	1	1	0	Shortage of cash flow	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 176510702	2021-05-07 00:00:00	6 to 12 months (till Mar 2022)	Revenue is expected to be 25% of 2019	Workforce size will be 50% of 2019	1	1	1	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 173876161	2021-04-26 00:00:00	6 to 12 months (till Mar 2022)	None (or negligible)	None (or negligible)	1	0	0	0	0	0	1	0	0	Winning the confidence of tourists and guests in the context of COVID-19	Government agencies (Ministry, Department of Tourism, etc.)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
@@ -4258,10 +5151,10 @@ COPY public.business_outlook_downloads_data (id, "timestamp", how_lng_covid_dsru
 
 
 --
--- Data for Name: business_preparedness_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_preparedness_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_preparedness_downloads_data (id, "timestamp", hhs_measures_placed_sanitizers, hhs_measures_trained_employes_on_hhs, hhs_measures_placed_thermal_screening, hhs_measures_maintained_social_distancing, hhs_measures_implemented_cashless_payment, hhs_measures_discontinued_buffed_services, hhs_measures_added_covid_friendly_marketing, hhs_measures_outsourced_services, other_hhs_measures, no_hhs_measures, wrkrs_hlth_informed_covid_saftey_measures, wrkrs_hlth_encouraged_home_stay_if_sick, wrkrs_hlth_maintained_social_distancing, wrkrs_hlth_implemented_working_shifts, wrkrs_hlth_implemented_remote_working, wrkrs_hlth_performed_temperature_checks, wrkrs_hlth_provided_ppe, wrkrs_hlth_provided_paid_sick_leave, wrkrs_hlth_provided_covid_insurance, other_wrkrs_hlth_measures, no_wrkrs_hlth_measures, internl_recvry_strategy_reduce_prdocution, internl_recvry_strategy_increase_production, internl_recvry_strategy_diversify_offerings, internl_recvry_strategy_start_different_business, internl_recvry_strategy_diversify_sales_channels, internl_recvry_strategy_retrain_workers, other_internl_recvry_strategy, no_internl_recvry_strategy, externl_recvry_strategy_negotiate_bank_paymnts, externl_recvry_strategy_lobby_support_trade_unions, externl_recvry_strategy_negotiate_with_wrkrs_union, externl_recvry_strategy_negotiate_with_property_owner, externl_recvry_strategy_partner_with_other_business, externl_recvry_strategy_increase_shareholders, externl_recvry_strategy_share_assets_other_business, other_externl_recvry_strategy, no_externl_recvry_strategy, has_dedictd_covid_desk) FROM stdin;
+COPY public.businesses_preparedness_downloads_data (id, submission_date, hhs_measures_placed_sanitizers, hhs_measures_trained_employes_on_hhs, hhs_measures_placed_thermal_screening, hhs_measures_maintained_social_distancing, hhs_measures_implemented_cashless_payment, hhs_measures_discontinued_buffed_services, hhs_measures_added_covid_friendly_marketing, hhs_measures_outsourced_services, other_hhs_measures, no_hhs_measures, wrkrs_hlth_informed_covid_saftey_measures, wrkrs_hlth_encouraged_home_stay_if_sick, wrkrs_hlth_maintained_social_distancing, wrkrs_hlth_implemented_working_shifts, wrkrs_hlth_implemented_remote_working, wrkrs_hlth_performed_temperature_checks, wrkrs_hlth_provided_ppe, wrkrs_hlth_provided_paid_sick_leave, wrkrs_hlth_provided_covid_insurance, other_wrkrs_hlth_measures, no_wrkrs_hlth_measures, internl_recvry_strategy_reduce_prdocution, internl_recvry_strategy_increase_production, internl_recvry_strategy_diversify_offerings, internl_recvry_strategy_start_different_business, internl_recvry_strategy_diversify_sales_channels, internl_recvry_strategy_retrain_workers, other_internl_recvry_strategy, no_internl_recvry_strategy, externl_recvry_strategy_negotiate_bank_paymnts, externl_recvry_strategy_lobby_support_trade_unions, externl_recvry_strategy_negotiate_with_wrkrs_union, externl_recvry_strategy_negotiate_with_property_owner, externl_recvry_strategy_partner_with_other_business, externl_recvry_strategy_increase_shareholders, externl_recvry_strategy_share_assets_other_business, other_externl_recvry_strategy, no_externl_recvry_strategy, has_dedictd_covid_desk) FROM stdin;
 174444706	2021-04-28 00:00:00	1	1	1	1	1	0	1	1	0	0	1	1	1	1	0	1	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0
 176510702	2021-05-07 00:00:00	1	1	1	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0
 173876161	2021-04-26 00:00:00	1	1	1	1	0	1	0	0	0	0	1	1	1	1	0	1	1	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	0
@@ -4378,10 +5271,10 @@ COPY public.business_preparedness_downloads_data (id, "timestamp", hhs_measures_
 
 
 --
--- Data for Name: business_univariate_stats; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: businesses_univariate_stats ; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.business_univariate_stats (variable, value, label_en, label_ne, "variableGroup", total, "percOfTotal", index) FROM stdin;
+COPY public."businesses_univariate_stats " (variable, value, label_en, label_ne, variablegroup, total, percoftotal, index) FROM stdin;
 i_covid_effect_business	10	Other	अन्य	impact	28	0.25	1
 i_covid_effect_business	5	Supply chain disruption	आपूर्ति श्रृंखला अवरोध	impact	20	0.17857142857142858	2
 i_covid_effect_business	2	Increased COVID-19 cases in our area	हाम्रो क्षेत्रमा कोभिड-१९ केसहरू बढ्यो 	impact	36	0.32142857142857145	3
@@ -4482,7 +5375,7 @@ n_rcvry_preferred_loan_pybck_incntv	2	Extension of loan periods	ऋण अवध
 n_rcvry_preferred_loan_pybck_incntv	1	Reduced interest rates on existing loans	अवस्थित ऋणमा ब्याज दरहरू घटाइयो	need	37	0.5967741935483871	98
 n_rcvry_preferred_fund_aprvl_incntv	1	Short-term loans without collateral	जमानत बिना छोटो अवधिका ऋण	need	12	0.36363636363636365	99
 n_rcvry_preferred_fund_aprvl_incntv	2	Long-term subsidized loans	दीर्घकालीन अनुदान ऋण	need	21	0.6363636363636364	100
-b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	general	38	0.3392857142857143	177
+b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	general	59	0.5267857142857143	178
 n_rcvry_preferred_tax_asstnc	3	Exemption of fines on taxes	करमा जरिवाना छुट	need	4	0.07692307692307693	101
 n_rcvry_preferred_tax_asstnc	2	Tax deferral	कर स्थगित	need	6	0.11538461538461539	102
 n_rcvry_preferred_tax_asstnc	5	Decrease sales tax and VAT rates	बिक्री कर र VAT दरहरू घटाउने 	need	6	0.11538461538461539	103
@@ -4520,28 +5413,28 @@ o_do_u_know_of_gov_schemes	1	I am NOT aware of such government schemes.	म त�
 o_how_efctv_gov_schemes	1	These schemes are difficult to understand	यी योजनाहरू बुझ्न गाह्रो छ	need	8	0.23529411764705882	135
 o_how_efctv_gov_schemes	3	These schemes are not sufficient	यी योजनाहरू पर्याप्त छैनन्	need	14	0.4117647058823529	136
 o_how_efctv_gov_schemes	2	These schemes are not easy to use	यी योजनाहरू प्रयोग गर्न सजिलो छैन	need	21	0.6176470588235294	137
-o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	perception	12	0.10714285714285714	138
-o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	perception	23	0.20535714285714285	139
-o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	perception	29	0.25892857142857145	140
-o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	perception	48	0.42857142857142855	141
-o_rcvry_biggest_diffclties	9	Others	अन्य	perception	1	0.010752688172043012	142
-o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	perception	14	0.15053763440860216	143
-o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	perception	27	0.2903225806451613	144
-o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	perception	33	0.3548387096774194	145
-o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	perception	57	0.6129032258064516	146
-o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	perception	64	0.6881720430107527	147
-o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	perception	5	0.053763440860215055	148
-o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	perception	6	0.06451612903225806	149
-o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	perception	6	0.06451612903225806	150
-o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	perception	10	0.10752688172043011	151
-o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	perception	25	0.26881720430107525	152
-o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	perception	41	0.44086021505376344	153
-o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	perception	2	0.021505376344086023	154
-o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	perception	6	0.06451612903225806	155
-o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	perception	8	0.08602150537634409	156
-o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	perception	15	0.16129032258064516	157
-o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	perception	30	0.3225806451612903	158
-o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	perception	32	0.34408602150537637	159
+o_covid_how_long_it_last	4	More than 24 months (beyond Mar 2023 )	२४ महिना भन्दा बढी (मार्च २०२३ भन्दा उता)	outlook	12	0.10714285714285714	138
+o_covid_how_long_it_last	1	Less than 6 months (till Sep 2021)	६ महिना भन्दा कम (सेप्टे २०२१ सम्म)	outlook	23	0.20535714285714285	139
+o_covid_how_long_it_last	3	13 to 24 months (till Mar 2023)	१३-२४ महिना (मार्च २०२३ सम्म) 	outlook	29	0.25892857142857145	140
+o_covid_how_long_it_last	2	6 to 12 months (till Mar 2022)	६-१२ महिना (मार्च २०२२ सम्म)	outlook	48	0.42857142857142855	141
+o_rcvry_biggest_diffclties	9	Others	अन्य	outlook	1	0.010752688172043012	142
+o_rcvry_biggest_diffclties	5	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	outlook	14	0.15053763440860216	143
+o_rcvry_biggest_diffclties	2	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	outlook	27	0.2903225806451613	144
+o_rcvry_biggest_diffclties	3	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	outlook	33	0.3548387096774194	145
+o_rcvry_biggest_diffclties	7	Shortage of cash flow	नगद प्रवाहको अभाव	outlook	57	0.6129032258064516	146
+o_rcvry_biggest_diffclties	1	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	outlook	64	0.6881720430107527	147
+o_econ_impact_revenue_chng_21_v_19	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	outlook	5	0.053763440860215055	148
+o_econ_impact_revenue_chng_21_v_19	4	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	outlook	6	0.06451612903225806	149
+o_econ_impact_revenue_chng_21_v_19	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	outlook	6	0.06451612903225806	150
+o_econ_impact_revenue_chng_21_v_19	3	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	outlook	10	0.10752688172043011	151
+o_econ_impact_revenue_chng_21_v_19	2	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	outlook	25	0.26881720430107525	152
+o_econ_impact_revenue_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	outlook	41	0.44086021505376344	153
+o_econ_impact_wrkfrc_chng_21_v_19	6	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	outlook	2	0.021505376344086023	154
+o_econ_impact_wrkfrc_chng_21_v_19	4	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	outlook	6	0.06451612903225806	155
+o_econ_impact_wrkfrc_chng_21_v_19	5	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	outlook	8	0.08602150537634409	156
+o_econ_impact_wrkfrc_chng_21_v_19	3	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	outlook	15	0.16129032258064516	157
+o_econ_impact_wrkfrc_chng_21_v_19	1	None (or negligible)	कुनै पनि होइन (वा नगण्य)	outlook	30	0.3225806451612903	158
+o_econ_impact_wrkfrc_chng_21_v_19	2	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	outlook	32	0.34408602150537637	159
 m_biz_years_in_operation	1	Less than a year	एक बर्ष भन्दा कम	general	1	0.008928571428571428	160
 m_biz_years_in_operation	2	1 to 2 years	१-२ बर्ष	general	21	0.1875	161
 m_biz_years_in_operation	4	6 to 10 years	६-१० बर्ष	general	27	0.24107142857142858	162
@@ -4559,7 +5452,1511 @@ m_biz_type	1	Hotel	होटल	general	29	0.25892857142857145	173
 b_n_emplyes_pre_covid	5	More than 100 people	१०० भन्दा बढी 	general	2	0.017857142857142856	174
 b_n_emplyes_pre_covid	4	51 to 100 people	५१-१०० जना	general	3	0.026785714285714284	175
 b_n_emplyes_pre_covid	3	31 to 50 people	३१-५० जना	general	10	0.08928571428571429	176
-b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	general	59	0.5267857142857143	178
+b_n_emplyes_pre_covid	2	11 to 30 people	११-३० जना 	general	38	0.3392857142857143	177
+\.
+
+
+--
+-- Data for Name: map_visualization_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.map_visualization_data (businessname, submissiondate, businesstype, variable, value, percoftotal, total, label_en, label_ne, latitude, longitude, index) FROM stdin;
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7153038584918	85.3103238891712	1
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	26.98806	85.89996	2
+chitwan forest resort	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.58148	84.49332	3
+Suburb cafe	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.684759	85.312688	4
+hostel nextdoor	3	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.684944	85.315922	5
+Orbit Nepal Adventure	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71305	85.31126	6
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.69443	85.24896	7
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.69035	85.23849	8
+Mandala Handicrafts	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71297	85.31228	9
+Handicrafts (felt,woolen. Curio	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71442	85.31192	10
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71223	85.31062	11
+Earth angle trading pvt ltd	2	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71409	85.31012	12
+Pashmina	1	Shop/Merchandise	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71274	85.31124	13
+Tharu Home Resort	2	Hotel	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	28.46335	81.25026	14
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71061	85.31213	15
+New light handicraft	2	Handicraft	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71361	85.31132	16
+Rainbow Adventure Nepal	2	Rafting	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7115056	85.3089164	17
+Hotel	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71217	85.30787	18
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71331	85.3114	19
+Namaste Spa Pvt.Ltd	2	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7151	85.312	20
+B s handicrafts	1	Shop/Merchandise	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	27.71316	85.31265	21
+Natural nepal export	2	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71736	85.31034	22
+Yakety Yak Hostel	1	Hotel	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	27.7133876	85.31238	23
+R.R.Jewellery	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7137093	85.3123409	24
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71423	85.31159	25
+Hiking nepal pvt ltd	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71689	85.30937	26
+Garden of Hope Treks & Expeditions	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71459	85.31326	27
+Hotel Down Town Pvt. Ltd	1	Hotel	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	27.71587	85.30982	28
+Hemp House Nepal Pvt.Ltd	1	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71575	85.30998	29
+Hemp heafquarter	2	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71587	85.30991	30
+Kathmandu Spa	1	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7161657	85.3108951	31
+Restutant	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71665	85.3099	32
+Hotel Luna Kathmandu	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7167297	85.3120921	33
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71702	85.33378	34
+Om Shanti Spa	2	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71578	85.30944	35
+Om Shanti Spa	2	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71578	85.30945	36
+Pashmina Queen and Craft	2	Shop/Merchandise	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71538	85.3104	37
+Terres du Nepal Trekking	1	Trekking	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71805	85.31192	38
+Cuisine Court	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.719115	85.332184	39
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7174198	85.3260471	40
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7175	85.32594	41
+Asian adventure treks and expedition	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71321	85.31137	42
+Sun N Fun Holidays	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7043	85.33088	43
+Spa kinjjala pvt ltd.	2	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.67812	85.30827	44
+Subhakamana Travels and Tours	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.19899	83.97616	45
+Tiger Mountain	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.21064	84.04247	46
+Hotel Tulsi Pokhara	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.2097	83.95798	47
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	28.2148186	83.9618638	48
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.22345	83.9888	49
+Himalayan Doorway	1	Travel and Tour Operator	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	28.706472	80.577207	50
+Hotel Task International Pvt. Ltd.	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.2048324	83.9986713	51
+Stunning Adventure	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.6891069867822	85.2478348127655	52
+Nepal Mountain Gear	2	Mountaineering	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7149361495911	85.3104505819971	53
+HOTEL HIMALAYA PVT. LTD	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.68413	85.31941	54
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7165403	85.3129886	55
+HOTEL	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7177391	85.3101198	56
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7152382	85.3115879	57
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2077552	83.9684899	1475
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7156778	85.3113177	58
+Hotel Lakeside Pvt. Ltd	1	Hotel	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	28.2077552	83.9684899	59
+Green Mansions Jungle Resort	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.5845046127971	84.4711607974195	60
+The  cashmere store	1	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.2044184	83.9644088	61
+Nepal Handicraft portal	1	Travel and Tour Operator	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7115975664926	85.3089139946971	62
+Pilgrims Guest House P.Ltd	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.717619	85.3115799	63
+Harry guest house and restaurant	1	Hotel	i_econ_stop_business	1	6	6	No, operations were always running	होइन, अपरेशनहरू सँधै चलिरहेका थिए	28.21224	83.9626	64
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.2198688	83.9580593	65
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7054130197592	85.3489936269846	66
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7650888094923	85.363349712796	67
+Tourism	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.20794	83.95855	68
+Splash nepal adventure	1	Rafting	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7146686256428	85.3109832980832	69
+LEGENDS KHUKURI GALLERY PVT LTD	1	Other	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7142268	85.3113891	70
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7141228	85.3116181	71
+Eco craft collection	1	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7169496294368	85.310175951392	72
+Royal handicraft	1	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7155286407712	85.3113662974226	73
+Nepal Ascent Treks	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7119692416278	85.3110869262584	74
+Dibya Hospitality Pvt.Ltd	1	Other	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71292	85.35984	75
+Himalayan idol travel and tours	1	Travel and Tour Operator	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71301	85.31211	76
+Naya Nepal collection and export pvt.ltd	1	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.713195	85.3122775	77
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	28.2072939	83.9578631	78
+Downtown Restaurant	1	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.68076	85.31722	79
+Mount everest souvenir house	1	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7135681946502	85.3125867485289	80
+Apex himalaya trek and expedition	1	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7104423	85.3109739	81
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7392974199588	85.3239723928859	82
+Hotel Crown Plaza	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7130878	85.3281444	83
+Kailash cafe & bar	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7160368463001	85.3104862262585	84
+Green Boutique Hotel	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7210567730833	85.3653754560733	85
+Demeter Handicrafts	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7207596166803	85.3607724987554	86
+Nepal Highland Treks P Ltd	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7166059299288	85.3117833730153	87
+Kathmandu cityhill Apartmnet	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7209932	85.3118557	88
+Krishna handicraft	2	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.716084576286	85.3099118032157	89
+Mithila women handicraft	2	Shop/Merchandise	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7130115973909	85.3125155738383	90
+Ashirwad export	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.71892	85.3122	91
+Golden Cloud Adventure P. Ltd.	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.710411302506	85.3129580931116	92
+Flight gyani Pvt ltd	2	Travel and Tour Operator	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7110507076044	85.3150705587519	93
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7176441116934	85.3093493859829	94
+Peak trekking equipment collection	2	Trekking	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7140738	85.3098685	95
+Trekking shop	2	Trekking	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.71574	85.30944	96
+Carrot holidays pvt ltd	2	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.6882985387026	85.3324406541961	97
+Himalaya Traders & Export	2	Other	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7148479186674	85.3113777116411	98
+Lotus handicraft	2	Handicraft	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7162829183416	85.3101437234923	99
+Hotel Tharu Garden	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.5753519138286	84.5016726992705	100
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7180005590084	85.3097967996561	101
+DBRAND SOLUTION PVT LTD	2	Other	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.6924011815381	85.3301440109144	102
+Agaman hotel	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7349334767156	85.3143232244077	103
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7147492	85.3102089	104
+Thamel Seasons Hotel Pvt.ltd	2	Hotel	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	27.7179141297178	85.3101209550944	105
+Hotel Business	2	Hotel	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.6632585317559	85.4449016109137	106
+The freedom cafe restaurant & bar	2	Restaurant and Bar	i_econ_stop_business	3	17	19	Yes, permanently stopped	हो, स्थायी रूपमा रोकियो	28.2209793	83.9559105	107
+Tour and trekking and Expedition	2	Trekking	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.7153213473598	85.3117415550944	108
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	i_econ_stop_business	2	77	84	Yes, temporarily stopped operations	हो, अस्थायी रूपमा सञ्चालनहरू बन्द गरियो	27.6742617216237	85.3691647550934	109
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.7153038584918	85.3103238891712	110
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	26.98806	85.89996	111
+chitwan forest resort	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.58148	84.49332	112
+Suburb cafe	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.684759	85.312688	113
+hostel nextdoor	3	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.684944	85.315922	114
+Orbit Nepal Adventure	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71305	85.31126	115
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.69443	85.24896	116
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.69035	85.23849	117
+Mandala Handicrafts	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71297	85.31228	118
+Handicrafts (felt,woolen. Curio	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71442	85.31192	119
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.71223	85.31062	120
+Earth angle trading pvt ltd	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71409	85.31012	121
+Pashmina	1	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71274	85.31124	122
+Tharu Home Resort	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	28.46335	81.25026	123
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.71061	85.31213	124
+New light handicraft	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71361	85.31132	125
+Rainbow Adventure Nepal	2	Rafting	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7115056	85.3089164	126
+Hotel	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71217	85.30787	127
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71331	85.3114	128
+Namaste Spa Pvt.Ltd	2	Other	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.7151	85.312	129
+B s handicrafts	1	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.71316	85.31265	130
+Natural nepal export	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71736	85.31034	131
+Yakety Yak Hostel	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7133876	85.31238	132
+R.R.Jewellery	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7137093	85.3123409	133
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71423	85.31159	134
+Hiking nepal pvt ltd	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71689	85.30937	135
+Garden of Hope Treks & Expeditions	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.71459	85.31326	136
+Hotel Down Town Pvt. Ltd	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.71587	85.30982	137
+Hemp House Nepal Pvt.Ltd	1	Handicraft	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71575	85.30998	138
+Hemp heafquarter	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.71587	85.30991	139
+Kathmandu Spa	1	Other	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.7161657	85.3108951	140
+Restutant	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.71665	85.3099	141
+Hotel Luna Kathmandu	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7167297	85.3120921	142
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71702	85.33378	143
+Om Shanti Spa	2	Other	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71578	85.30944	144
+Om Shanti Spa	2	Other	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71578	85.30945	145
+Pashmina Queen and Craft	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71538	85.3104	146
+Terres du Nepal Trekking	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71805	85.31192	147
+Cuisine Court	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.719115	85.332184	148
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7174198	85.3260471	149
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7175	85.32594	150
+Asian adventure treks and expedition	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71321	85.31137	151
+Sun N Fun Holidays	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7043	85.33088	152
+Spa kinjjala pvt ltd.	2	Other	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.67812	85.30827	153
+Subhakamana Travels and Tours	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	28.19899	83.97616	154
+Tiger Mountain	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	28.21064	84.04247	155
+Hotel Tulsi Pokhara	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	28.2097	83.95798	156
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	28.2148186	83.9618638	157
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	28.22345	83.9888	158
+Himalayan Doorway	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	28.706472	80.577207	159
+Hotel Task International Pvt. Ltd.	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	28.2048324	83.9986713	160
+Stunning Adventure	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.6891069867822	85.2478348127655	161
+Nepal Mountain Gear	2	Mountaineering	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7149361495911	85.3104505819971	162
+HOTEL HIMALAYA PVT. LTD	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.68413	85.31941	163
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.7165403	85.3129886	164
+HOTEL	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7177391	85.3101198	165
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7152382	85.3115879	166
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7156778	85.3113177	167
+Hotel Lakeside Pvt. Ltd	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	28.2077552	83.9684899	168
+Green Mansions Jungle Resort	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.5845046127971	84.4711607974195	169
+The  cashmere store	1	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	28.2044184	83.9644088	170
+Nepal Handicraft portal	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7115975664926	85.3089139946971	171
+Pilgrims Guest House P.Ltd	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.717619	85.3115799	172
+Harry guest house and restaurant	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	28.21224	83.9626	173
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	28.2198688	83.9580593	174
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.7054130197592	85.3489936269846	175
+Green Mansions Jungle Resort	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.5845046127971	84.4711607974195	1476
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7650888094923	85.363349712796	176
+Tourism	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	28.20794	83.95855	177
+Splash nepal adventure	1	Rafting	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7146686256428	85.3109832980832	178
+LEGENDS KHUKURI GALLERY PVT LTD	1	Other	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7142268	85.3113891	179
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7141228	85.3116181	180
+Eco craft collection	1	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7169496294368	85.310175951392	181
+Royal handicraft	1	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7155286407712	85.3113662974226	182
+Nepal Ascent Treks	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7119692416278	85.3110869262584	183
+Dibya Hospitality Pvt.Ltd	1	Other	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71292	85.35984	184
+Himalayan idol travel and tours	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.71301	85.31211	185
+Naya Nepal collection and export pvt.ltd	1	Handicraft	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.713195	85.3122775	186
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	28.2072939	83.9578631	187
+Downtown Restaurant	1	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.68076	85.31722	188
+Mount everest souvenir house	1	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7135681946502	85.3125867485289	189
+Apex himalaya trek and expedition	1	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7104423	85.3109739	190
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7392974199588	85.3239723928859	191
+Hotel Crown Plaza	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7130878	85.3281444	192
+Kailash cafe & bar	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.7160368463001	85.3104862262585	193
+Green Boutique Hotel	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7210567730833	85.3653754560733	194
+Demeter Handicrafts	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7207596166803	85.3607724987554	195
+Nepal Highland Treks P Ltd	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7166059299288	85.3117833730153	196
+Kathmandu cityhill Apartmnet	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7209932	85.3118557	197
+Krishna handicraft	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	2	10	11	Workforce size became 75% of 2019	कार्यबल आकार २०१९ को ७५% भयो 	27.716084576286	85.3099118032157	198
+Mithila women handicraft	2	Shop/Merchandise	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7130115973909	85.3125155738383	199
+Ashirwad export	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.71892	85.3122	200
+Golden Cloud Adventure P. Ltd.	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.710411302506	85.3129580931116	201
+Flight gyani Pvt ltd	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7110507076044	85.3150705587519	202
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7176441116934	85.3093493859829	203
+Peak trekking equipment collection	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7140738	85.3098685	204
+Trekking shop	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	6	2	2	Workforce size increased compared to 2019	कार्यबल आकार २०१९ को तुलनामा बढ्यो	27.71574	85.30944	205
+The  cashmere store	1	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2044184	83.9644088	1477
+Carrot holidays pvt ltd	2	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.6882985387026	85.3324406541961	206
+Himalaya Traders & Export	2	Other	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.7148479186674	85.3113777116411	207
+Lotus handicraft	2	Handicraft	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7162829183416	85.3101437234923	208
+Hotel Tharu Garden	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	4	28	31	Workforce size became 25% of 2019	कार्यबल आकार २०१९ को २५% भयो 	27.5753519138286	84.5016726992705	209
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7180005590084	85.3097967996561	210
+DBRAND SOLUTION PVT LTD	2	Other	i_wrkfrc_size_chng_2020_v_2019	1	9	10	Workforce size remained the same	कार्यबल आकार उही रह्यो 	27.6924011815381	85.3301440109144	211
+Agaman hotel	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7349334767156	85.3143232244077	212
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	3	13	14	Workforce size became 50% of 2019	कार्यबल आकार २०१९ को ५०% भयो 	27.7147492	85.3102089	213
+Thamel Seasons Hotel Pvt.ltd	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7179141297178	85.3101209550944	214
+Hotel Business	2	Hotel	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.6632585317559	85.4449016109137	215
+The freedom cafe restaurant & bar	2	Restaurant and Bar	i_wrkfrc_size_chng_2020_v_2019	6	2	2	Workforce size increased compared to 2019	कार्यबल आकार २०१९ को तुलनामा बढ्यो	28.2209793	83.9559105	216
+Tour and trekking and Expedition	2	Trekking	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.7153213473598	85.3117415550944	217
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	i_wrkfrc_size_chng_2020_v_2019	5	38	41	Workforce size became zero	कार्यबल आकार शून्य भयो 	27.6742617216237	85.3691647550934	218
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	27.7153038584918	85.3103238891712	219
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	26.98806	85.89996	220
+chitwan forest resort	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.58148	84.49332	221
+Suburb cafe	2	Hotel	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	27.684759	85.312688	222
+hostel nextdoor	3	Hotel	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	27.684944	85.315922	223
+Orbit Nepal Adventure	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71305	85.31126	224
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.69443	85.24896	225
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.69035	85.23849	226
+Mandala Handicrafts	2	Handicraft	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.71297	85.31228	227
+Handicrafts (felt,woolen. Curio	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71442	85.31192	228
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.71223	85.31062	229
+Earth angle trading pvt ltd	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71409	85.31012	230
+Pashmina	1	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71274	85.31124	231
+Tharu Home Resort	2	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.46335	81.25026	232
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.71061	85.31213	233
+New light handicraft	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71361	85.31132	234
+Rainbow Adventure Nepal	2	Rafting	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7115056	85.3089164	235
+Hotel	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71217	85.30787	236
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.71331	85.3114	237
+Namaste Spa Pvt.Ltd	2	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7151	85.312	238
+B s handicrafts	1	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71316	85.31265	239
+Natural nepal export	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	1	1	1	Revenue remained the same	राजस्व उही रह्यो	27.71736	85.31034	240
+Yakety Yak Hostel	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7133876	85.31238	241
+R.R.Jewellery	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7137093	85.3123409	242
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71423	85.31159	243
+Hiking nepal pvt ltd	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71689	85.30937	244
+Garden of Hope Treks & Expeditions	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71459	85.31326	245
+Hotel Down Town Pvt. Ltd	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.71587	85.30982	246
+Hemp House Nepal Pvt.Ltd	1	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71575	85.30998	247
+Hemp heafquarter	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.71587	85.30991	248
+Kathmandu Spa	1	Other	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.7161657	85.3108951	249
+Restutant	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71665	85.3099	250
+Hotel Luna Kathmandu	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7167297	85.3120921	251
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71702	85.33378	252
+Om Shanti Spa	2	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71578	85.30944	253
+Om Shanti Spa	2	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71578	85.30945	254
+Pashmina Queen and Craft	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71538	85.3104	255
+Terres du Nepal Trekking	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71805	85.31192	256
+Cuisine Court	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.719115	85.332184	257
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7174198	85.3260471	258
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7175	85.32594	259
+Asian adventure treks and expedition	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71321	85.31137	260
+Sun N Fun Holidays	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7043	85.33088	261
+Spa kinjjala pvt ltd.	2	Other	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.67812	85.30827	262
+Subhakamana Travels and Tours	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.19899	83.97616	263
+Tiger Mountain	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.21064	84.04247	264
+Hotel Tulsi Pokhara	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.2097	83.95798	265
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	28.2148186	83.9618638	266
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	28.22345	83.9888	267
+Himalayan Doorway	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.706472	80.577207	268
+Hotel Task International Pvt. Ltd.	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.2048324	83.9986713	269
+Stunning Adventure	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.6891069867822	85.2478348127655	270
+Nepal Mountain Gear	2	Mountaineering	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7149361495911	85.3104505819971	271
+HOTEL HIMALAYA PVT. LTD	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.68413	85.31941	272
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7165403	85.3129886	273
+HOTEL	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7177391	85.3101198	274
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7152382	85.3115879	275
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7156778	85.3113177	276
+Hotel Lakeside Pvt. Ltd	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.2077552	83.9684899	277
+Green Mansions Jungle Resort	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.5845046127971	84.4711607974195	278
+The  cashmere store	1	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.2044184	83.9644088	279
+Nepal Handicraft portal	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7115975664926	85.3089139946971	280
+Pilgrims Guest House P.Ltd	1	Hotel	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	27.717619	85.3115799	281
+Harry guest house and restaurant	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.21224	83.9626	282
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.2198688	83.9580593	283
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7054130197592	85.3489936269846	284
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7650888094923	85.363349712796	285
+Tourism	1	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.20794	83.95855	286
+Splash nepal adventure	1	Rafting	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7146686256428	85.3109832980832	287
+LEGENDS KHUKURI GALLERY PVT LTD	1	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7142268	85.3113891	288
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.7141228	85.3116181	289
+Eco craft collection	1	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7169496294368	85.310175951392	290
+Royal handicraft	1	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7155286407712	85.3113662974226	291
+Nepal Ascent Treks	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7119692416278	85.3110869262584	292
+Dibya Hospitality Pvt.Ltd	1	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71292	85.35984	293
+Himalayan idol travel and tours	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71301	85.31211	294
+Naya Nepal collection and export pvt.ltd	1	Handicraft	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.713195	85.3122775	295
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	28.2072939	83.9578631	296
+Downtown Restaurant	1	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	3	7	8	Revenue became 50% of 2019	राजस्व २०१९ को ५०% भयो 	27.68076	85.31722	297
+Mount everest souvenir house	1	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7135681946502	85.3125867485289	298
+Apex himalaya trek and expedition	1	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7104423	85.3109739	299
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7392974199588	85.3239723928859	300
+Hotel Crown Plaza	2	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7130878	85.3281444	301
+Kailash cafe & bar	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7160368463001	85.3104862262585	302
+Green Boutique Hotel	2	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7210567730833	85.3653754560733	303
+Demeter Handicrafts	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7207596166803	85.3607724987554	304
+Nepal Highland Treks P Ltd	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7166059299288	85.3117833730153	305
+Kathmandu cityhill Apartmnet	2	Hotel	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7209932	85.3118557	306
+Krishna handicraft	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.716084576286	85.3099118032157	307
+Mithila women handicraft	2	Shop/Merchandise	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7130115973909	85.3125155738383	308
+Ashirwad export	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.71892	85.3122	309
+Golden Cloud Adventure P. Ltd.	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.710411302506	85.3129580931116	310
+Flight gyani Pvt ltd	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7110507076044	85.3150705587519	311
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7176441116934	85.3093493859829	312
+Peak trekking equipment collection	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7140738	85.3098685	313
+Trekking shop	2	Trekking	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.71574	85.30944	314
+Carrot holidays pvt ltd	2	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.6882985387026	85.3324406541961	315
+Himalaya Traders & Export	2	Other	i_fin_revenue_chng_2020_v_2019	4	22	24	Revenue became 25% of 2019	राजस्व २०१९ को २५% भयो 	27.7148479186674	85.3113777116411	316
+Lotus handicraft	2	Handicraft	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7162829183416	85.3101437234923	317
+Hotel Tharu Garden	2	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.5753519138286	84.5016726992705	318
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7180005590084	85.3097967996561	319
+DBRAND SOLUTION PVT LTD	2	Other	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.6924011815381	85.3301440109144	320
+Agaman hotel	2	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7349334767156	85.3143232244077	321
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	2	6	7	Revenue became 75% of 2019	राजस्व २०१९ को ७५% भयो 	27.7147492	85.3102089	322
+Thamel Seasons Hotel Pvt.ltd	2	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7179141297178	85.3101209550944	323
+Hotel Business	2	Hotel	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.6632585317559	85.4449016109137	324
+The freedom cafe restaurant & bar	2	Restaurant and Bar	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	28.2209793	83.9559105	325
+Tour and trekking and Expedition	2	Trekking	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.7153213473598	85.3117415550944	326
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	i_fin_revenue_chng_2020_v_2019	5	63	69	Revenue stopped completely	राजस्व पूर्ण रूपमा रोकियो	27.6742617216237	85.3691647550934	327
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7153038584918	85.3103238891712	328
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	26.98806	85.89996	329
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71575	85.30998	441
+chitwan forest resort	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.58148	84.49332	330
+Suburb cafe	2	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.684759	85.312688	331
+hostel nextdoor	3	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.684944	85.315922	332
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71305	85.31126	333
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.69443	85.24896	334
+Mandala Handicrafts	2	Handicraft	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71297	85.31228	335
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71442	85.31192	336
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71223	85.31062	337
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71409	85.31012	338
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71061	85.31213	339
+Rainbow Adventure Nepal	2	Rafting	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7115056	85.3089164	340
+Hotel	1	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71217	85.30787	341
+Namaste Spa Pvt.Ltd	2	Other	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7151	85.312	342
+B s handicrafts	1	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71316	85.31265	343
+Natural nepal export	2	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71736	85.31034	344
+Yakety Yak Hostel	1	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7133876	85.31238	345
+R.R.Jewellery	2	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7137093	85.3123409	346
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71423	85.31159	347
+Hiking nepal pvt ltd	1	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71689	85.30937	348
+Garden of Hope Treks & Expeditions	2	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71459	85.31326	349
+Hotel Down Town Pvt. Ltd	1	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71587	85.30982	350
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71575	85.30998	351
+Hemp heafquarter	2	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71587	85.30991	352
+Kathmandu Spa	1	Other	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7161657	85.3108951	353
+Restutant	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.71665	85.3099	354
+Hotel Luna Kathmandu	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7167297	85.3120921	355
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71702	85.33378	356
+Om Shanti Spa	2	Other	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71578	85.30944	357
+Om Shanti Spa	2	Other	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71578	85.30945	358
+Cuisine Court	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.719115	85.332184	359
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7174198	85.3260471	360
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7175	85.32594	361
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71321	85.31137	362
+Sun N Fun Holidays	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7043	85.33088	363
+Spa kinjjala pvt ltd.	2	Other	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.67812	85.30827	364
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.19899	83.97616	365
+Tiger Mountain	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.21064	84.04247	366
+Hotel Tulsi Pokhara	1	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	28.2097	83.95798	367
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.2148186	83.9618638	368
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	28.22345	83.9888	369
+Hotel Task International Pvt. Ltd.	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.2048324	83.9986713	370
+Stunning Adventure	2	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.6891069867822	85.2478348127655	371
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.68413	85.31941	372
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7165403	85.3129886	373
+HOTEL	1	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.7177391	85.3101198	374
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7152382	85.3115879	375
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.7156778	85.3113177	376
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.2077552	83.9684899	377
+Green Mansions Jungle Resort	1	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.5845046127971	84.4711607974195	378
+The  cashmere store	1	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	28.2044184	83.9644088	379
+Pilgrims Guest House P.Ltd	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.717619	85.3115799	380
+Harry guest house and restaurant	1	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	28.21224	83.9626	381
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	28.2198688	83.9580593	382
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7054130197592	85.3489936269846	383
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7650888094923	85.363349712796	384
+Tourism	1	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	28.20794	83.95855	385
+Splash nepal adventure	1	Rafting	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.7146686256428	85.3109832980832	386
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7141228	85.3116181	387
+Eco craft collection	1	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7169496294368	85.310175951392	388
+Royal handicraft	1	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7155286407712	85.3113662974226	389
+Nepal Ascent Treks	1	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7119692416278	85.3110869262584	390
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.713195	85.3122775	391
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	28.2072939	83.9578631	392
+Downtown Restaurant	1	Restaurant and Bar	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.68076	85.31722	393
+Mount everest souvenir house	1	Handicraft	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7135681946502	85.3125867485289	394
+Apex himalaya trek and expedition	1	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7104423	85.3109739	395
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7392974199588	85.3239723928859	396
+Hotel Crown Plaza	2	Hotel	o_do_u_know_of_gov_schemes	3	9	8	Yes, I have used one or more government schemes.	मैले एक वा बढी सरकारी योजनाहरू प्रयोग गरेको छु।	27.7130878	85.3281444	397
+Kailash cafe & bar	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7160368463001	85.3104862262585	398
+Green Boutique Hotel	2	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7210567730833	85.3653754560733	399
+Demeter Handicrafts	2	Handicraft	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7207596166803	85.3607724987554	400
+Nepal Highland Treks P Ltd	2	Trekking	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7166059299288	85.3117833730153	401
+Kathmandu cityhill Apartmnet	2	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7209932	85.3118557	402
+Krishna handicraft	2	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.716084576286	85.3099118032157	403
+Mithila women handicraft	2	Shop/Merchandise	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7130115973909	85.3125155738383	404
+Ashirwad export	2	Handicraft	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.71892	85.3122	405
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.710411302506	85.3129580931116	406
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7176441116934	85.3093493859829	407
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.6882985387026	85.3324406541961	408
+Lotus handicraft	2	Handicraft	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7162829183416	85.3101437234923	409
+Hotel Tharu Garden	2	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.5753519138286	84.5016726992705	410
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7180005590084	85.3097967996561	411
+DBRAND SOLUTION PVT LTD	2	Other	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.6924011815381	85.3301440109144	412
+Agaman hotel	2	Hotel	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7349334767156	85.3143232244077	413
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.7147492	85.3102089	414
+Hemp heafquarter	2	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.71587	85.30991	442
+Hotel Business	2	Hotel	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.6632585317559	85.4449016109137	415
+Tour and trekking and Expedition	2	Trekking	o_do_u_know_of_gov_schemes	2	37	33	No, I have not used any government scheme but I know about such schemes.	 मैले कुनै सरकारी योजना प्रयोग गरेको छैन तर मलाई त्यस्ता योजनाहरूको बारेमा थाहा छ।	27.7153213473598	85.3117415550944	416
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_do_u_know_of_gov_schemes	1	54	49	I am NOT aware of such government schemes.	म त्यस्ता सरकारी योजनाहरूको बारेमा सचेत छैन।	27.6742617216237	85.3691647550934	417
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	27.7153038584918	85.3103238891712	418
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	26.98806	85.89996	419
+chitwan forest resort	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.58148	84.49332	420
+Suburb cafe	2	Hotel	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.684759	85.312688	421
+hostel nextdoor	3	Hotel	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	27.684944	85.315922	422
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.71305	85.31126	423
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.69443	85.24896	424
+Mandala Handicrafts	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	5	6	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	27.71297	85.31228	425
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.71442	85.31192	426
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.71223	85.31062	427
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71409	85.31012	428
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.71061	85.31213	429
+Rainbow Adventure Nepal	2	Rafting	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7115056	85.3089164	430
+Hotel	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71217	85.30787	431
+Namaste Spa Pvt.Ltd	2	Other	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7151	85.312	432
+B s handicrafts	1	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	27.71316	85.31265	433
+Natural nepal export	2	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71736	85.31034	434
+Yakety Yak Hostel	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7133876	85.31238	435
+R.R.Jewellery	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7137093	85.3123409	436
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.71423	85.31159	437
+Hiking nepal pvt ltd	1	Trekking	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.71689	85.30937	438
+Garden of Hope Treks & Expeditions	2	Trekking	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.71459	85.31326	439
+Hotel Down Town Pvt. Ltd	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.71587	85.30982	440
+Kathmandu Spa	1	Other	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	27.7161657	85.3108951	443
+Restutant	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71665	85.3099	444
+Hotel Luna Kathmandu	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7167297	85.3120921	445
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71702	85.33378	446
+Om Shanti Spa	2	Other	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71578	85.30944	447
+Om Shanti Spa	2	Other	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71578	85.30945	448
+Cuisine Court	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.719115	85.332184	449
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7174198	85.3260471	450
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7175	85.32594	451
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.71321	85.31137	452
+Sun N Fun Holidays	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7043	85.33088	453
+Spa kinjjala pvt ltd.	2	Other	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.67812	85.30827	454
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.19899	83.97616	455
+Tiger Mountain	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.21064	84.04247	456
+Hotel Tulsi Pokhara	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.2097	83.95798	457
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.2148186	83.9618638	458
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.22345	83.9888	459
+Hotel Task International Pvt. Ltd.	1	Hotel	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	28.2048324	83.9986713	460
+Stunning Adventure	2	Trekking	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.6891069867822	85.2478348127655	461
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.68413	85.31941	462
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7165403	85.3129886	463
+HOTEL	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7177391	85.3101198	464
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	5	6	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	27.7152382	85.3115879	465
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7156778	85.3113177	466
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.2077552	83.9684899	467
+Green Mansions Jungle Resort	1	Hotel	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.5845046127971	84.4711607974195	468
+The  cashmere store	1	Handicraft	o_econ_impact_revenue_chng_21_v_19	5	6	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	28.2044184	83.9644088	469
+Pilgrims Guest House P.Ltd	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.717619	85.3115799	470
+Harry guest house and restaurant	1	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	28.21224	83.9626	471
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	28.2198688	83.9580593	472
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7054130197592	85.3489936269846	473
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	5	6	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	27.7650888094923	85.363349712796	474
+Tourism	1	Hotel	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	28.20794	83.95855	475
+Splash nepal adventure	1	Rafting	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.7146686256428	85.3109832980832	476
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.7141228	85.3116181	477
+Eco craft collection	1	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7169496294368	85.310175951392	478
+Royal handicraft	1	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7155286407712	85.3113662974226	479
+Nepal Ascent Treks	1	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7119692416278	85.3110869262584	480
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.713195	85.3122775	481
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	28.2072939	83.9578631	482
+Downtown Restaurant	1	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.68076	85.31722	483
+Mount everest souvenir house	1	Handicraft	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7135681946502	85.3125867485289	484
+Apex himalaya trek and expedition	1	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7104423	85.3109739	485
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7392974199588	85.3239723928859	486
+Hotel Crown Plaza	2	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7130878	85.3281444	487
+Kailash cafe & bar	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7160368463001	85.3104862262585	488
+Green Boutique Hotel	2	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7210567730833	85.3653754560733	489
+Demeter Handicrafts	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7207596166803	85.3607724987554	490
+Nepal Highland Treks P Ltd	2	Trekking	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.7166059299288	85.3117833730153	491
+Kathmandu cityhill Apartmnet	2	Hotel	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.7209932	85.3118557	492
+Krishna handicraft	2	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	2	26	23	Revenue is expected to be 25% of 2019	राजस्व २०१९ को २५% हुने अपेक्षा गरिएको छ	27.716084576286	85.3099118032157	493
+Mithila women handicraft	2	Shop/Merchandise	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.7130115973909	85.3125155738383	494
+Ashirwad export	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71892	85.3122	495
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.710411302506	85.3129580931116	496
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7176441116934	85.3093493859829	497
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.6882985387026	85.3324406541961	498
+Lotus handicraft	2	Handicraft	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7162829183416	85.3101437234923	499
+Hotel Tharu Garden	2	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.5753519138286	84.5016726992705	500
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7180005590084	85.3097967996561	501
+DBRAND SOLUTION PVT LTD	2	Other	o_econ_impact_revenue_chng_21_v_19	6	7	6	Revenue is expected to be higher than 2019	राजस्व २०१९ को भन्दा बढी हुने अपेक्षा गरिएको छ	27.6924011815381	85.3301440109144	502
+Agaman hotel	2	Hotel	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7349334767156	85.3143232244077	503
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_econ_impact_revenue_chng_21_v_19	3	11	10	Revenue is expected to be 50% of 2019	राजस्व २०१९ को ५०% हुने अपेक्षा गरिएको छ	27.7147492	85.3102089	504
+Hotel Business	2	Hotel	o_econ_impact_revenue_chng_21_v_19	5	6	5	Revenue is expected to be similar to 2019’s revenue	राजस्व २०१९ को राजस्व जस्तै मिल्दो हुने अपेक्षा गरिएको छ	27.6632585317559	85.4449016109137	505
+Tour and trekking and Expedition	2	Trekking	o_econ_impact_revenue_chng_21_v_19	4	7	6	Revenue is expected to be 75% of 2019	राजस्व २०१९ को ७५% हुने अपेक्षा गरिएको छ	27.7153213473598	85.3117415550944	506
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_econ_impact_revenue_chng_21_v_19	1	44	40	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.6742617216237	85.3691647550934	507
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	4	6	5	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	27.7153038584918	85.3103238891712	508
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	26.98806	85.89996	509
+chitwan forest resort	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.58148	84.49332	510
+Suburb cafe	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.684759	85.312688	511
+hostel nextdoor	3	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.684944	85.315922	512
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71305	85.31126	513
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.69443	85.24896	514
+Mandala Handicrafts	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	27.71297	85.31228	515
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71442	85.31192	516
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71223	85.31062	517
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71409	85.31012	518
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	27.71061	85.31213	519
+Rainbow Adventure Nepal	2	Rafting	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7115056	85.3089164	520
+Hotel	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71217	85.30787	521
+Namaste Spa Pvt.Ltd	2	Other	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7151	85.312	522
+B s handicrafts	1	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71316	85.31265	523
+Natural nepal export	2	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71736	85.31034	524
+Yakety Yak Hostel	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.7133876	85.31238	525
+R.R.Jewellery	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7137093	85.3123409	526
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71423	85.31159	527
+Hiking nepal pvt ltd	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71689	85.30937	528
+Garden of Hope Treks & Expeditions	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.71459	85.31326	529
+Hotel Down Town Pvt. Ltd	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.71587	85.30982	530
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71575	85.30998	531
+Hemp heafquarter	2	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71587	85.30991	532
+Kathmandu Spa	1	Other	o_econ_impact_wrkfrc_chng_21_v_19	4	6	5	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	27.7161657	85.3108951	533
+Restutant	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71665	85.3099	534
+Hotel Luna Kathmandu	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.7167297	85.3120921	535
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71702	85.33378	536
+Om Shanti Spa	2	Other	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71578	85.30944	537
+Om Shanti Spa	2	Other	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.71578	85.30945	538
+Cuisine Court	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.719115	85.332184	539
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7174198	85.3260471	540
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7175	85.32594	541
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71321	85.31137	542
+Sun N Fun Holidays	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7043	85.33088	543
+Spa kinjjala pvt ltd.	2	Other	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.67812	85.30827	544
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	28.19899	83.97616	545
+Tiger Mountain	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	28.21064	84.04247	546
+Hotel Tulsi Pokhara	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	28.2097	83.95798	547
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	28.2148186	83.9618638	548
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	28.22345	83.9888	549
+Hotel Task International Pvt. Ltd.	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	28.2048324	83.9986713	550
+Stunning Adventure	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.6891069867822	85.2478348127655	551
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.68413	85.31941	552
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7165403	85.3129886	553
+HOTEL	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7177391	85.3101198	554
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	27.7152382	85.3115879	555
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7156778	85.3113177	556
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	28.2077552	83.9684899	557
+Green Mansions Jungle Resort	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.5845046127971	84.4711607974195	558
+The  cashmere store	1	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	28.2044184	83.9644088	559
+Pilgrims Guest House P.Ltd	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.717619	85.3115799	560
+Harry guest house and restaurant	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	28.21224	83.9626	561
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	28.2198688	83.9580593	562
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	27.7054130197592	85.3489936269846	563
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7650888094923	85.363349712796	564
+Tourism	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	28.20794	83.95855	565
+Splash nepal adventure	1	Rafting	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7146686256428	85.3109832980832	566
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.7141228	85.3116181	567
+Eco craft collection	1	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7169496294368	85.310175951392	568
+Royal handicraft	1	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7155286407712	85.3113662974226	569
+Nepal Ascent Treks	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7119692416278	85.3110869262584	570
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.713195	85.3122775	571
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	28.2072939	83.9578631	572
+Downtown Restaurant	1	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	4	6	5	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	27.68076	85.31722	573
+Mount everest souvenir house	1	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7135681946502	85.3125867485289	574
+Apex himalaya trek and expedition	1	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	5	9	8	Workforce size will be similar to that of 2019	कार्यबल आकार २०१९ को जस्तै मिल्दो हुनेछ 	27.7104423	85.3109739	575
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7392974199588	85.3239723928859	576
+Hotel Crown Plaza	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7130878	85.3281444	577
+Kailash cafe & bar	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	4	6	5	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	27.7160368463001	85.3104862262585	578
+Green Boutique Hotel	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7210567730833	85.3653754560733	579
+Demeter Handicrafts	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7207596166803	85.3607724987554	580
+Nepal Highland Treks P Ltd	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7166059299288	85.3117833730153	581
+Kathmandu cityhill Apartmnet	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	6	2	2	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	27.7209932	85.3118557	582
+Krishna handicraft	2	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.716084576286	85.3099118032157	583
+Mithila women handicraft	2	Shop/Merchandise	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7130115973909	85.3125155738383	584
+Ashirwad export	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.71892	85.3122	585
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.710411302506	85.3129580931116	586
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7176441116934	85.3093493859829	587
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.6882985387026	85.3324406541961	588
+Lotus handicraft	2	Handicraft	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7162829183416	85.3101437234923	589
+Hotel Tharu Garden	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.5753519138286	84.5016726992705	590
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	2	34	31	Workforce size will be 25% of 2019	कार्यबल आकार २०१९ को २५% हुनेछ	27.7180005590084	85.3097967996561	591
+DBRAND SOLUTION PVT LTD	2	Other	o_econ_impact_wrkfrc_chng_21_v_19	6	2	2	Workforce size will be greater than that of 2019	कार्यबल आकार २०१९ को भन्दा बढी हुनेछ 	27.6924011815381	85.3301440109144	592
+Agaman hotel	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.7349334767156	85.3143232244077	593
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_econ_impact_wrkfrc_chng_21_v_19	3	17	15	Workforce size will be 50% of 2019	कार्यबल आकार २०१९ को ५०% हुनेछ 	27.7147492	85.3102089	594
+Hotel Business	2	Hotel	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.6632585317559	85.4449016109137	595
+Tour and trekking and Expedition	2	Trekking	o_econ_impact_wrkfrc_chng_21_v_19	4	6	5	Workforce size will be 75% of 2019	कार्यबल आकार २०१९ को ७५% हुनेछ 	27.7153213473598	85.3117415550944	596
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_econ_impact_wrkfrc_chng_21_v_19	1	32	29	None (or negligible)	कुनै पनि होइन (वा नगण्य)	27.6742617216237	85.3691647550934	597
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7153038584918	85.3103238891712	598
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	26.98806	85.89996	599
+chitwan forest resort	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.58148	84.49332	600
+Suburb cafe	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.684759	85.312688	601
+hostel nextdoor	3	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.684944	85.315922	602
+Orbit Nepal Adventure	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71305	85.31126	603
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.69443	85.24896	604
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.69035	85.23849	605
+Mandala Handicrafts	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71297	85.31228	606
+Handicrafts (felt,woolen. Curio	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71442	85.31192	607
+Tharu Home Resort	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.46335	81.25026	608
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71061	85.31213	609
+New light handicraft	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71361	85.31132	610
+Hotel	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71217	85.30787	611
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71331	85.3114	612
+Namaste Spa Pvt.Ltd	2	Other	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7151	85.312	613
+Natural nepal export	2	Shop/Merchandise	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71736	85.31034	614
+Yakety Yak Hostel	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7133876	85.31238	615
+R.R.Jewellery	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7137093	85.3123409	616
+Hiking nepal pvt ltd	1	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71689	85.30937	617
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71587	85.30982	618
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71575	85.30998	619
+Kathmandu Spa	1	Other	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7161657	85.3108951	620
+Hotel Luna Kathmandu	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7167297	85.3120921	621
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71702	85.33378	622
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71578	85.30944	623
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71578	85.30945	624
+Pashmina Queen and Craft	2	Shop/Merchandise	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71538	85.3104	625
+Terres du Nepal Trekking	1	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71805	85.31192	626
+Cuisine Court	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.719115	85.332184	627
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7175	85.32594	628
+Asian adventure treks and expedition	2	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71321	85.31137	629
+Sun N Fun Holidays	2	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7043	85.33088	630
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.19899	83.97616	631
+Tiger Mountain	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.21064	84.04247	632
+Hotel Tulsi Pokhara	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2097	83.95798	633
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2148186	83.9618638	634
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.22345	83.9888	635
+Himalayan Doorway	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.706472	80.577207	636
+Nepal Mountain Gear	2	Mountaineering	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7149361495911	85.3104505819971	637
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.68413	85.31941	638
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7165403	85.3129886	639
+HOTEL	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7177391	85.3101198	640
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2077552	83.9684899	641
+Green Mansions Jungle Resort	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.5845046127971	84.4711607974195	642
+Nepal Handicraft portal	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7115975664926	85.3089139946971	643
+Pilgrims Guest House P.Ltd	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.717619	85.3115799	644
+Harry guest house and restaurant	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.21224	83.9626	645
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2198688	83.9580593	646
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7054130197592	85.3489936269846	647
+Tourism	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.20794	83.95855	648
+Mandala Handicrafts	2	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71297	85.31228	729
+LEGENDS KHUKURI GALLERY PVT LTD	1	Other	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7142268	85.3113891	649
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7141228	85.3116181	650
+Royal handicraft	1	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7155286407712	85.3113662974226	651
+Nepal Ascent Treks	1	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7119692416278	85.3110869262584	652
+Naya Nepal collection and export pvt.ltd	1	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.713195	85.3122775	653
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2072939	83.9578631	654
+Downtown Restaurant	1	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.68076	85.31722	655
+Mount everest souvenir house	1	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7135681946502	85.3125867485289	656
+Hotel Crown Plaza	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7130878	85.3281444	657
+Kailash cafe & bar	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7160368463001	85.3104862262585	658
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7209932	85.3118557	659
+Krishna handicraft	2	Shop/Merchandise	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.716084576286	85.3099118032157	660
+Mithila women handicraft	2	Shop/Merchandise	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7130115973909	85.3125155738383	661
+Ashirwad export	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71892	85.3122	662
+Golden Cloud Adventure P. Ltd.	2	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.710411302506	85.3129580931116	663
+Flight gyani Pvt ltd	2	Travel and Tour Operator	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7110507076044	85.3150705587519	664
+Trekking shop	2	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.71574	85.30944	665
+Lotus handicraft	2	Handicraft	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7162829183416	85.3101437234923	666
+Hotel Tharu Garden	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.5753519138286	84.5016726992705	667
+Handicrafts (felt,woolen. Curio	2	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71442	85.31192	730
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7180005590084	85.3097967996561	668
+Agaman hotel	2	Hotel	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7349334767156	85.3143232244077	669
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	27.7147492	85.3102089	670
+The freedom cafe restaurant & bar	2	Restaurant and Bar	p_hlth_hhs_measures	1	1	74	Placed sanitizers, thermal screening or disinfections at prominent locations	प्रमुख स्थानहरूमा सेनिटाइजर, थर्मल स्क्रीनिंग र कीटाणुशोधन राखियो	28.2209793	83.9559105	671
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7153038584918	85.3103238891712	672
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	26.98806	85.89996	673
+chitwan forest resort	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.58148	84.49332	674
+hostel nextdoor	3	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.684944	85.315922	675
+Orbit Nepal Adventure	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71305	85.31126	676
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.69035	85.23849	677
+Handicrafts (felt,woolen. Curio	2	Handicraft	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71442	85.31192	678
+Tharu Home Resort	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.46335	81.25026	679
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71061	85.31213	680
+Rainbow Adventure Nepal	2	Rafting	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7115056	85.3089164	681
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71331	85.3114	682
+Namaste Spa Pvt.Ltd	2	Other	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7151	85.312	683
+Yakety Yak Hostel	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7133876	85.31238	684
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71587	85.30982	685
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71575	85.30998	686
+Hemp heafquarter	2	Shop/Merchandise	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71587	85.30991	687
+Restutant	2	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71665	85.3099	688
+Hotel Luna Kathmandu	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7167297	85.3120921	689
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71702	85.33378	690
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71578	85.30944	691
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71578	85.30945	692
+Pashmina Queen and Craft	2	Shop/Merchandise	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71538	85.3104	693
+Terres du Nepal Trekking	1	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.71805	85.31192	694
+Cuisine Court	2	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.719115	85.332184	695
+Spa kinjjala pvt ltd.	2	Other	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.67812	85.30827	696
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.19899	83.97616	697
+Tiger Mountain	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.21064	84.04247	698
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.2148186	83.9618638	699
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.22345	83.9888	700
+Himalayan Doorway	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.706472	80.577207	701
+Stunning Adventure	2	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.6891069867822	85.2478348127655	702
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.68413	85.31941	703
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7165403	85.3129886	704
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7152382	85.3115879	705
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.2077552	83.9684899	706
+Green Mansions Jungle Resort	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.5845046127971	84.4711607974195	707
+Hotel Crown Plaza	2	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7130878	85.3281444	999
+The  cashmere store	1	Handicraft	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.2044184	83.9644088	708
+Pilgrims Guest House P.Ltd	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.717619	85.3115799	709
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7054130197592	85.3489936269846	710
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7650888094923	85.363349712796	711
+Tourism	1	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	28.20794	83.95855	712
+Splash nepal adventure	1	Rafting	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7146686256428	85.3109832980832	713
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7141228	85.3116181	714
+Nepal Ascent Treks	1	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7119692416278	85.3110869262584	715
+Apex himalaya trek and expedition	1	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7104423	85.3109739	716
+Hotel Crown Plaza	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7130878	85.3281444	717
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7209932	85.3118557	718
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7176441116934	85.3093493859829	719
+Carrot holidays pvt ltd	2	Travel and Tour Operator	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.6882985387026	85.3324406541961	720
+Hotel Tharu Garden	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.5753519138286	84.5016726992705	721
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7180005590084	85.3097967996561	722
+Thamel Seasons Hotel Pvt.ltd	2	Hotel	p_hlth_hhs_measures	2	1	52	Trained our employees on HHS (Health, hygiene and sanitation)	हाम्रा कर्मचारीहरुलाई स्वास्थ्य, सरसफाइ र स्वच्छतामा तालिम दिइयो 	27.7179141297178	85.3101209550944	723
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7153038584918	85.3103238891712	724
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	26.98806	85.89996	725
+chitwan forest resort	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.58148	84.49332	726
+Suburb cafe	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.684759	85.312688	727
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.69035	85.23849	728
+Earth angle trading pvt ltd	2	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71409	85.31012	731
+Tharu Home Resort	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.46335	81.25026	732
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71061	85.31213	733
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71331	85.3114	734
+B s handicrafts	1	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71316	85.31265	735
+Natural nepal export	2	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71736	85.31034	736
+Yakety Yak Hostel	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7133876	85.31238	737
+R.R.Jewellery	2	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7137093	85.3123409	738
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71423	85.31159	739
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71587	85.30982	740
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71575	85.30998	741
+Hotel Luna Kathmandu	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7167297	85.3120921	742
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71702	85.33378	743
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71578	85.30944	744
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71578	85.30945	745
+Pashmina Queen and Craft	2	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71538	85.3104	746
+Terres du Nepal Trekking	1	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71805	85.31192	747
+Cuisine Court	2	Restaurant and Bar	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.719115	85.332184	748
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7174198	85.3260471	749
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7175	85.32594	750
+Spa kinjjala pvt ltd.	2	Other	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.67812	85.30827	751
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.19899	83.97616	752
+Tiger Mountain	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.21064	84.04247	753
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.2148186	83.9618638	754
+Himalayan Doorway	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.706472	80.577207	755
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.68413	85.31941	756
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7165403	85.3129886	757
+HOTEL	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7177391	85.3101198	758
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7156778	85.3113177	759
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.2077552	83.9684899	760
+Green Mansions Jungle Resort	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.5845046127971	84.4711607974195	761
+The  cashmere store	1	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.2044184	83.9644088	762
+Nepal Handicraft portal	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7115975664926	85.3089139946971	763
+Pilgrims Guest House P.Ltd	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.717619	85.3115799	764
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.2198688	83.9580593	765
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7054130197592	85.3489936269846	766
+Tourism	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.20794	83.95855	767
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7141228	85.3116181	768
+Eco craft collection	1	Shop/Merchandise	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7169496294368	85.310175951392	769
+Nepal Ascent Treks	1	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7119692416278	85.3110869262584	770
+Dibya Hospitality Pvt.Ltd	1	Other	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.71292	85.35984	771
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	28.2072939	83.9578631	772
+Mount everest souvenir house	1	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7135681946502	85.3125867485289	773
+Hotel Crown Plaza	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7130878	85.3281444	774
+Demeter Handicrafts	2	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7207596166803	85.3607724987554	775
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7209932	85.3118557	776
+Golden Cloud Adventure P. Ltd.	2	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.710411302506	85.3129580931116	777
+Lotus handicraft	2	Handicraft	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7162829183416	85.3101437234923	778
+Hotel Tharu Garden	2	Hotel	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.5753519138286	84.5016726992705	779
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.7180005590084	85.3097967996561	780
+DBRAND SOLUTION PVT LTD	2	Other	p_hlth_hhs_measures	4	1	58	Maintained social distancing at our business premises	हाम्रो व्यवसाय परिसरमा सामाजिक दुरी बनाइयो	27.6924011815381	85.3301440109144	781
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7153038584918	85.3103238891712	782
+Lets trip Nepal Adventure Pvt Ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.69035	85.23849	783
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71061	85.31213	784
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71423	85.31159	785
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71587	85.30982	786
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71575	85.30998	787
+Kathmandu Spa	1	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7161657	85.3108951	788
+Hotel Luna Kathmandu	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7167297	85.3120921	789
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71702	85.33378	790
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71578	85.30944	791
+Om Shanti Spa	2	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.71578	85.30945	792
+Cuisine Court	2	Restaurant and Bar	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.719115	85.332184	793
+Spa kinjjala pvt ltd.	2	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.67812	85.30827	794
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.19899	83.97616	795
+Tiger Mountain	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.21064	84.04247	796
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.22345	83.9888	797
+Himalayan Doorway	1	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.706472	80.577207	798
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.68413	85.31941	799
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7165403	85.3129886	800
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.2077552	83.9684899	801
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7054130197592	85.3489936269846	802
+Tourism	1	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	28.20794	83.95855	803
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7141228	85.3116181	804
+Downtown Restaurant	1	Restaurant and Bar	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.68076	85.31722	805
+Mount everest souvenir house	1	Handicraft	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7135681946502	85.3125867485289	806
+Hotel Crown Plaza	2	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7130878	85.3281444	807
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7209932	85.3118557	808
+Himalaya Traders & Export	2	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7148479186674	85.3113777116411	809
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.7180005590084	85.3097967996561	810
+DBRAND SOLUTION PVT LTD	2	Other	p_hlth_hhs_measures	5	1	30	Introduced/Implemented cashless payments	नगद भुक्तानहरू परिचय /कार्यान्वयन गरियो 	27.6924011815381	85.3301440109144	811
+chitwan forest resort	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.58148	84.49332	812
+Aster Hotel Nepal Pvt. Ltd.	2	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.71331	85.3114	813
+Hotel Luna Kathmandu	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7167297	85.3120921	814
+Tiger Mountain	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	28.21064	84.04247	815
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	28.22345	83.9888	816
+HOTEL	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7177391	85.3101198	817
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	28.2077552	83.9684899	818
+Green Mansions Jungle Resort	1	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.5845046127971	84.4711607974195	819
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7141228	85.3116181	820
+Hotel Crown Plaza	2	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7130878	85.3281444	821
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7209932	85.3118557	822
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	6	1	12	Discontinued buffet services (applicable for hotels and restaurants only)	बफे सेवाहरू बन्द गरियो(होटल र रेस्टुरेन्टका लागि मात्र लागू)	27.7180005590084	85.3097967996561	823
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.7153038584918	85.3103238891712	824
+Pashmina	1	Shop/Merchandise	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.71274	85.31124	825
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.71702	85.33378	826
+Himalayan Doorway	1	Travel and Tour Operator	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	28.706472	80.577207	827
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.7141228	85.3116181	828
+Spa kinjjala pvt ltd.	2	Other	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.67812	85.30827	966
+Himalayan idol travel and tours	1	Travel and Tour Operator	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.71301	85.31211	829
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.7209932	85.3118557	830
+Golden Cloud Adventure P. Ltd.	2	Trekking	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.710411302506	85.3129580931116	831
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_hhs_measures	8	1	9	Outsourced certain services like order management, delivery, etc.	केहि सेवाहरू जस्तै अर्डर म्यानेजमेन्ट, डेलिभरी, आदि आउटसोर्स गरियो	27.7180005590084	85.3097967996561	832
+Hotel Business	2	Hotel	p_hlth_hhs_measures	9	1	1	Other	अन्य	27.6632585317559	85.4449016109137	833
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	p_hlth_hhs_measures	10	1	5	We didn't employ any health and sanitation related measures	हामीले स्वास्थ्य र सरसफाई सम्बन्धी कुनै उपायहरू प्रयोग गरेनौं	27.7392974199588	85.3239723928859	834
+Green Boutique Hotel	2	Hotel	p_hlth_hhs_measures	10	1	5	We didn't employ any health and sanitation related measures	हामीले स्वास्थ्य र सरसफाई सम्बन्धी कुनै उपायहरू प्रयोग गरेनौं	27.7210567730833	85.3653754560733	835
+Nepal Highland Treks P Ltd	2	Trekking	p_hlth_hhs_measures	10	1	5	We didn't employ any health and sanitation related measures	हामीले स्वास्थ्य र सरसफाई सम्बन्धी कुनै उपायहरू प्रयोग गरेनौं	27.7166059299288	85.3117833730153	836
+Tour and trekking and Expedition	2	Trekking	p_hlth_hhs_measures	10	1	5	We didn't employ any health and sanitation related measures	हामीले स्वास्थ्य र सरसफाई सम्बन्धी कुनै उपायहरू प्रयोग गरेनौं	27.7153213473598	85.3117415550944	837
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	p_hlth_hhs_measures	10	1	5	We didn't employ any health and sanitation related measures	हामीले स्वास्थ्य र सरसफाई सम्बन्धी कुनै उपायहरू प्रयोग गरेनौं	27.6742617216237	85.3691647550934	838
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7153038584918	85.3103238891712	839
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	26.98806	85.89996	840
+chitwan forest resort	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.58148	84.49332	841
+Suburb cafe	2	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.684759	85.312688	842
+hostel nextdoor	3	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.684944	85.315922	843
+Orbit Nepal Adventure	1	Travel and Tour Operator	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71305	85.31126	844
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.69443	85.24896	845
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71061	85.31213	846
+Rainbow Adventure Nepal	2	Rafting	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7115056	85.3089164	847
+Tiger Mountain	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.21064	84.04247	967
+Hotel	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71217	85.30787	848
+Namaste Spa Pvt.Ltd	2	Other	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7151	85.312	849
+B s handicrafts	1	Shop/Merchandise	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71316	85.31265	850
+Yakety Yak Hostel	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7133876	85.31238	851
+Garden of Hope Treks & Expeditions	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71459	85.31326	852
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71587	85.30982	853
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71575	85.30998	854
+Kathmandu Spa	1	Other	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7161657	85.3108951	855
+Restutant	2	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71665	85.3099	856
+Hotel Luna Kathmandu	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7167297	85.3120921	857
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71702	85.33378	858
+Om Shanti Spa	2	Other	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71578	85.30944	859
+Om Shanti Spa	2	Other	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.71578	85.30945	860
+Cuisine Court	2	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.719115	85.332184	861
+Spa kinjjala pvt ltd.	2	Other	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.67812	85.30827	862
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.19899	83.97616	863
+Tiger Mountain	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.21064	84.04247	864
+Hotel Tulsi Pokhara	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.2097	83.95798	865
+Nepal Ascent Treks	1	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7119692416278	85.3110869262584	997
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.2148186	83.9618638	866
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.22345	83.9888	867
+Hotel Task International Pvt. Ltd.	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.2048324	83.9986713	868
+Stunning Adventure	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.6891069867822	85.2478348127655	869
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.68413	85.31941	870
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7165403	85.3129886	871
+HOTEL	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7177391	85.3101198	872
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.2077552	83.9684899	873
+Green Mansions Jungle Resort	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.5845046127971	84.4711607974195	874
+Pilgrims Guest House P.Ltd	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.717619	85.3115799	875
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7054130197592	85.3489936269846	876
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7650888094923	85.363349712796	877
+Tourism	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.20794	83.95855	878
+Splash nepal adventure	1	Rafting	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7146686256428	85.3109832980832	879
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7141228	85.3116181	880
+Eco craft collection	1	Shop/Merchandise	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7169496294368	85.310175951392	881
+Nepal Ascent Treks	1	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7119692416278	85.3110869262584	882
+Naya Nepal collection and export pvt.ltd	1	Handicraft	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.713195	85.3122775	883
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	28.2072939	83.9578631	884
+Downtown Restaurant	1	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.68076	85.31722	885
+Mount everest souvenir house	1	Handicraft	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7135681946502	85.3125867485289	886
+Hotel Crown Plaza	2	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7130878	85.3281444	887
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7209932	85.3118557	888
+Golden Cloud Adventure P. Ltd.	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.710411302506	85.3129580931116	889
+Lotus handicraft	2	Handicraft	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7162829183416	85.3101437234923	890
+Hotel Tharu Garden	2	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.5753519138286	84.5016726992705	891
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7180005590084	85.3097967996561	892
+Agaman hotel	2	Hotel	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7349334767156	85.3143232244077	893
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7147492	85.3102089	894
+Tour and trekking and Expedition	2	Trekking	p_hlth_safety_measures	1	1	57	Informed and Implemented Covid-19 prevention mesures like social distancing, use of personal prrotection equipments etc.	कोभिड-१९ प्रसारण र रोकथाम उपायहरूमा कामदारहरूलाई जानकारी दिने	27.7153213473598	85.3117415550944	895
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7153038584918	85.3103238891712	896
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	26.98806	85.89996	897
+chitwan forest resort	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.58148	84.49332	898
+Suburb cafe	2	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.684759	85.312688	899
+hostel nextdoor	3	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.684944	85.315922	900
+Orbit Nepal Adventure	1	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71305	85.31126	901
+Mandala Handicrafts	2	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71297	85.31228	902
+Handicrafts (felt,woolen. Curio	2	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71442	85.31192	903
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71223	85.31062	904
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71061	85.31213	905
+Rainbow Adventure Nepal	2	Rafting	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7115056	85.3089164	906
+Hotel	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71217	85.30787	907
+Namaste Spa Pvt.Ltd	2	Other	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7151	85.312	908
+B s handicrafts	1	Shop/Merchandise	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71316	85.31265	909
+Natural nepal export	2	Shop/Merchandise	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71736	85.31034	910
+Yakety Yak Hostel	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7133876	85.31238	911
+R.R.Jewellery	2	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7137093	85.3123409	912
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71423	85.31159	913
+Hiking nepal pvt ltd	1	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71689	85.30937	914
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71587	85.30982	915
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71575	85.30998	916
+Hemp heafquarter	2	Shop/Merchandise	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71587	85.30991	917
+Kathmandu Spa	1	Other	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7161657	85.3108951	918
+Hotel Luna Kathmandu	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7167297	85.3120921	919
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71702	85.33378	920
+Om Shanti Spa	2	Other	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71578	85.30944	921
+Om Shanti Spa	2	Other	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71578	85.30945	922
+Apex himalaya trek and expedition	1	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7104423	85.3109739	998
+Cuisine Court	2	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.719115	85.332184	923
+Asian adventure treks and expedition	2	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71321	85.31137	924
+Spa kinjjala pvt ltd.	2	Other	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.67812	85.30827	925
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.19899	83.97616	926
+Tiger Mountain	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.21064	84.04247	927
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.2148186	83.9618638	928
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.22345	83.9888	929
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.68413	85.31941	930
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7165403	85.3129886	931
+HOTEL	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7177391	85.3101198	932
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.2077552	83.9684899	933
+Green Mansions Jungle Resort	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.5845046127971	84.4711607974195	934
+Pilgrims Guest House P.Ltd	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.717619	85.3115799	935
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.2198688	83.9580593	936
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7054130197592	85.3489936269846	937
+Tourism	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.20794	83.95855	938
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7141228	85.3116181	939
+Nepal Ascent Treks	1	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7119692416278	85.3110869262584	940
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	28.2072939	83.9578631	941
+Downtown Restaurant	1	Restaurant and Bar	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.68076	85.31722	942
+Mount everest souvenir house	1	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7135681946502	85.3125867485289	943
+Hotel Crown Plaza	2	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7130878	85.3281444	944
+Nepal Highland Treks P Ltd	2	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7166059299288	85.3117833730153	945
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7209932	85.3118557	946
+Ashirwad export	2	Handicraft	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.71892	85.3122	947
+Golden Cloud Adventure P. Ltd.	2	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.710411302506	85.3129580931116	948
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7176441116934	85.3093493859829	949
+Carrot holidays pvt ltd	2	Travel and Tour Operator	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.6882985387026	85.3324406541961	950
+Hotel Tharu Garden	2	Hotel	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.5753519138286	84.5016726992705	951
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_safety_measures	2	1	57	Encouraging workers to take paid/unpaid leave they feel sick	कामदारहरूलाई बिरामी पर्दा उनीहरूलाई घरमा बस्न प्रोत्साहित गर्ने 	27.7180005590084	85.3097967996561	952
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7153038584918	85.3103238891712	953
+chitwan forest resort	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.58148	84.49332	954
+Handicrafts (felt,woolen. Curio	2	Handicraft	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71442	85.31192	955
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71061	85.31213	956
+Namaste Spa Pvt.Ltd	2	Other	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7151	85.312	957
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71423	85.31159	958
+Hotel Down Town Pvt. Ltd	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71587	85.30982	959
+Hemp House Nepal Pvt.Ltd	1	Handicraft	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71575	85.30998	960
+Hotel Luna Kathmandu	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7167297	85.3120921	961
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71702	85.33378	962
+Om Shanti Spa	2	Other	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71578	85.30944	963
+Om Shanti Spa	2	Other	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71578	85.30945	964
+Asian adventure treks and expedition	2	Travel and Tour Operator	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.71321	85.31137	965
+Pilgrims Guest House P.Ltd	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.717619	85.3115799	1478
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.2148186	83.9618638	968
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.22345	83.9888	969
+HOTEL HIMALAYA PVT. LTD	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.68413	85.31941	970
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7165403	85.3129886	971
+HOTEL	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7177391	85.3101198	972
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.2077552	83.9684899	973
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.2198688	83.9580593	974
+Tourism	1	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	28.20794	83.95855	975
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7141228	85.3116181	976
+Nepal Ascent Treks	1	Trekking	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7119692416278	85.3110869262584	977
+Hotel Crown Plaza	2	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7130878	85.3281444	978
+Kailash cafe & bar	2	Restaurant and Bar	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7160368463001	85.3104862262585	979
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7209932	85.3118557	980
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_safety_measures	4	1	29	Introduced working in shifts and remote working to reduce congestion	भीड कम गर्न सिफ्टमा काम गर्ने 	27.7180005590084	85.3097967996561	981
+chitwan forest resort	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.58148	84.49332	982
+hostel nextdoor	3	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.684944	85.315922	983
+Rainbow Adventure Nepal	2	Rafting	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7115056	85.3089164	984
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.71702	85.33378	985
+Cuisine Court	2	Restaurant and Bar	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.719115	85.332184	986
+Sun N Fun Holidays	2	Travel and Tour Operator	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7043	85.33088	987
+Spa kinjjala pvt ltd.	2	Other	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.67812	85.30827	988
+Subhakamana Travels and Tours	1	Travel and Tour Operator	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	28.19899	83.97616	989
+Tiger Mountain	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	28.21064	84.04247	990
+Hotel Task International Pvt. Ltd.	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	28.2048324	83.9986713	991
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7165403	85.3129886	992
+HOTEL	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7177391	85.3101198	993
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7152382	85.3115879	994
+Hotel Lakeside Pvt. Ltd	1	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	28.2077552	83.9684899	995
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7054130197592	85.3489936269846	996
+Nepal Highland Treks P Ltd	2	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7166059299288	85.3117833730153	1000
+Kathmandu cityhill Apartmnet	2	Hotel	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7209932	85.3118557	1001
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7176441116934	85.3093493859829	1002
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7180005590084	85.3097967996561	1003
+Tour and trekking and Expedition	2	Trekking	p_hlth_safety_measures	9	1	23	Providing Covid-19 insurance	कोभिड-१९ बीमा प्रदान गर्ने 	27.7153213473598	85.3117415550944	1004
+Earth angle trading pvt ltd	2	Shop/Merchandise	p_hlth_safety_measures	10	1	3	Other	अन्य	27.71409	85.31012	1005
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	p_hlth_safety_measures	10	1	3	Other	अन्य	27.7174198	85.3260471	1006
+The  cashmere store	1	Handicraft	p_hlth_safety_measures	10	1	3	Other	अन्य	28.2044184	83.9644088	1007
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	p_hlth_safety_measures	11	1	5	We haven't implemented any safety measures for workers currently	हामीले हाल कामदारहरूको लागि कुनै सुरक्षा उपायहरू कार्यान्वयन गरेका छैनौं	27.7175	85.32594	1008
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	p_hlth_safety_measures	11	1	5	We haven't implemented any safety measures for workers currently	हामीले हाल कामदारहरूको लागि कुनै सुरक्षा उपायहरू कार्यान्वयन गरेका छैनौं	27.7392974199588	85.3239723928859	1009
+Demeter Handicrafts	2	Handicraft	p_hlth_safety_measures	11	1	5	We haven't implemented any safety measures for workers currently	हामीले हाल कामदारहरूको लागि कुनै सुरक्षा उपायहरू कार्यान्वयन गरेका छैनौं	27.7207596166803	85.3607724987554	1010
+Hotel Business	2	Hotel	p_hlth_safety_measures	11	1	5	We haven't implemented any safety measures for workers currently	हामीले हाल कामदारहरूको लागि कुनै सुरक्षा उपायहरू कार्यान्वयन गरेका छैनौं	27.6632585317559	85.4449016109137	1011
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	p_hlth_safety_measures	11	1	5	We haven't implemented any safety measures for workers currently	हामीले हाल कामदारहरूको लागि कुनै सुरक्षा उपायहरू कार्यान्वयन गरेका छैनौं	27.6742617216237	85.3691647550934	1012
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7153038584918	85.3103238891712	1013
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	26.98806	85.89996	1014
+Suburb cafe	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.684759	85.312688	1015
+hostel nextdoor	3	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.684944	85.315922	1016
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71297	85.31228	1017
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71442	85.31192	1018
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71223	85.31062	1019
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71061	85.31213	1020
+Rainbow Adventure Nepal	2	Rafting	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7115056	85.3089164	1021
+Hotel	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71217	85.30787	1022
+Namaste Spa Pvt.Ltd	2	Other	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7151	85.312	1023
+B s handicrafts	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71316	85.31265	1024
+Natural nepal export	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71736	85.31034	1025
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71423	85.31159	1026
+Hiking nepal pvt ltd	1	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71689	85.30937	1027
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71575	85.30998	1028
+Kathmandu Spa	1	Other	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7161657	85.3108951	1029
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7167297	85.3120921	1030
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71702	85.33378	1031
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71578	85.30944	1032
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71578	85.30945	1033
+Cuisine Court	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.719115	85.332184	1034
+Spa kinjjala pvt ltd.	2	Other	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.67812	85.30827	1035
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.19899	83.97616	1036
+Hotel Tulsi Pokhara	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.2097	83.95798	1037
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.22345	83.9888	1038
+Hotel Task International Pvt. Ltd.	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.2048324	83.9986713	1039
+Stunning Adventure	2	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.6891069867822	85.2478348127655	1040
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.68413	85.31941	1041
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7165403	85.3129886	1042
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7177391	85.3101198	1043
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7156778	85.3113177	1044
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.2077552	83.9684899	1045
+Green Mansions Jungle Resort	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.5845046127971	84.4711607974195	1046
+Pilgrims Guest House P.Ltd	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.717619	85.3115799	1047
+Harry guest house and restaurant	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.21224	83.9626	1048
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7650888094923	85.363349712796	1049
+Tourism	1	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	28.20794	83.95855	1050
+Splash nepal adventure	1	Rafting	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7146686256428	85.3109832980832	1051
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7141228	85.3116181	1052
+Nepal Ascent Treks	1	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7119692416278	85.3110869262584	1053
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.713195	85.3122775	1054
+Downtown Restaurant	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.68076	85.31722	1055
+Mount everest souvenir house	1	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7135681946502	85.3125867485289	1056
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7392974199588	85.3239723928859	1057
+Hotel Crown Plaza	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7130878	85.3281444	1058
+Kailash cafe & bar	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7160368463001	85.3104862262585	1059
+Green Boutique Hotel	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7210567730833	85.3653754560733	1060
+Demeter Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7207596166803	85.3607724987554	1061
+Kathmandu cityhill Apartmnet	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7209932	85.3118557	1062
+Mithila women handicraft	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7130115973909	85.3125155738383	1063
+Ashirwad export	2	Handicraft	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.71892	85.3122	1064
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.710411302506	85.3129580931116	1065
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7176441116934	85.3093493859829	1066
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7054130197592	85.3489936269846	1479
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.5753519138286	84.5016726992705	1067
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7180005590084	85.3097967996561	1068
+Agaman hotel	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7349334767156	85.3143232244077	1069
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7147492	85.3102089	1070
+Hotel Business	2	Hotel	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.6632585317559	85.4449016109137	1071
+Tour and trekking and Expedition	2	Trekking	o_expectd_problms_next_6_mnths	1	1	60	My business will have difficulties in paying back existing loans	मेरो व्यवसायलाई अवस्थित ऋण भुक्तान गर्न कठिनाइ हुनेछ	27.7153213473598	85.3117415550944	1072
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7153038584918	85.3103238891712	1073
+hostel nextdoor	3	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.684944	85.315922	1074
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.71297	85.31228	1075
+Rainbow Adventure Nepal	2	Rafting	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7115056	85.3089164	1076
+Namaste Spa Pvt.Ltd	2	Other	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7151	85.312	1077
+Hiking nepal pvt ltd	1	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.71689	85.30937	1078
+Hemp heafquarter	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.71587	85.30991	1079
+Kathmandu Spa	1	Other	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7161657	85.3108951	1080
+Restutant	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.71665	85.3099	1081
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7167297	85.3120921	1082
+Cuisine Court	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.719115	85.332184	1083
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7174198	85.3260471	1084
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	28.19899	83.97616	1085
+Hotel Tulsi Pokhara	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	28.2097	83.95798	1086
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.68413	85.31941	1087
+Tourism	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.20794	83.95855	1480
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7177391	85.3101198	1088
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7152382	85.3115879	1089
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	28.2077552	83.9684899	1090
+Green Mansions Jungle Resort	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.5845046127971	84.4711607974195	1091
+Pilgrims Guest House P.Ltd	1	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.717619	85.3115799	1092
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	28.2198688	83.9580593	1093
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7141228	85.3116181	1094
+Nepal Ascent Treks	1	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7119692416278	85.3110869262584	1095
+Mount everest souvenir house	1	Handicraft	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7135681946502	85.3125867485289	1096
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7392974199588	85.3239723928859	1097
+Hotel Crown Plaza	2	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7130878	85.3281444	1098
+Ashirwad export	2	Handicraft	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.71892	85.3122	1099
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.710411302506	85.3129580931116	1100
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.5753519138286	84.5016726992705	1101
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.7180005590084	85.3097967996561	1102
+DBRAND SOLUTION PVT LTD	2	Other	o_expectd_problms_next_6_mnths	2	1	31	My business will have difficulties to acquire additional loans or funds	मेरो व्यवसायलाई थप ऋण वा कोष प्राप्त गर्न कठिनाइ हुनेछ	27.6924011815381	85.3301440109144	1103
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7153038584918	85.3103238891712	1104
+hostel nextdoor	3	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.684944	85.315922	1105
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71297	85.31228	1106
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71442	85.31192	1107
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71409	85.31012	1108
+Royal handicraft	1	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7155286407712	85.3113662974226	1481
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71061	85.31213	1109
+Rainbow Adventure Nepal	2	Rafting	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7115056	85.3089164	1110
+Hotel	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71217	85.30787	1111
+Namaste Spa Pvt.Ltd	2	Other	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7151	85.312	1112
+B s handicrafts	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71316	85.31265	1113
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71423	85.31159	1114
+Hiking nepal pvt ltd	1	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71689	85.30937	1115
+Garden of Hope Treks & Expeditions	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71459	85.31326	1116
+Hotel Down Town Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71587	85.30982	1117
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71575	85.30998	1118
+Kathmandu Spa	1	Other	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7161657	85.3108951	1119
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7167297	85.3120921	1120
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71702	85.33378	1121
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71578	85.30944	1122
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71578	85.30945	1123
+Cuisine Court	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.719115	85.332184	1124
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7174198	85.3260471	1125
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71321	85.31137	1126
+Sun N Fun Holidays	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7043	85.33088	1127
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	28.22345	83.9888	1128
+Stunning Adventure	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.6891069867822	85.2478348127655	1129
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.68413	85.31941	1130
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7165403	85.3129886	1131
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7177391	85.3101198	1132
+Green Mansions Jungle Resort	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.5845046127971	84.4711607974195	1133
+Pilgrims Guest House P.Ltd	1	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.717619	85.3115799	1134
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	28.2198688	83.9580593	1135
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7054130197592	85.3489936269846	1136
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7141228	85.3116181	1137
+Royal handicraft	1	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7155286407712	85.3113662974226	1138
+Nepal Ascent Treks	1	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7119692416278	85.3110869262584	1139
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.713195	85.3122775	1140
+Mount everest souvenir house	1	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7135681946502	85.3125867485289	1141
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7392974199588	85.3239723928859	1142
+Demeter Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7207596166803	85.3607724987554	1143
+Nepal Highland Treks P Ltd	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7166059299288	85.3117833730153	1144
+Ashirwad export	2	Handicraft	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.71892	85.3122	1145
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.710411302506	85.3129580931116	1146
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7176441116934	85.3093493859829	1147
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.5753519138286	84.5016726992705	1148
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7180005590084	85.3097967996561	1149
+DBRAND SOLUTION PVT LTD	2	Other	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.6924011815381	85.3301440109144	1150
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7147492	85.3102089	1151
+Hotel Business	2	Hotel	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.6632585317559	85.4449016109137	1152
+Tour and trekking and Expedition	2	Trekking	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.7153213473598	85.3117415550944	1153
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	3	1	51	My business will have difficulties in paying its taxes	मेरो व्यवसायलाई यसको करहरू तिर्नमा कठिनाइ हुनेछ	27.6742617216237	85.3691647550934	1154
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7153038584918	85.3103238891712	1155
+Suburb cafe	2	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.684759	85.312688	1156
+hostel nextdoor	3	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.684944	85.315922	1157
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71305	85.31126	1158
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.69443	85.24896	1159
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71297	85.31228	1160
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71409	85.31012	1161
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71061	85.31213	1162
+Rainbow Adventure Nepal	2	Rafting	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7115056	85.3089164	1163
+Hotel	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71217	85.30787	1164
+Namaste Spa Pvt.Ltd	2	Other	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7151	85.312	1165
+Yakety Yak Hostel	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7133876	85.31238	1166
+R.R.Jewellery	2	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7137093	85.3123409	1167
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71423	85.31159	1168
+Garden of Hope Treks & Expeditions	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71459	85.31326	1169
+Hotel Down Town Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71587	85.30982	1170
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71575	85.30998	1171
+Kathmandu Spa	1	Other	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7161657	85.3108951	1172
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7167297	85.3120921	1173
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71702	85.33378	1174
+Nepal Ascent Treks	1	Trekking	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7119692416278	85.3110869262584	1482
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71578	85.30944	1175
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71578	85.30945	1176
+Cuisine Court	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.719115	85.332184	1177
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7174198	85.3260471	1178
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7175	85.32594	1179
+Sun N Fun Holidays	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7043	85.33088	1180
+Spa kinjjala pvt ltd.	2	Other	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.67812	85.30827	1181
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.19899	83.97616	1182
+Hotel Tulsi Pokhara	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2097	83.95798	1183
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2148186	83.9618638	1184
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.22345	83.9888	1185
+Hotel Task International Pvt. Ltd.	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2048324	83.9986713	1186
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.68413	85.31941	1187
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7177391	85.3101198	1188
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2077552	83.9684899	1189
+Green Mansions Jungle Resort	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.5845046127971	84.4711607974195	1190
+The  cashmere store	1	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2044184	83.9644088	1191
+Pilgrims Guest House P.Ltd	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.717619	85.3115799	1192
+Harry guest house and restaurant	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.21224	83.9626	1193
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2198688	83.9580593	1194
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7054130197592	85.3489936269846	1195
+Tourism	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.20794	83.95855	1196
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7141228	85.3116181	1197
+Eco craft collection	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7169496294368	85.310175951392	1198
+Royal handicraft	1	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7155286407712	85.3113662974226	1199
+Nepal Ascent Treks	1	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7119692416278	85.3110869262584	1200
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.713195	85.3122775	1201
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	28.2072939	83.9578631	1202
+Mount everest souvenir house	1	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7135681946502	85.3125867485289	1203
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7392974199588	85.3239723928859	1204
+Hotel Crown Plaza	2	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7130878	85.3281444	1205
+Green Boutique Hotel	2	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7210567730833	85.3653754560733	1206
+Demeter Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7207596166803	85.3607724987554	1207
+Nepal Highland Treks P Ltd	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7166059299288	85.3117833730153	1208
+Ashirwad export	2	Handicraft	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.71892	85.3122	1209
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.710411302506	85.3129580931116	1210
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.6882985387026	85.3324406541961	1211
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.5753519138286	84.5016726992705	1212
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7180005590084	85.3097967996561	1213
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7147492	85.3102089	1214
+Hotel Business	2	Hotel	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.6632585317559	85.4449016109137	1215
+Tour and trekking and Expedition	2	Trekking	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.7153213473598	85.3117415550944	1216
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	4	1	63	My business will have difficulties in covering its operating costs	मेरो व्यवसायलाई यसको अपरेटिंग लागतहरू कभर गर्न कठिनाइ हुनेछ	27.6742617216237	85.3691647550934	1217
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7153038584918	85.3103238891712	1218
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.71297	85.31228	1219
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.71409	85.31012	1220
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.71061	85.31213	1221
+Rainbow Adventure Nepal	2	Rafting	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7115056	85.3089164	1222
+Hotel Down Town Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.71587	85.30982	1223
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.71575	85.30998	1224
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7167297	85.3120921	1225
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7175	85.32594	1226
+Spa kinjjala pvt ltd.	2	Other	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.67812	85.30827	1227
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	28.19899	83.97616	1228
+Tiger Mountain	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	28.21064	84.04247	1229
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.68413	85.31941	1230
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7165403	85.3129886	1231
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7177391	85.3101198	1232
+The  cashmere store	1	Handicraft	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	28.2044184	83.9644088	1233
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	28.2198688	83.9580593	1234
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.7392974199588	85.3239723928859	1437
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7141228	85.3116181	1235
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.713195	85.3122775	1236
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	28.2072939	83.9578631	1237
+Apex himalaya trek and expedition	1	Trekking	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7104423	85.3109739	1238
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7392974199588	85.3239723928859	1239
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.710411302506	85.3129580931116	1240
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.5753519138286	84.5016726992705	1241
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.7180005590084	85.3097967996561	1242
+DBRAND SOLUTION PVT LTD	2	Other	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.6924011815381	85.3301440109144	1243
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	5	1	27	My business will most likely face labor-related issues	मेरो व्यवसायले सम्भवतः श्रम सम्बन्धी मुद्दाहरूको सामना गर्नेछ	27.6742617216237	85.3691647550934	1244
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7153038584918	85.3103238891712	1245
+chitwan forest resort	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.58148	84.49332	1246
+Suburb cafe	2	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.684759	85.312688	1247
+hostel nextdoor	3	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.684944	85.315922	1248
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71305	85.31126	1249
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.69443	85.24896	1250
+Mandala Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71297	85.31228	1251
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71442	85.31192	1252
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71409	85.31012	1253
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71061	85.31213	1254
+Namaste Spa Pvt.Ltd	2	Other	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7151	85.312	1255
+B s handicrafts	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71316	85.31265	1256
+Yakety Yak Hostel	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7133876	85.31238	1257
+R.R.Jewellery	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7137093	85.3123409	1258
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71423	85.31159	1259
+Garden of Hope Treks & Expeditions	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71459	85.31326	1260
+Hotel Down Town Pvt. Ltd	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71587	85.30982	1261
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71575	85.30998	1262
+Kathmandu Spa	1	Other	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7161657	85.3108951	1263
+Hotel Luna Kathmandu	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7167297	85.3120921	1264
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71578	85.30944	1265
+Om Shanti Spa	2	Other	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71578	85.30945	1266
+Cuisine Court	2	Restaurant and Bar	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.719115	85.332184	1267
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7175	85.32594	1268
+Sun N Fun Holidays	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7043	85.33088	1269
+Spa kinjjala pvt ltd.	2	Other	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.67812	85.30827	1270
+Ashirwad export	2	Handicraft	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.71892	85.3122	1438
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.19899	83.97616	1271
+Hotel Tulsi Pokhara	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.2097	83.95798	1272
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.2148186	83.9618638	1273
+Stunning Adventure	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.6891069867822	85.2478348127655	1274
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.68413	85.31941	1275
+HOTEL	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7177391	85.3101198	1276
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7156778	85.3113177	1277
+Green Mansions Jungle Resort	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.5845046127971	84.4711607974195	1278
+The  cashmere store	1	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.2044184	83.9644088	1279
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.2198688	83.9580593	1280
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7054130197592	85.3489936269846	1281
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7650888094923	85.363349712796	1282
+Tourism	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.20794	83.95855	1283
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7141228	85.3116181	1284
+Eco craft collection	1	Shop/Merchandise	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7169496294368	85.310175951392	1285
+Royal handicraft	1	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7155286407712	85.3113662974226	1286
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.713195	85.3122775	1287
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.713195	85.3122775	1483
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	28.2072939	83.9578631	1288
+Mount everest souvenir house	1	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7135681946502	85.3125867485289	1289
+Apex himalaya trek and expedition	1	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7104423	85.3109739	1290
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7392974199588	85.3239723928859	1291
+Hotel Crown Plaza	2	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7130878	85.3281444	1292
+Green Boutique Hotel	2	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7210567730833	85.3653754560733	1293
+Demeter Handicrafts	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7207596166803	85.3607724987554	1294
+Nepal Highland Treks P Ltd	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7166059299288	85.3117833730153	1295
+Krishna handicraft	2	Shop/Merchandise	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.716084576286	85.3099118032157	1296
+Ashirwad export	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.71892	85.3122	1297
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.710411302506	85.3129580931116	1298
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7176441116934	85.3093493859829	1299
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.6882985387026	85.3324406541961	1300
+Lotus handicraft	2	Handicraft	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7162829183416	85.3101437234923	1301
+Hotel Tharu Garden	2	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.5753519138286	84.5016726992705	1302
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7180005590084	85.3097967996561	1303
+Hotel Business	2	Hotel	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.6632585317559	85.4449016109137	1304
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2072939	83.9578631	1484
+Tour and trekking and Expedition	2	Trekking	o_expectd_problms_next_6_mnths	6	1	61	My business will have difficulties in getting enough customers required for its survival	मेरो व्यवसायको अस्तित्वको लागि पर्याप्त ग्राहकहरू प्राप्त गर्न कठिनाइ हुनेछ	27.7153213473598	85.3117415550944	1305
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7153038584918	85.3103238891712	1306
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	26.98806	85.89996	1307
+chitwan forest resort	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.58148	84.49332	1308
+hostel nextdoor	3	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.684944	85.315922	1309
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71305	85.31126	1310
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.69443	85.24896	1311
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71442	85.31192	1312
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71409	85.31012	1313
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71061	85.31213	1314
+B s handicrafts	1	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71316	85.31265	1315
+Natural nepal export	2	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71736	85.31034	1316
+Yakety Yak Hostel	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7133876	85.31238	1317
+R.R.Jewellery	2	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7137093	85.3123409	1318
+Avia tours and travels PVT LTD	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71423	85.31159	1319
+Garden of Hope Treks & Expeditions	2	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71459	85.31326	1320
+Hotel Down Town Pvt. Ltd	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71587	85.30982	1321
+Kathmandu Spa	1	Other	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7161657	85.3108951	1322
+Restutant	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71665	85.3099	1323
+Hotel Luna Kathmandu	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7167297	85.3120921	1324
+Wongchhu Peak Promotion Pvt. Ltd.	1	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71702	85.33378	1325
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71578	85.30944	1326
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71578	85.30945	1327
+Cuisine Court	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.719115	85.332184	1328
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7174198	85.3260471	1329
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.71321	85.31137	1330
+Spa kinjjala pvt ltd.	2	Other	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.67812	85.30827	1331
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.19899	83.97616	1332
+Tiger Mountain	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.21064	84.04247	1333
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.22345	83.9888	1334
+Stunning Adventure	2	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.6891069867822	85.2478348127655	1335
+Nepali Ghar Hotel Pvt Ltd	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7165403	85.3129886	1336
+HOTEL	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7177391	85.3101198	1337
+Alpine trekking gears pvt.ltd	1	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7152382	85.3115879	1338
+Hotel Lakeside Pvt. Ltd	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.2077552	83.9684899	1339
+Green Mansions Jungle Resort	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.5845046127971	84.4711607974195	1340
+The  cashmere store	1	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.2044184	83.9644088	1341
+Pilgrims Guest House P.Ltd	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.717619	85.3115799	1342
+Harry guest house and restaurant	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.21224	83.9626	1343
+Wish List Nepal Tours and Travels	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7054130197592	85.3489936269846	1344
+Downtown Restaurant	1	Restaurant and Bar	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.68076	85.31722	1485
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7650888094923	85.363349712796	1345
+Tourism	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.20794	83.95855	1346
+Splash nepal adventure	1	Rafting	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7146686256428	85.3109832980832	1347
+Little buddha restaurant &lounge bar	1	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7141228	85.3116181	1348
+Royal handicraft	1	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7155286407712	85.3113662974226	1349
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.713195	85.3122775	1350
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	28.2072939	83.9578631	1351
+Mount everest souvenir house	1	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7135681946502	85.3125867485289	1352
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7392974199588	85.3239723928859	1353
+Hotel Crown Plaza	2	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7130878	85.3281444	1354
+Kailash cafe & bar	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7160368463001	85.3104862262585	1355
+Green Boutique Hotel	2	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7210567730833	85.3653754560733	1356
+Demeter Handicrafts	2	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7207596166803	85.3607724987554	1357
+Kathmandu cityhill Apartmnet	2	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7209932	85.3118557	1358
+Krishna handicraft	2	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.716084576286	85.3099118032157	1359
+Mithila women handicraft	2	Shop/Merchandise	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7130115973909	85.3125155738383	1360
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.710411302506	85.3129580931116	1361
+Attractive Travels and Tours Pvt. Ltd.	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7176441116934	85.3093493859829	1362
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.6882985387026	85.3324406541961	1363
+Lotus handicraft	2	Handicraft	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7162829183416	85.3101437234923	1364
+Hotel Tharu Garden	2	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.5753519138286	84.5016726992705	1365
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7180005590084	85.3097967996561	1366
+Reggae Bar Restaurant & lounge pvt ltd	2	Restaurant and Bar	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.7147492	85.3102089	1367
+Hotel Business	2	Hotel	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.6632585317559	85.4449016109137	1368
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	1	1	64	Winning the confidence of tourists and guests in the context of COVID-19	कोभिड-१९ को सन्दर्भमा पर्यटक र पाहुनाहरूको विश्वास जित्ने 	27.6742617216237	85.3691647550934	1369
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	26.98806	85.89996	1370
+Everest Tour Nepal Treks & Expedition Pvt. Ltd.	2	Trekking	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.69443	85.24896	1371
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71442	85.31192	1372
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71061	85.31213	1373
+Rainbow Adventure Nepal	2	Rafting	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7115056	85.3089164	1374
+B s handicrafts	1	Shop/Merchandise	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71316	85.31265	1375
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71575	85.30998	1376
+Hemp heafquarter	2	Shop/Merchandise	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71587	85.30991	1377
+Hotel Luna Kathmandu	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7167297	85.3120921	1378
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.71321	85.31137	1379
+Sun N Fun Holidays	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7043	85.33088	1380
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	28.19899	83.97616	1381
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	28.2148186	83.9618638	1382
+Stunning Adventure	2	Trekking	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.6891069867822	85.2478348127655	1383
+HOTEL	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7177391	85.3101198	1384
+Everest outdoor gears pvt ltd	1	Shop/Merchandise	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7156778	85.3113177	1385
+Green Mansions Jungle Resort	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.5845046127971	84.4711607974195	1386
+The  cashmere store	1	Handicraft	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	28.2044184	83.9644088	1387
+Pilgrims Guest House P.Ltd	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.717619	85.3115799	1388
+Tourism	1	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	28.20794	83.95855	1389
+Mount everest souvenir house	1	Handicraft	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7135681946502	85.3125867485289	1390
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7392974199588	85.3239723928859	1391
+Hotel Crown Plaza	2	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7130878	85.3281444	1392
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.710411302506	85.3129580931116	1393
+Hotel Tharu Garden	2	Hotel	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.5753519138286	84.5016726992705	1394
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_rcvry_biggest_diffclties	2	1	26	Understanding and meeting the demands of source markets	स्रोत बजारको मागलाई बुझ्ने र भेट्ने (स्रोत बजारहरू विदेशी वा घरेलु ठाउँहरू हुन् जहाँबाट पर्यटकहरू आउँछन्)	27.7180005590084	85.3097967996561	1395
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	26.98806	85.89996	1396
+Orbit Nepal Adventure	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71305	85.31126	1397
+Mount everest souvenir house	1	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7135681946502	85.3125867485289	1486
+Handicrafts (felt,woolen. Curio	2	Handicraft	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71442	85.31192	1398
+B s handicrafts	1	Shop/Merchandise	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71316	85.31265	1399
+Yakety Yak Hostel	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7133876	85.31238	1400
+Hiking nepal pvt ltd	1	Trekking	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71689	85.30937	1401
+Hotel Down Town Pvt. Ltd	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71587	85.30982	1402
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71575	85.30998	1403
+Hotel Luna Kathmandu	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7167297	85.3120921	1404
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71578	85.30944	1405
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71578	85.30945	1406
+Swotah Travel and Adventure Pvt. Ltd.	1	Trekking	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7174198	85.3260471	1407
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.71321	85.31137	1408
+Sun N Fun Holidays	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7043	85.33088	1409
+Spa kinjjala pvt ltd.	2	Other	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.67812	85.30827	1410
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.19899	83.97616	1411
+Tiger Mountain	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.21064	84.04247	1412
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.22345	83.9888	1413
+HOTEL	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7177391	85.3101198	1414
+The  cashmere store	1	Handicraft	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.2044184	83.9644088	1415
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.7180005590084	85.3097967996561	1439
+3 Sisters Adventure Trekking P(Ltd)	1	Trekking	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.2198688	83.9580593	1416
+Nepal Pyramids Pvt Ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7650888094923	85.363349712796	1417
+Eco craft collection	1	Shop/Merchandise	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7169496294368	85.310175951392	1418
+Royal handicraft	1	Handicraft	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7155286407712	85.3113662974226	1419
+Mechi resort Pvt Ltd & Maina travels and tours Pvt Ltd	1	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	28.2072939	83.9578631	1420
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7392974199588	85.3239723928859	1421
+Green Boutique Hotel	2	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7210567730833	85.3653754560733	1422
+Demeter Handicrafts	2	Handicraft	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7207596166803	85.3607724987554	1423
+Golden Cloud Adventure P. Ltd.	2	Trekking	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.710411302506	85.3129580931116	1424
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.6882985387026	85.3324406541961	1425
+Backpacker Treks & Expedition Pvt. Ltd	2	Trekking	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.7180005590084	85.3097967996561	1426
+Hotel Business	2	Hotel	o_rcvry_biggest_diffclties	3	1	32	Ensuring health and safety measures for employees, guests and tourists	पाहुनाहरू र पर्यटकहरूको लागि स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने 	27.6632585317559	85.4449016109137	1427
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.71061	85.31213	1428
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.71575	85.30998	1429
+Hotel Luna Kathmandu	1	Hotel	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.7167297	85.3120921	1430
+Spa kinjjala pvt ltd.	2	Other	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.67812	85.30827	1431
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	28.22345	83.9888	1432
+HOTEL	1	Hotel	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.7177391	85.3101198	1433
+The  cashmere store	1	Handicraft	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	28.2044184	83.9644088	1434
+Naya Nepal collection and export pvt.ltd	1	Handicraft	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.713195	85.3122775	1435
+Apex himalaya trek and expedition	1	Trekking	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.7104423	85.3109739	1436
+DBRAND SOLUTION PVT LTD	2	Other	o_rcvry_biggest_diffclties	5	1	13	Shortage of goods, funds and human resources	सामान आपूर्ति, कोष र मानव संसाधन को कमी	27.6924011815381	85.3301440109144	1440
+Shisha Lounge & Bar Pvt Ltd	1	Restaurant and Bar	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7153038584918	85.3103238891712	1441
+Hotel Vinayak pvt ltd	2	Restaurant and Bar	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	26.98806	85.89996	1442
+chitwan forest resort	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.58148	84.49332	1443
+Suburb cafe	2	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.684759	85.312688	1444
+hostel nextdoor	3	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.684944	85.315922	1445
+Alliance Treks & Expedition Pvt. Ltd.	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71223	85.31062	1446
+Earth angle trading pvt ltd	2	Shop/Merchandise	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71409	85.31012	1447
+ROSHA TRAVELS AND TOURS P. LTD	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71061	85.31213	1448
+Rainbow Adventure Nepal	2	Rafting	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7115056	85.3089164	1449
+Hotel	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71217	85.30787	1450
+Namaste Spa Pvt.Ltd	2	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7151	85.312	1451
+Yakety Yak Hostel	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7133876	85.31238	1452
+R.R.Jewellery	2	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7137093	85.3123409	1453
+Hiking nepal pvt ltd	1	Trekking	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71689	85.30937	1454
+Garden of Hope Treks & Expeditions	2	Trekking	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71459	85.31326	1455
+Hotel Down Town Pvt. Ltd	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71587	85.30982	1456
+Hemp House Nepal Pvt.Ltd	1	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71575	85.30998	1457
+Kathmandu Spa	1	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7161657	85.3108951	1458
+Hotel Luna Kathmandu	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7167297	85.3120921	1459
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71578	85.30944	1460
+Om Shanti Spa	2	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71578	85.30945	1461
+Cuisine Court	2	Restaurant and Bar	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.719115	85.332184	1462
+Art Summit Holiday Pvt Ltd	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7175	85.32594	1463
+Asian adventure treks and expedition	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71321	85.31137	1464
+Sun N Fun Holidays	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7043	85.33088	1465
+Spa kinjjala pvt ltd.	2	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.67812	85.30827	1466
+Subhakamana Travels and Tours	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.19899	83.97616	1467
+Tiger Mountain	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.21064	84.04247	1468
+Hotel Tulsi Pokhara	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2097	83.95798	1469
+HOTEL BLUE MAGNET & MULTIPURPUSE PVT.LTD.	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2148186	83.9618638	1470
+Grill n’ Chill Restro and Bar	2	Restaurant and Bar	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.22345	83.9888	1471
+Hotel Task International Pvt. Ltd.	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	28.2048324	83.9986713	1472
+HOTEL HIMALAYA PVT. LTD	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.68413	85.31941	1473
+HOTEL	1	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7177391	85.3101198	1474
+Ghumante The Traveller adventure pvt ltd	1	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7392974199588	85.3239723928859	1487
+Hotel Crown Plaza	2	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7130878	85.3281444	1488
+Demeter Handicrafts	2	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7207596166803	85.3607724987554	1489
+Nepal Highland Treks P Ltd	2	Trekking	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.7166059299288	85.3117833730153	1490
+Ashirwad export	2	Handicraft	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.71892	85.3122	1491
+Carrot holidays pvt ltd	2	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.6882985387026	85.3324406541961	1492
+Hotel Tharu Garden	2	Hotel	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.5753519138286	84.5016726992705	1493
+DBRAND SOLUTION PVT LTD	2	Other	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.6924011815381	85.3301440109144	1494
+Outlandish Nepal Holidays Ltd.	3	Travel and Tour Operator	o_rcvry_biggest_diffclties	7	1	55	Shortage of cash flow	नगद प्रवाहको अभाव	27.6742617216237	85.3691647550934	1495
+Green Mansions Jungle Resort	1	Hotel	o_rcvry_biggest_diffclties	9	1	1	Others	अन्य	27.5845046127971	84.4711607974195	1496
 \.
 
 
@@ -4567,7 +6964,7 @@ b_n_emplyes_pre_covid	1	Upto 10 people	१० जना सम्म	general	59	
 -- Data for Name: workers_bivariate_stats; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.workers_bivariate_stats ("xVariable", "xValue", "xLabel_en", "xLabel_ne", "yVariable", "yValue", "yLabel_en", "yLabel_ne", total, "percOfTotal", "variableGroup", index) FROM stdin;
+COPY public.workers_bivariate_stats (xvariable, xvalue, xlabel_en, xlabel_ne, yvariable, yvalue, ylabel_en, ylabel_ne, total, percoftotal, variablegroup, index) FROM stdin;
 m_gender	2	Female	महिला	i_lvlhd_domicile_chng_self_fml	0	No	परेन	15	0.05813953488372093	impact	1
 m_gender	2	Female	महिला	i_lvlhd_domicile_chng_self_fml	1	Yes	पर्यो	10	0.03875968992248062	impact	2
 m_gender	1	Male	पुरुष	i_lvlhd_domicile_chng_self_fml	0	No	परेन	100	0.3875968992248062	impact	3
@@ -6014,532 +8411,532 @@ m_years_of_experience	3	6 to 10 years	६-१० वर्ष	n_rcvry_preferred_
 m_years_of_experience	3	6 to 10 years	६-१० वर्ष	n_rcvry_preferred_incentives	9	Provision of social security system	सामाजिक सुरक्षाको व्यवस्था	56	0.21705426356589147	need	1444
 m_years_of_experience	3	6 to 10 years	६-१० वर्ष	n_rcvry_preferred_incentives	2	Employment-related training or retraining	रोजगारीमूलक तालिम वा पुन:प्रशिक्षण	53	0.2054263565891473	need	1445
 m_years_of_experience	3	6 to 10 years	६-१० वर्ष	n_rcvry_preferred_incentives	5	Subsidized loans	सहुलियत दरमा ऋण	70	0.2713178294573643	need	1446
-m_gender	2	Female	महिला	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	perception	1447
-m_gender	2	Female	महिला	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	3	0.011627906976744186	perception	1448
-m_gender	2	Female	महिला	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	10	0.03875968992248062	perception	1449
-m_gender	2	Female	महिला	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	11	0.04263565891472868	perception	1450
-m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	13	0.050387596899224806	perception	1451
-m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	72	0.27906976744186046	perception	1452
-m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	72	0.27906976744186046	perception	1453
-m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	76	0.29457364341085274	perception	1454
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	perception	1455
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	perception	1456
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	0	0	perception	1457
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	perception	1458
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	perception	1459
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	perception	1460
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	4	0.015503875968992248	perception	1461
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	1	0.003875968992248062	perception	1462
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	perception	1463
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	22	0.08527131782945736	perception	1464
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	perception	1465
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	12	0.046511627906976744	perception	1466
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	10	0.03875968992248062	perception	1467
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	53	0.2054263565891473	perception	1468
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	72	0.27906976744186046	perception	1469
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	74	0.2868217054263566	perception	1470
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	perception	1471
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	perception	1472
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	0	0	perception	1473
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	perception	1474
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	perception	1475
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	perception	1476
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	1	0.003875968992248062	perception	1477
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	perception	1478
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	perception	1479
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	14	0.05426356589147287	perception	1480
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	perception	1481
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	4	0.015503875968992248	perception	1482
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	perception	1483
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	10	0.03875968992248062	perception	1484
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	10	0.03875968992248062	perception	1485
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	6	0.023255813953488372	perception	1486
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	2	0.007751937984496124	perception	1487
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	18	0.06976744186046512	perception	1488
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	19	0.07364341085271318	perception	1489
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	21	0.08139534883720931	perception	1490
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	2	0.007751937984496124	perception	1491
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	11	0.04263565891472868	perception	1492
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	20	0.07751937984496124	perception	1493
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	27	0.10465116279069768	perception	1494
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	9	0.03488372093023256	perception	1495
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	22	0.08527131782945736	perception	1496
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	26	0.10077519379844961	perception	1497
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	29	0.1124031007751938	perception	1498
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	perception	1499
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	3	0.011627906976744186	perception	1500
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	perception	1501
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	6	0.023255813953488372	perception	1502
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	perception	1503
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	8	0.031007751937984496	perception	1504
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	14	0.05426356589147287	perception	1505
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	19	0.07364341085271318	perception	1506
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	perception	1507
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	12	0.046511627906976744	perception	1508
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	15	0.05813953488372093	perception	1509
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	19	0.07364341085271318	perception	1510
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	perception	1511
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	25	0.09689922480620156	perception	1512
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	12	0.046511627906976744	perception	1513
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	15	0.05813953488372093	perception	1514
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	4	0.015503875968992248	perception	1515
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	27	0.10465116279069768	perception	1516
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	35	0.13565891472868216	perception	1517
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	28	0.10852713178294573	perception	1518
-m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1519
-m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1520
-m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	perception	1521
-m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	11	0.04263565891472868	perception	1522
-m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	14	0.05426356589147287	perception	1523
-m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	3	0.011627906976744186	perception	1524
-m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	5	0.01937984496124031	perception	1525
-m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	15	0.05813953488372093	perception	1526
-m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	66	0.2558139534883721	perception	1527
-m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	144	0.5581395348837209	perception	1528
-m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1529
-m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	perception	1530
-m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	perception	1531
-m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1532
-m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	0	0	perception	1533
-m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1534
-m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1535
-m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	1	0.003875968992248062	perception	1536
-m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	3	0.011627906976744186	perception	1537
-m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	2	0.007751937984496124	perception	1538
-m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	perception	1539
-m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	perception	1540
-m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	perception	1541
-m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	13	0.050387596899224806	perception	1542
-m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	24	0.09302325581395349	perception	1543
-m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	perception	1544
-m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	3	0.011627906976744186	perception	1545
-m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	12	0.046511627906976744	perception	1546
-m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	61	0.2364341085271318	perception	1547
-m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	132	0.5116279069767442	perception	1548
-m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1549
-m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	perception	1550
-m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	perception	1551
-m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1552
-m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	0	0	perception	1553
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1554
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1555
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	perception	1556
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	perception	1557
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	1	0.003875968992248062	perception	1558
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1559
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	perception	1560
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	perception	1561
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	5	0.01937984496124031	perception	1562
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	17	0.06589147286821706	perception	1563
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1564
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1565
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	perception	1566
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	10	0.03875968992248062	perception	1567
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	15	0.05813953488372093	perception	1568
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1569
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	perception	1570
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	perception	1571
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	12	0.046511627906976744	perception	1572
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	45	0.1744186046511628	perception	1573
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	perception	1574
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	perception	1575
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	6	0.023255813953488372	perception	1576
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	23	0.08914728682170543	perception	1577
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	perception	1578
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	perception	1579
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	perception	1580
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	5	0.01937984496124031	perception	1581
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	27	0.10465116279069768	perception	1582
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	51	0.19767441860465115	perception	1583
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1584
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1585
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	perception	1586
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	6	0.023255813953488372	perception	1587
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	8	0.031007751937984496	perception	1588
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1589
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	perception	1590
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	1	0.003875968992248062	perception	1591
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	16	0.06201550387596899	perception	1592
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	25	0.09689922480620156	perception	1593
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	perception	1594
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	perception	1595
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	3	0.011627906976744186	perception	1596
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	17	0.06589147286821706	perception	1597
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	perception	1598
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	perception	1599
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	perception	1600
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	perception	1601
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	20	0.07751937984496124	perception	1602
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	perception	1603
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	perception	1604
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	perception	1605
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	7	0.027131782945736434	perception	1606
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	18	0.06976744186046512	perception	1607
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	67	0.2596899224806202	perception	1608
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	perception	1609
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1610
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	9	0.03488372093023256	perception	1611
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	12	0.046511627906976744	perception	1612
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	perception	1613
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	12	0.046511627906976744	perception	1614
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	16	0.06201550387596899	perception	1615
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	15	0.05813953488372093	perception	1616
-m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	17	0.06589147286821706	perception	1617
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	3	0.011627906976744186	perception	1618
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	4	0.015503875968992248	perception	1619
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	66	0.2558139534883721	perception	1620
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	120	0.46511627906976744	perception	1621
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	118	0.4573643410852713	perception	1622
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	152	0.5891472868217055	perception	1623
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	149	0.5775193798449613	perception	1624
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	152	0.5891472868217055	perception	1625
-m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	161	0.624031007751938	perception	1626
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1627
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1628
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	3	0.011627906976744186	perception	1629
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	1	0.003875968992248062	perception	1630
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	perception	1631
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	2	0.007751937984496124	perception	1632
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	perception	1633
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	perception	1634
-m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	4	0.015503875968992248	perception	1635
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	perception	1636
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	perception	1637
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	11	0.04263565891472868	perception	1638
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	18	0.06976744186046512	perception	1639
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	30	0.11627906976744186	perception	1640
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	25	0.09689922480620156	perception	1641
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	perception	1642
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	25	0.09689922480620156	perception	1643
-m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	34	0.13178294573643412	perception	1644
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	4	0.015503875968992248	perception	1645
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	3	0.011627906976744186	perception	1646
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	61	0.2364341085271318	perception	1647
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	113	0.437984496124031	perception	1648
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	105	0.4069767441860465	perception	1649
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	137	0.5310077519379846	perception	1650
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	134	0.5193798449612403	perception	1651
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	139	0.5387596899224806	perception	1652
-m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	140	0.5426356589147286	perception	1653
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1654
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1655
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	0	0	perception	1656
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	0	0	perception	1657
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	perception	1658
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	1	0.003875968992248062	perception	1659
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	perception	1660
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	perception	1661
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	1	0.003875968992248062	perception	1662
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1663
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1664
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	7	0.027131782945736434	perception	1665
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	12	0.046511627906976744	perception	1666
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	14	0.05426356589147287	perception	1667
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	21	0.08139534883720931	perception	1668
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	perception	1669
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	perception	1670
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	19	0.07364341085271318	perception	1671
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	perception	1672
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	perception	1673
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	7	0.027131782945736434	perception	1674
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	16	0.06201550387596899	perception	1675
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	perception	1676
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	17	0.06589147286821706	perception	1677
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	15	0.05813953488372093	perception	1678
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	perception	1679
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	17	0.06589147286821706	perception	1680
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1681
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1682
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	18	0.06976744186046512	perception	1683
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	31	0.12015503875968993	perception	1684
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	31	0.12015503875968993	perception	1685
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	45	0.1744186046511628	perception	1686
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	34	0.13178294573643412	perception	1687
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	41	0.15891472868217055	perception	1688
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	43	0.16666666666666666	perception	1689
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	perception	1690
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	2	0.007751937984496124	perception	1691
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	16	0.06201550387596899	perception	1692
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	29	0.1124031007751938	perception	1693
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	12	0.046511627906976744	perception	1719
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	31	0.12015503875968993	perception	1694
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	29	0.1124031007751938	perception	1695
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	39	0.1511627906976744	perception	1696
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	perception	1697
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	36	0.13953488372093023	perception	1698
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	perception	1699
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	perception	1700
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	27	0.10465116279069768	perception	1701
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	44	0.17054263565891473	perception	1702
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	44	0.17054263565891473	perception	1703
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	51	0.19767441860465115	perception	1704
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	59	0.22868217054263565	perception	1705
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	56	0.21705426356589147	perception	1706
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	62	0.24031007751937986	perception	1707
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1708
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1709
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	10	0.03875968992248062	perception	1710
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	4	0.015503875968992248	perception	1711
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	9	0.03488372093023256	perception	1712
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	6	0.023255813953488372	perception	1713
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	8	0.031007751937984496	perception	1714
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	7	0.027131782945736434	perception	1715
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	9	0.03488372093023256	perception	1716
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	perception	1717
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1718
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	22	0.08527131782945736	perception	1720
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	perception	1721
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	27	0.10465116279069768	perception	1722
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	perception	1723
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	perception	1724
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	30	0.11627906976744186	perception	1725
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	perception	1726
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	perception	1727
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	9	0.03488372093023256	perception	1728
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	22	0.08527131782945736	perception	1729
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	perception	1730
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	29	0.1124031007751938	perception	1731
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	30	0.11627906976744186	perception	1732
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	perception	1733
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	32	0.12403100775193798	perception	1734
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	perception	1735
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	perception	1736
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	16	0.06201550387596899	perception	1737
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	28	0.10852713178294573	perception	1738
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	37	0.1434108527131783	perception	1739
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	37	0.1434108527131783	perception	1740
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	40	0.15503875968992248	perception	1741
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	37	0.1434108527131783	perception	1742
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	41	0.15891472868217055	perception	1743
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	perception	1744
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	3	0.011627906976744186	perception	1745
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	28	0.10852713178294573	perception	1746
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	56	0.21705426356589147	perception	1747
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	44	0.17054263565891473	perception	1748
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	65	0.25193798449612403	perception	1749
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	55	0.2131782945736434	perception	1750
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	63	0.2441860465116279	perception	1751
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	66	0.2558139534883721	perception	1752
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	perception	1753
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1754
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	5	0.01937984496124031	perception	1755
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	10	0.03875968992248062	perception	1756
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	17	0.06589147286821706	perception	1757
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	19	0.07364341085271318	perception	1758
-m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	23	0.08914728682170543	perception	1759
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	6	other	अन्य	5	0.01937984496124031	perception	1760
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	perception	1761
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	69	0.26744186046511625	perception	1762
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	143	0.5542635658914729	perception	1763
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	146	0.5658914728682171	perception	1764
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	162	0.627906976744186	perception	1765
-m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	190	0.7364341085271318	perception	1766
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	perception	1767
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1768
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	0	0	perception	1769
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	4	0.015503875968992248	perception	1770
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	4	0.015503875968992248	perception	1771
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	4	0.015503875968992248	perception	1772
-m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	4	0.015503875968992248	perception	1773
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	perception	1774
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	perception	1775
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	15	0.05813953488372093	perception	1776
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	27	0.10465116279069768	perception	1777
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	27	0.10465116279069768	perception	1778
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	33	0.12790697674418605	perception	1779
-m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	33	0.12790697674418605	perception	1780
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	5	0.01937984496124031	perception	1781
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1782
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	59	0.22868217054263565	perception	1783
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	122	0.4728682170542636	perception	1784
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	132	0.5116279069767442	perception	1785
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	144	0.5581395348837209	perception	1786
-m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	176	0.6821705426356589	perception	1787
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	perception	1788
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1789
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	0	0	perception	1790
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	0	0	perception	1791
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	0	0	perception	1792
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	0	0	perception	1793
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	1	0.003875968992248062	perception	1794
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	perception	1795
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	perception	1796
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	5	0.01937984496124031	perception	1797
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	13	0.050387596899224806	perception	1798
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	14	0.05426356589147287	perception	1799
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	14	0.05426356589147287	perception	1800
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	20	0.07751937984496124	perception	1801
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	perception	1802
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1803
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	12	0.046511627906976744	perception	1804
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	21	0.08139534883720931	perception	1805
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	17	0.06589147286821706	perception	1806
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	18	0.06976744186046512	perception	1807
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	22	0.08527131782945736	perception	1808
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	perception	1809
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1810
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	9	0.03488372093023256	perception	1811
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	30	0.11627906976744186	perception	1812
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	40	0.15503875968992248	perception	1813
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	44	0.17054263565891473	perception	1814
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	49	0.18992248062015504	perception	1815
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	6	other	अन्य	4	0.015503875968992248	perception	1816
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1817
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	23	0.08914728682170543	perception	1818
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	35	0.13565891472868216	perception	1819
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	42	0.16279069767441862	perception	1820
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	16	0.06201550387596899	perception	1873
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	50	0.1937984496124031	perception	1821
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	52	0.20155038759689922	perception	1822
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	perception	1823
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1824
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	25	0.09689922480620156	perception	1825
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	54	0.20930232558139536	perception	1826
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	50	0.1937984496124031	perception	1827
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	55	0.2131782945736434	perception	1828
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	69	0.26744186046511625	perception	1829
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	perception	1830
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1831
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	4	0.015503875968992248	perception	1832
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	11	0.04263565891472868	perception	1833
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	9	0.03488372093023256	perception	1834
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	9	0.03488372093023256	perception	1835
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	10	0.03875968992248062	perception	1836
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	2	0.007751937984496124	perception	1837
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1838
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	15	0.05813953488372093	perception	1839
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	24	0.09302325581395349	perception	1840
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	24	0.09302325581395349	perception	1841
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	29	0.1124031007751938	perception	1842
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	37	0.1434108527131783	perception	1843
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	2	0.007751937984496124	perception	1844
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1845
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	14	0.05426356589147287	perception	1872
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	16	0.06201550387596899	perception	1846
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	31	0.12015503875968993	perception	1847
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	31	0.12015503875968993	perception	1848
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	34	0.13178294573643412	perception	1849
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	41	0.15891472868217055	perception	1850
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	perception	1851
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	perception	1852
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	21	0.08139534883720931	perception	1853
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	37	0.1434108527131783	perception	1854
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	32	0.12403100775193798	perception	1855
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	40	0.15503875968992248	perception	1856
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	44	0.17054263565891473	perception	1857
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	perception	1858
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	perception	1859
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	18	0.06976744186046512	perception	1860
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	50	0.1937984496124031	perception	1861
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	67	0.2596899224806202	perception	1862
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	69	0.26744186046511625	perception	1863
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	81	0.313953488372093	perception	1864
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	1	0.003875968992248062	perception	1865
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	perception	1866
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	perception	1867
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	perception	1868
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	5	0.01937984496124031	perception	1869
-m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	14	0.05426356589147287	perception	1870
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	4	0.015503875968992248	perception	1871
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	19	0.07364341085271318	perception	1874
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	38	0.14728682170542637	perception	1875
-m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	142	0.5503875968992248	perception	1876
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	perception	1877
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	perception	1878
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	perception	1879
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	perception	1880
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	0	0	perception	1881
-m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1882
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1883
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	perception	1884
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	perception	1885
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	perception	1886
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	2	0.007751937984496124	perception	1887
-m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	2	0.007751937984496124	perception	1888
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1889
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	perception	1890
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	perception	1891
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	perception	1892
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	4	0.015503875968992248	perception	1893
-m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	29	0.1124031007751938	perception	1894
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	5	0.01937984496124031	perception	1895
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	13	0.050387596899224806	perception	1896
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	12	0.046511627906976744	perception	1897
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	17	0.06589147286821706	perception	1898
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	37	0.1434108527131783	perception	1899
-m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	125	0.4844961240310077	perception	1900
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	perception	1901
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	perception	1902
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	perception	1903
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	perception	1904
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	0	0	perception	1905
-m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1906
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1907
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	perception	1908
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	perception	1909
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	perception	1910
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	perception	1911
-m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	1	0.003875968992248062	perception	1912
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1913
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	perception	1914
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	perception	1915
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	perception	1916
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	1	0.003875968992248062	perception	1917
-m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	19	0.07364341085271318	perception	1918
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1919
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	perception	1920
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	4	0.015503875968992248	perception	1921
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	perception	1922
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	7	0.027131782945736434	perception	1923
-m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	13	0.050387596899224806	perception	1924
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	perception	1925
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	3	0.011627906976744186	perception	1926
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	perception	1927
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	5	0.01937984496124031	perception	1928
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	6	0.023255813953488372	perception	1929
-m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	44	0.17054263565891473	perception	1930
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1931
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	perception	1932
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	perception	1933
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	perception	1934
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	13	0.050387596899224806	perception	1935
-m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	34	0.13178294573643412	perception	1936
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	3	0.011627906976744186	perception	1937
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	perception	1938
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	perception	1939
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	11	0.04263565891472868	perception	1940
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	16	0.06201550387596899	perception	1941
-m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	45	0.1744186046511628	perception	1942
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1943
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	perception	1944
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	3	0.011627906976744186	perception	1945
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	perception	1946
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	5	0.01937984496124031	perception	1947
-m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	2	0.007751937984496124	perception	1948
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	perception	1949
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	perception	1950
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	perception	1951
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	perception	1952
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	15	0.05813953488372093	perception	1953
-m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	18	0.06976744186046512	perception	1954
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	perception	1955
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	perception	1956
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	3	0.011627906976744186	perception	1957
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	6	0.023255813953488372	perception	1958
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	8	0.031007751937984496	perception	1959
-m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	30	0.11627906976744186	perception	1960
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	perception	1961
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	perception	1962
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	perception	1963
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	perception	1964
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	6	0.023255813953488372	perception	1965
-m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	36	0.13953488372093023	perception	1966
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	1	0.003875968992248062	perception	1967
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	6	0.023255813953488372	perception	1968
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	4	0.015503875968992248	perception	1969
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	perception	1970
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	9	0.03488372093023256	perception	1971
-m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	70	0.2713178294573643	perception	1972
+m_gender	2	Female	महिला	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	outlook	1447
+m_gender	2	Female	महिला	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	3	0.011627906976744186	outlook	1448
+m_gender	2	Female	महिला	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	10	0.03875968992248062	outlook	1449
+m_gender	2	Female	महिला	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	11	0.04263565891472868	outlook	1450
+m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	13	0.050387596899224806	outlook	1451
+m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	72	0.27906976744186046	outlook	1452
+m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	72	0.27906976744186046	outlook	1453
+m_gender	1	Male	पुरुष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	76	0.29457364341085274	outlook	1454
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	outlook	1455
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	outlook	1456
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	0	0	outlook	1457
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	outlook	1458
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	outlook	1459
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	outlook	1460
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	4	0.015503875968992248	outlook	1461
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	1	0.003875968992248062	outlook	1462
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	outlook	1463
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	22	0.08527131782945736	outlook	1464
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	outlook	1465
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	outlook	1699
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	12	0.046511627906976744	outlook	1466
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	10	0.03875968992248062	outlook	1467
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	53	0.2054263565891473	outlook	1468
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	72	0.27906976744186046	outlook	1469
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	74	0.2868217054263566	outlook	1470
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	outlook	1471
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	outlook	1472
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	0	0	outlook	1473
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	outlook	1474
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	outlook	1475
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	0	0	outlook	1476
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	1	0.003875968992248062	outlook	1477
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	0	0	outlook	1478
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	0	0	outlook	1479
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	14	0.05426356589147287	outlook	1480
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	outlook	1481
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	4	0.015503875968992248	outlook	1482
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	outlook	1483
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	10	0.03875968992248062	outlook	1484
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	10	0.03875968992248062	outlook	1485
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	6	0.023255813953488372	outlook	1486
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	2	0.007751937984496124	outlook	1487
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	18	0.06976744186046512	outlook	1488
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	19	0.07364341085271318	outlook	1489
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	21	0.08139534883720931	outlook	1490
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	2	0.007751937984496124	outlook	1491
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	11	0.04263565891472868	outlook	1492
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	20	0.07751937984496124	outlook	1493
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	27	0.10465116279069768	outlook	1494
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	9	0.03488372093023256	outlook	1495
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	22	0.08527131782945736	outlook	1496
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	26	0.10077519379844961	outlook	1497
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	29	0.1124031007751938	outlook	1498
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	1	0.003875968992248062	outlook	1499
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	3	0.011627906976744186	outlook	1500
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	6	0.023255813953488372	outlook	1501
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	6	0.023255813953488372	outlook	1502
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	outlook	1503
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	8	0.031007751937984496	outlook	1504
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	14	0.05426356589147287	outlook	1505
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	19	0.07364341085271318	outlook	1506
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	outlook	1507
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	12	0.046511627906976744	outlook	1508
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	15	0.05813953488372093	outlook	1509
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	19	0.07364341085271318	outlook	1510
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	3	0.011627906976744186	outlook	1511
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	25	0.09689922480620156	outlook	1512
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	12	0.046511627906976744	outlook	1513
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	15	0.05813953488372093	outlook	1514
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	4	0.015503875968992248	outlook	1515
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	27	0.10465116279069768	outlook	1516
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	35	0.13565891472868216	outlook	1517
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	28	0.10852713178294573	outlook	1518
+m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1519
+m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1520
+m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	outlook	1521
+m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	11	0.04263565891472868	outlook	1522
+m_gender	2	Female	महिला	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	14	0.05426356589147287	outlook	1523
+m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	3	0.011627906976744186	outlook	1524
+m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	5	0.01937984496124031	outlook	1525
+m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	15	0.05813953488372093	outlook	1526
+m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	66	0.2558139534883721	outlook	1527
+m_gender	1	Male	पुरुष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	144	0.5581395348837209	outlook	1528
+m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1529
+m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	outlook	1530
+m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	outlook	1531
+m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1532
+m_gender	3	Third gender	तेस्रो लिंगी	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	0	0	outlook	1533
+m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1534
+m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1535
+m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	1	0.003875968992248062	outlook	1536
+m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	3	0.011627906976744186	outlook	1537
+m_age	1	Less than 20 years	०-२० बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	2	0.007751937984496124	outlook	1538
+m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	outlook	1539
+m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	outlook	1540
+m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	outlook	1541
+m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	13	0.050387596899224806	outlook	1542
+m_age	3	41 - 60 years	४१-६० वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	24	0.09302325581395349	outlook	1543
+m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	outlook	1544
+m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	3	0.011627906976744186	outlook	1545
+m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	12	0.046511627906976744	outlook	1546
+m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	61	0.2364341085271318	outlook	1547
+m_age	2	21 - 40 years	२१-४० बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	132	0.5116279069767442	outlook	1548
+m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1549
+m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	outlook	1550
+m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	outlook	1551
+m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1552
+m_age	4	61 and above	६१ वर्ष वा माथि	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	0	0	outlook	1553
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1554
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1555
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	outlook	1556
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	0	0	outlook	1557
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	1	0.003875968992248062	outlook	1558
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1559
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	outlook	1560
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	0	0	outlook	1561
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	5	0.01937984496124031	outlook	1562
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	17	0.06589147286821706	outlook	1563
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1564
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1565
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	outlook	1566
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	10	0.03875968992248062	outlook	1567
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	15	0.05813953488372093	outlook	1568
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1569
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	outlook	1570
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	outlook	1571
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	12	0.046511627906976744	outlook	1572
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	45	0.1744186046511628	outlook	1573
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	outlook	1574
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	outlook	1575
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	6	0.023255813953488372	outlook	1576
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	23	0.08914728682170543	outlook	1577
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	outlook	1578
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	outlook	1579
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	outlook	1580
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	5	0.01937984496124031	outlook	1581
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	27	0.10465116279069768	outlook	1582
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	51	0.19767441860465115	outlook	1583
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1584
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1585
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	outlook	1586
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	6	0.023255813953488372	outlook	1587
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	8	0.031007751937984496	outlook	1588
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1589
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	outlook	1590
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	1	0.003875968992248062	outlook	1591
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	16	0.06201550387596899	outlook	1592
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	25	0.09689922480620156	outlook	1593
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	0	0	outlook	1594
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	0	0	outlook	1595
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	3	0.011627906976744186	outlook	1596
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	17	0.06589147286821706	outlook	1597
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	outlook	1598
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	2	0.007751937984496124	outlook	1599
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	2	0.007751937984496124	outlook	1600
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	2	0.007751937984496124	outlook	1601
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	20	0.07751937984496124	outlook	1602
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	29	0.1124031007751938	outlook	1603
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	1	0.003875968992248062	outlook	1604
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	1	0.003875968992248062	outlook	1605
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	7	0.027131782945736434	outlook	1606
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	18	0.06976744186046512	outlook	1607
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	67	0.2596899224806202	outlook	1608
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	outlook	1609
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1610
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	9	0.03488372093023256	outlook	1611
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	12	0.046511627906976744	outlook	1612
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	outlook	1613
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	12	0.046511627906976744	outlook	1614
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	16	0.06201550387596899	outlook	1615
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	15	0.05813953488372093	outlook	1616
+m_gender	2	Female	महिला	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	17	0.06589147286821706	outlook	1617
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	3	0.011627906976744186	outlook	1618
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	4	0.015503875968992248	outlook	1619
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	66	0.2558139534883721	outlook	1620
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	120	0.46511627906976744	outlook	1621
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1726
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	118	0.4573643410852713	outlook	1622
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	152	0.5891472868217055	outlook	1623
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	149	0.5775193798449613	outlook	1624
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	152	0.5891472868217055	outlook	1625
+m_gender	1	Male	पुरुष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	161	0.624031007751938	outlook	1626
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1627
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1628
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	3	0.011627906976744186	outlook	1629
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	1	0.003875968992248062	outlook	1630
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	outlook	1631
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	2	0.007751937984496124	outlook	1632
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	outlook	1633
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	3	0.011627906976744186	outlook	1634
+m_age	1	Less than 20 years	०-२० बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	4	0.015503875968992248	outlook	1635
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	outlook	1636
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	outlook	1637
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	11	0.04263565891472868	outlook	1638
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	18	0.06976744186046512	outlook	1639
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	30	0.11627906976744186	outlook	1640
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	25	0.09689922480620156	outlook	1641
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	outlook	1642
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	25	0.09689922480620156	outlook	1643
+m_age	3	41 - 60 years	४१-६० वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	34	0.13178294573643412	outlook	1644
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	4	0.015503875968992248	outlook	1645
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	3	0.011627906976744186	outlook	1646
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	61	0.2364341085271318	outlook	1647
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	113	0.437984496124031	outlook	1648
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	outlook	1753
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	105	0.4069767441860465	outlook	1649
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	137	0.5310077519379846	outlook	1650
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	134	0.5193798449612403	outlook	1651
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	139	0.5387596899224806	outlook	1652
+m_age	2	21 - 40 years	२१-४० बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	140	0.5426356589147286	outlook	1653
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1654
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1655
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	0	0	outlook	1656
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	0	0	outlook	1657
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	outlook	1658
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	1	0.003875968992248062	outlook	1659
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	outlook	1660
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	1	0.003875968992248062	outlook	1661
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	1	0.003875968992248062	outlook	1662
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1663
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1664
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	7	0.027131782945736434	outlook	1665
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	12	0.046511627906976744	outlook	1666
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	14	0.05426356589147287	outlook	1667
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	21	0.08139534883720931	outlook	1668
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	outlook	1669
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	outlook	1670
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	19	0.07364341085271318	outlook	1671
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	outlook	1672
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	outlook	1673
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	66	0.2558139534883721	outlook	1752
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	7	0.027131782945736434	outlook	1674
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	16	0.06201550387596899	outlook	1675
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	outlook	1676
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	17	0.06589147286821706	outlook	1677
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	15	0.05813953488372093	outlook	1678
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	17	0.06589147286821706	outlook	1679
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	17	0.06589147286821706	outlook	1680
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1681
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1682
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	18	0.06976744186046512	outlook	1683
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	31	0.12015503875968993	outlook	1684
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	31	0.12015503875968993	outlook	1685
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	45	0.1744186046511628	outlook	1686
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	34	0.13178294573643412	outlook	1687
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	41	0.15891472868217055	outlook	1688
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	43	0.16666666666666666	outlook	1689
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	outlook	1690
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	2	0.007751937984496124	outlook	1691
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	16	0.06201550387596899	outlook	1692
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	29	0.1124031007751938	outlook	1693
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	31	0.12015503875968993	outlook	1694
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	29	0.1124031007751938	outlook	1695
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	39	0.1511627906976744	outlook	1696
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	outlook	1697
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	36	0.13953488372093023	outlook	1698
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	outlook	1700
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	27	0.10465116279069768	outlook	1701
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	44	0.17054263565891473	outlook	1702
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	44	0.17054263565891473	outlook	1703
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	51	0.19767441860465115	outlook	1704
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	59	0.22868217054263565	outlook	1705
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	56	0.21705426356589147	outlook	1706
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	62	0.24031007751937986	outlook	1707
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	0	0	outlook	1708
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1709
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	10	0.03875968992248062	outlook	1710
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	4	0.015503875968992248	outlook	1711
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	9	0.03488372093023256	outlook	1712
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	6	0.023255813953488372	outlook	1713
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	8	0.031007751937984496	outlook	1714
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	7	0.027131782945736434	outlook	1715
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	9	0.03488372093023256	outlook	1716
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	outlook	1717
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1718
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	12	0.046511627906976744	outlook	1719
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	22	0.08527131782945736	outlook	1720
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	20	0.07751937984496124	outlook	1721
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	27	0.10465116279069768	outlook	1722
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	outlook	1723
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	outlook	1724
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	30	0.11627906976744186	outlook	1725
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	0	0	outlook	1727
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	9	0.03488372093023256	outlook	1728
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	22	0.08527131782945736	outlook	1729
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	28	0.10852713178294573	outlook	1730
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	29	0.1124031007751938	outlook	1731
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	30	0.11627906976744186	outlook	1732
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	32	0.12403100775193798	outlook	1733
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	32	0.12403100775193798	outlook	1734
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	8	other	अन्य	1	0.003875968992248062	outlook	1735
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	1	0.003875968992248062	outlook	1736
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	16	0.06201550387596899	outlook	1737
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	28	0.10852713178294573	outlook	1738
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	37	0.1434108527131783	outlook	1739
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	37	0.1434108527131783	outlook	1740
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	40	0.15503875968992248	outlook	1741
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	37	0.1434108527131783	outlook	1742
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	41	0.15891472868217055	outlook	1743
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	8	other	अन्य	2	0.007751937984496124	outlook	1744
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	3	0.011627906976744186	outlook	1745
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	28	0.10852713178294573	outlook	1746
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	56	0.21705426356589147	outlook	1747
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	44	0.17054263565891473	outlook	1748
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	65	0.25193798449612403	outlook	1749
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	55	0.2131782945736434	outlook	1750
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	63	0.2441860465116279	outlook	1751
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1754
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	5	0.01937984496124031	outlook	1755
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	10	0.03875968992248062	outlook	1756
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	17	0.06589147286821706	outlook	1757
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	19	0.07364341085271318	outlook	1758
+m_gender	2	Female	महिला	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	23	0.08914728682170543	outlook	1759
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	6	other	अन्य	5	0.01937984496124031	outlook	1760
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	outlook	1761
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	69	0.26744186046511625	outlook	1762
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	143	0.5542635658914729	outlook	1763
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	146	0.5658914728682171	outlook	1764
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	162	0.627906976744186	outlook	1765
+m_gender	1	Male	पुरुष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	190	0.7364341085271318	outlook	1766
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	outlook	1767
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1768
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	0	0	outlook	1769
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	4	0.015503875968992248	outlook	1770
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	4	0.015503875968992248	outlook	1771
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	4	0.015503875968992248	outlook	1772
+m_age	1	Less than 20 years	०-२० बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	4	0.015503875968992248	outlook	1773
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	outlook	1774
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	outlook	1775
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	15	0.05813953488372093	outlook	1776
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	27	0.10465116279069768	outlook	1777
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	27	0.10465116279069768	outlook	1778
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	33	0.12790697674418605	outlook	1779
+m_age	3	41 - 60 years	४१-६० वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	33	0.12790697674418605	outlook	1780
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	5	0.01937984496124031	outlook	1781
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1782
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	59	0.22868217054263565	outlook	1783
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	122	0.4728682170542636	outlook	1784
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	132	0.5116279069767442	outlook	1785
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	144	0.5581395348837209	outlook	1786
+m_age	2	21 - 40 years	२१-४० बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	176	0.6821705426356589	outlook	1787
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	outlook	1788
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1789
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	0	0	outlook	1790
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	0	0	outlook	1791
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	0	0	outlook	1792
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	0	0	outlook	1793
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	1	0.003875968992248062	outlook	1794
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	outlook	1795
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	outlook	1796
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	5	0.01937984496124031	outlook	1797
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	13	0.050387596899224806	outlook	1798
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	14	0.05426356589147287	outlook	1799
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	14	0.05426356589147287	outlook	1800
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	20	0.07751937984496124	outlook	1801
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	outlook	1802
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1803
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	12	0.046511627906976744	outlook	1804
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	21	0.08139534883720931	outlook	1805
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	17	0.06589147286821706	outlook	1806
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	18	0.06976744186046512	outlook	1807
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	22	0.08527131782945736	outlook	1808
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	outlook	1809
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1810
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	9	0.03488372093023256	outlook	1811
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	30	0.11627906976744186	outlook	1812
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	40	0.15503875968992248	outlook	1813
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	44	0.17054263565891473	outlook	1814
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	49	0.18992248062015504	outlook	1815
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	6	other	अन्य	4	0.015503875968992248	outlook	1816
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1817
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	23	0.08914728682170543	outlook	1818
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	35	0.13565891472868216	outlook	1819
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	42	0.16279069767441862	outlook	1820
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	50	0.1937984496124031	outlook	1821
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	52	0.20155038759689922	outlook	1822
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	outlook	1823
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1824
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	25	0.09689922480620156	outlook	1825
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	54	0.20930232558139536	outlook	1826
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	50	0.1937984496124031	outlook	1827
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	55	0.2131782945736434	outlook	1828
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	69	0.26744186046511625	outlook	1829
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	0	0	outlook	1830
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1831
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	4	0.015503875968992248	outlook	1832
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	11	0.04263565891472868	outlook	1833
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	9	0.03488372093023256	outlook	1834
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	9	0.03488372093023256	outlook	1835
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	10	0.03875968992248062	outlook	1836
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	2	0.007751937984496124	outlook	1837
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1838
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	15	0.05813953488372093	outlook	1839
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	24	0.09302325581395349	outlook	1840
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	24	0.09302325581395349	outlook	1841
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	29	0.1124031007751938	outlook	1842
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	37	0.1434108527131783	outlook	1843
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	2	0.007751937984496124	outlook	1844
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1845
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	16	0.06201550387596899	outlook	1846
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	31	0.12015503875968993	outlook	1847
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	31	0.12015503875968993	outlook	1848
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	34	0.13178294573643412	outlook	1849
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	41	0.15891472868217055	outlook	1850
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	6	other	अन्य	3	0.011627906976744186	outlook	1851
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	1	0.003875968992248062	outlook	1852
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	21	0.08139534883720931	outlook	1853
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	37	0.1434108527131783	outlook	1854
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	32	0.12403100775193798	outlook	1855
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	40	0.15503875968992248	outlook	1856
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	44	0.17054263565891473	outlook	1857
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	6	other	अन्य	1	0.003875968992248062	outlook	1858
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	0	0	outlook	1859
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	18	0.06976744186046512	outlook	1860
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	50	0.1937984496124031	outlook	1861
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	67	0.2596899224806202	outlook	1862
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	69	0.26744186046511625	outlook	1863
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	81	0.313953488372093	outlook	1864
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	1	0.003875968992248062	outlook	1865
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	outlook	1866
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	outlook	1867
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	outlook	1868
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	5	0.01937984496124031	outlook	1869
+m_gender	2	Female	महिला	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	14	0.05426356589147287	outlook	1870
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	4	0.015503875968992248	outlook	1871
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	14	0.05426356589147287	outlook	1872
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	16	0.06201550387596899	outlook	1873
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	19	0.07364341085271318	outlook	1874
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	38	0.14728682170542637	outlook	1875
+m_gender	1	Male	पुरुष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	142	0.5503875968992248	outlook	1876
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	outlook	1877
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	outlook	1878
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	outlook	1879
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	outlook	1880
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	0	0	outlook	1881
+m_gender	3	Third gender	तेस्रो लिंगी	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1882
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1883
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	outlook	1884
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	outlook	1885
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	outlook	1886
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	2	0.007751937984496124	outlook	1887
+m_age	1	Less than 20 years	०-२० बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	2	0.007751937984496124	outlook	1888
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1889
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	outlook	1890
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	outlook	1891
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	outlook	1892
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	4	0.015503875968992248	outlook	1893
+m_age	3	41 - 60 years	४१-६० वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	29	0.1124031007751938	outlook	1894
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	5	0.01937984496124031	outlook	1895
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	13	0.050387596899224806	outlook	1896
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	12	0.046511627906976744	outlook	1897
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	17	0.06589147286821706	outlook	1898
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	37	0.1434108527131783	outlook	1899
+m_age	2	21 - 40 years	२१-४० बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	125	0.4844961240310077	outlook	1900
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	outlook	1901
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	outlook	1902
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	outlook	1903
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	outlook	1904
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	0	0	outlook	1905
+m_age	4	61 and above	६१ वर्ष वा माथि	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1906
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1907
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	0	0	outlook	1908
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	outlook	1909
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	0	0	outlook	1910
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	0	0	outlook	1911
+m_edu_levl	1	No education (illiterate)	निरक्षर	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	1	0.003875968992248062	outlook	1912
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1913
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	outlook	1914
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	outlook	1915
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	outlook	1916
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	1	0.003875968992248062	outlook	1917
+m_edu_levl	2	Can read and/or write	अक्षर चिन्ने	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	19	0.07364341085271318	outlook	1918
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1919
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	outlook	1920
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	4	0.015503875968992248	outlook	1921
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	1	0.003875968992248062	outlook	1922
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	7	0.027131782945736434	outlook	1923
+m_edu_levl	6	Master's degree or higher	स्नातकोत्तर वा माथि	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	13	0.050387596899224806	outlook	1924
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	outlook	1925
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	3	0.011627906976744186	outlook	1926
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	0	0	outlook	1927
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	5	0.01937984496124031	outlook	1928
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	6	0.023255813953488372	outlook	1929
+m_edu_levl	3	SLC or equivalent	एस्.एल.सी.	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	44	0.17054263565891473	outlook	1930
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1931
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	outlook	1932
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	outlook	1933
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	outlook	1934
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	13	0.050387596899224806	outlook	1935
+m_edu_levl	5	Bachelor's degree or equivalent	स्नातक	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	34	0.13178294573643412	outlook	1936
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	3	0.011627906976744186	outlook	1937
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	outlook	1938
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	outlook	1939
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	11	0.04263565891472868	outlook	1940
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	16	0.06201550387596899	outlook	1941
+m_edu_levl	4	10+2 or equivalent	+२' वा सो सरह	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	45	0.1744186046511628	outlook	1942
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1943
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	outlook	1944
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	3	0.011627906976744186	outlook	1945
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	outlook	1946
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	5	0.01937984496124031	outlook	1947
+m_years_of_experience	1	0 to 2 years	०-२ वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	2	0.007751937984496124	outlook	1948
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	outlook	1949
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	5	0.01937984496124031	outlook	1950
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	2	0.007751937984496124	outlook	1951
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	2	0.007751937984496124	outlook	1952
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	15	0.05813953488372093	outlook	1953
+m_years_of_experience	2	3 to 5 years	३-५ वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	18	0.06976744186046512	outlook	1954
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	0	0	outlook	1955
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	2	0.007751937984496124	outlook	1956
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	3	0.011627906976744186	outlook	1957
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	6	0.023255813953488372	outlook	1958
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	8	0.031007751937984496	outlook	1959
+m_years_of_experience	4	11 to 15 years	११-१५ बर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	30	0.11627906976744186	outlook	1960
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	2	0.007751937984496124	outlook	1961
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	1	0.003875968992248062	outlook	1962
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	6	0.023255813953488372	outlook	1963
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	outlook	1964
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	6	0.023255813953488372	outlook	1965
+m_years_of_experience	5	15 years or more	१५ वर्ष भन्दा बढी	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	36	0.13953488372093023	outlook	1966
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	1	0.003875968992248062	outlook	1967
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	6	0.023255813953488372	outlook	1968
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	4	0.015503875968992248	outlook	1969
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	4	0.015503875968992248	outlook	1970
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	9	0.03488372093023256	outlook	1971
+m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	70	0.2713178294573643	outlook	1972
 \.
 
 
@@ -6547,7 +8944,7 @@ m_years_of_experience	3	6 to 10 years	६-१० वर्ष	o_econ_impact_fml_
 -- Data for Name: workers_impact_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.workers_impact_downloads_data (id, "timestamp", occpatn_shopkeeper_pre_covid, occpatn_tour_guide_pre_covid, occpatn_trekking_guide_pre_covid, occpatn_rafting_guide_pre_covid, occpatn_mountain_guide_pre_covid, occpatn_driver_pre_covid, occpatn_travel_agent_pre_covid, occpatn_flight_attendent_pre_covid, occpatn_pilot_pre_covid, occpatn_cook_pre_covid, occpatn_hotel_manager_pre_covid, occpatn_hotel_staff_pre_covid, occpatn_waiter_pre_covid, occpatn_bartender_pre_covid, occpatn_porter_pre_covid, other_occpatn_pre_covid, had_frml_employment_contract_pre_covid, had_pan_pre_covid, wrk_type_seasonal_pre_covid, wrk_type_daily_wages_pre_covid, wrk_type_monthly_salary_pre_covid, other_wrk_type_pre_covid, sesonal_work_period, gender_individual, age_individual, education_level_individual, years_of_experience_individual, permanent_district_individual, temporary_district_individual, trsm_major_work_achham_district, trsm_major_work_arghakhanchi_district, trsm_major_work_baglung_district, trsm_major_work_baitadi_district, trsm_major_work_bajhang_district, b_empl_trsm_bajura_district, trsm_major_work_banke_district, trsm_major_work_bara_district, trsm_major_work_bardiya_district, trsm_major_work_bhaktapur_district, trsm_major_work_bhojpur_district, trsm_major_work_chitwan_district, trsm_major_work_dadeldhura_district, trsm_major_work_dailekh_district, trsm_major_work_dang_district, trsm_major_work_darchula_district, trsm_major_work_dhading_district, trsm_major_work_dhankuta_district, trsm_major_work_dhanusa_district, trsm_major_work_dolakha_district, trsm_major_work_dolpa_district, trsm_major_work_doti_district, trsm_major_work_gorkha_district, trsm_major_work_gulmi_district, trsm_major_work_humla_district, trsm_major_work_illam_district, trsm_major_work_jajarkot_district, trsm_major_work_jhapa_district, trsm_major_work_jumla_district, trsm_major_work_kailali_district, trsm_major_work_kalikot_district, trsm_major_work_kanchanpur_district, trsm_major_work_kapilbastu_district, trsm_major_work_kaski_district, trsm_major_work_kathmandu_district, trsm_major_work_kavrepalanchok_district, trsm_major_work_khotang_district, trsm_major_work_lalitpur_district, trsm_major_work_lamjung_district, trsm_major_work_mahottari_district, trsm_major_work_makwanpur_district, trsm_major_work_manang_district, trsm_major_work_morang_district, trsm_major_work_mugu_district, trsm_major_work_mustang_district, trsm_major_work_myagdi_district, trsm_major_work_nawalpur_district, trsm_major_work_parasi_district, trsm_major_work_nuwakot_district, trsm_major_work_okhaldhunga_district, trsm_major_work_palpa_district, trsm_major_work_panchthar_district, trsm_major_work_parbat_district, trsm_major_work_pyuthan_district, trsm_major_work_ramechhap_district, trsm_major_work_rasuwa_district, trsm_major_work_rautahat_district, trsm_major_work_rolpa_district, trsm_major_work_rukum_east_district, trsm_major_work_rukum_west_district, trsm_major_work_rupandehi_district, trsm_major_work_salyan_district, trsm_major_work_sankhuwasabha_district, trsm_major_work_saptari_district, trsm_major_work_sarlahi_district, trsm_major_work_sindhuli_district, trsm_major_work_sindhupalchok_district, trsm_major_work_siraha_district, trsm_major_work_solukhumbu_district, trsm_major_work_sunsari_district, trsm_major_work_surkhet_district, trsm_major_work_syangja_district, trsm_major_work_tanahu_district, trsm_major_work_taplejung_district, trsm_major_work_terhathum_district, trsm_major_work_udayapur_district) FROM stdin;
+COPY public.workers_impact_downloads_data (id, submission_date, occpatn_shopkeeper_pre_covid, occpatn_tour_guide_pre_covid, occpatn_trekking_guide_pre_covid, occpatn_rafting_guide_pre_covid, occpatn_mountain_guide_pre_covid, occpatn_driver_pre_covid, occpatn_travel_agent_pre_covid, occpatn_flight_attendent_pre_covid, occpatn_pilot_pre_covid, occpatn_cook_pre_covid, occpatn_hotel_manager_pre_covid, occpatn_hotel_staff_pre_covid, occpatn_waiter_pre_covid, occpatn_bartender_pre_covid, occpatn_porter_pre_covid, other_occpatn_pre_covid, had_frml_employment_contract_pre_covid, had_pan_pre_covid, wrk_type_seasonal_pre_covid, wrk_type_daily_wages_pre_covid, wrk_type_monthly_salary_pre_covid, other_wrk_type_pre_covid, sesonal_work_period, gender_individual, age_individual, education_level_individual, years_of_experience_individual, permanent_district_individual, temporary_district_individual, trsm_major_work_achham_district, trsm_major_work_arghakhanchi_district, trsm_major_work_baglung_district, trsm_major_work_baitadi_district, trsm_major_work_bajhang_district, b_empl_trsm_bajura_district, trsm_major_work_banke_district, trsm_major_work_bara_district, trsm_major_work_bardiya_district, trsm_major_work_bhaktapur_district, trsm_major_work_bhojpur_district, trsm_major_work_chitwan_district, trsm_major_work_dadeldhura_district, trsm_major_work_dailekh_district, trsm_major_work_dang_district, trsm_major_work_darchula_district, trsm_major_work_dhading_district, trsm_major_work_dhankuta_district, trsm_major_work_dhanusa_district, trsm_major_work_dolakha_district, trsm_major_work_dolpa_district, trsm_major_work_doti_district, trsm_major_work_gorkha_district, trsm_major_work_gulmi_district, trsm_major_work_humla_district, trsm_major_work_illam_district, trsm_major_work_jajarkot_district, trsm_major_work_jhapa_district, trsm_major_work_jumla_district, trsm_major_work_kailali_district, trsm_major_work_kalikot_district, trsm_major_work_kanchanpur_district, trsm_major_work_kapilbastu_district, trsm_major_work_kaski_district, trsm_major_work_kathmandu_district, trsm_major_work_kavrepalanchok_district, trsm_major_work_khotang_district, trsm_major_work_lalitpur_district, trsm_major_work_lamjung_district, trsm_major_work_mahottari_district, trsm_major_work_makwanpur_district, trsm_major_work_manang_district, trsm_major_work_morang_district, trsm_major_work_mugu_district, trsm_major_work_mustang_district, trsm_major_work_myagdi_district, trsm_major_work_nawalpur_district, trsm_major_work_parasi_district, trsm_major_work_nuwakot_district, trsm_major_work_okhaldhunga_district, trsm_major_work_palpa_district, trsm_major_work_panchthar_district, trsm_major_work_parbat_district, trsm_major_work_pyuthan_district, trsm_major_work_ramechhap_district, trsm_major_work_rasuwa_district, trsm_major_work_rautahat_district, trsm_major_work_rolpa_district, trsm_major_work_rukum_east_district, trsm_major_work_rukum_west_district, trsm_major_work_rupandehi_district, trsm_major_work_salyan_district, trsm_major_work_sankhuwasabha_district, trsm_major_work_saptari_district, trsm_major_work_sarlahi_district, trsm_major_work_sindhuli_district, trsm_major_work_sindhupalchok_district, trsm_major_work_siraha_district, trsm_major_work_solukhumbu_district, trsm_major_work_sunsari_district, trsm_major_work_surkhet_district, trsm_major_work_syangja_district, trsm_major_work_tanahu_district, trsm_major_work_taplejung_district, trsm_major_work_terhathum_district, trsm_major_work_udayapur_district) FROM stdin;
 181454796	2021-05-31 00:00:00	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	4 to 6 months	Male	21 - 40 years	10+2 or equivalent	6 to 10 years	Gorkha	Kathmandu	0	0	1	0	0	0	0	0	0	1	0	1	0	1	0	0	1	0	0	1	1	0	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	0	1	1	0	1	1	1	1	0	1	1	1	1	1	1	1	1	0	1	1	0	1	0	1	0	0	1	1	0	1	0	1	0	1	1	1	0
 180535647	2021-05-27 00:00:00	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	1	0	4 to 6 months	Male	41 - 60 years	SLC or equivalent	6 to 10 years	Kathmandu	Kathmandu	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0
 172149666	2021-04-17 00:00:00	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	4 to 6 months	Male	21 - 40 years	10+2 or equivalent	6 to 10 years	Sindhuli	Kathmandu	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
@@ -6813,7 +9210,7 @@ COPY public.workers_impact_downloads_data (id, "timestamp", occpatn_shopkeeper_p
 -- Data for Name: workers_needs_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.workers_needs_downloads_data (id, "timestamp", needs_health_training_for_recovery, needs_employment_related_training_for_recovery, needs_skills_learning_opportunity_for_recovery, needs_new_employment_opportunity_for_recovery, needs_subsidized_loans_for_recovery, needs_interest_rate_discount_for_recovery, needs_tax_discount_for_recovery, needs_emi_periods_extension_for_recovery, needs_provision_of_social_security_for_recovery, needs_grant_for_recovery, need_health_counselling_for_recovery, need_other_incentives_for_recovery, no_need_of_any_recovery_incentives, most_significant_recovery_incentive) FROM stdin;
+COPY public.workers_needs_downloads_data (id, submission_date, needs_health_training_for_recovery, needs_employment_related_training_for_recovery, needs_skills_learning_opportunity_for_recovery, needs_new_employment_opportunity_for_recovery, needs_subsidized_loans_for_recovery, needs_interest_rate_discount_for_recovery, needs_tax_discount_for_recovery, needs_emi_periods_extension_for_recovery, needs_provision_of_social_security_for_recovery, needs_grant_for_recovery, need_health_counselling_for_recovery, need_other_incentives_for_recovery, no_need_of_any_recovery_incentives, most_significant_recovery_incentive) FROM stdin;
 181454796	2021-05-31 00:00:00	0	1	1	1	1	1	0	1	0	1	0	0	0	New employment opportunities
 180535647	2021-05-27 00:00:00	0	1	0	0	1	0	0	0	1	0	0	0	0	Subsidized loans
 172149666	2021-04-17 00:00:00	0	0	0	0	1	0	0	0	1	1	1	0	0	Grant
@@ -7079,7 +9476,7 @@ COPY public.workers_needs_downloads_data (id, "timestamp", needs_health_training
 -- Data for Name: workers_preparedness_downloads_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.workers_preparedness_downloads_data (id, "timestamp", have_alternative_income_source, alternate_income_source_agriculture_animal_husbandry, alternate_income_source_daily_wages, alternate_income_source_business_occupation, alternate_income_source_job_estate, alternate_income_source_professional_work, other_alternate_income_source, self_savings_chng_today_v_19, had_land_assets_pre_covid, had_television_pre_covid, had_cable_tv_pre_covid, had_computer_pre_covid, had_internet_pre_covid, had_telephone_pre_covid, had_mobile_phone_pre_covid, had_referigerator_pre_covid, had_motorcycle_pre_covid, had_personal_use_four_wheeler_pre_covid, had_professional_use_four_wheeler_pre_covid, did_not_have_mentioned_assets_pre_covid, has_land_assets_post_covid, has_television_post_covid, has_cable_tv_post_covid, has_computer_post_covid, has_internet_post_covid, has_telephone_post_covid, has_mobile_phone_post_covid, has_referigerator_post_covid, has_motorcycle_post_covid, has_personal_use_four_wheeler_post_covid, has_professional_use_four_wheeler_post_covid, do_not_have_mentioned_assets_post_covid, has_outstanding_debt, num_depndnt_fml_membrs_pre_covid, num_depndnt_fml_membrs_post_covid, num_depndnt_fml_membrs_needs_post_covid, is_vaccinated_against_covid, has_received_covid_hhs_training, received_hhs_training_source_goverment, received_hhs_training_source_ngo, received_hhs_training_source_employer, received_hhs_training_source_hotel_worker_association, received_hhs_training_other_source, major_covid_info_source_is_family_friends, major_covid_info_source_is_social_media, major_covid_info_source_is_radio, major_covid_info_source_is_television, major_covid_info_source_is_newspapers, major_covid_info_source_is_nearby_health_service, uses_other_major_covid_info_source, learned_new_skills_during_pandemic) FROM stdin;
+COPY public.workers_preparedness_downloads_data (id, submission_date, have_alternative_income_source, alternate_income_source_agriculture_animal_husbandry, alternate_income_source_daily_wages, alternate_income_source_business_occupation, alternate_income_source_job_estate, alternate_income_source_professional_work, other_alternate_income_source, self_savings_chng_today_v_19, had_land_assets_pre_covid, had_television_pre_covid, had_cable_tv_pre_covid, had_computer_pre_covid, had_internet_pre_covid, had_telephone_pre_covid, had_mobile_phone_pre_covid, had_referigerator_pre_covid, had_motorcycle_pre_covid, had_personal_use_four_wheeler_pre_covid, had_professional_use_four_wheeler_pre_covid, did_not_have_mentioned_assets_pre_covid, has_land_assets_post_covid, has_television_post_covid, has_cable_tv_post_covid, has_computer_post_covid, has_internet_post_covid, has_telephone_post_covid, has_mobile_phone_post_covid, has_referigerator_post_covid, has_motorcycle_post_covid, has_personal_use_four_wheeler_post_covid, has_professional_use_four_wheeler_post_covid, do_not_have_mentioned_assets_post_covid, has_outstanding_debt, num_depndnt_fml_membrs_pre_covid, num_depndnt_fml_membrs_post_covid, num_depndnt_fml_membrs_needs_post_covid, is_vaccinated_against_covid, has_received_covid_hhs_training, received_hhs_training_source_goverment, received_hhs_training_source_ngo, received_hhs_training_source_employer, received_hhs_training_source_hotel_worker_association, received_hhs_training_other_source, major_covid_info_source_is_family_friends, major_covid_info_source_is_social_media, major_covid_info_source_is_radio, major_covid_info_source_is_television, major_covid_info_source_is_newspapers, major_covid_info_source_is_nearby_health_service, uses_other_major_covid_info_source, learned_new_skills_during_pandemic) FROM stdin;
 181454796	2021-05-31 00:00:00	0	\N	\N	\N	\N	\N	\N	Has reduced to almost zero	1	1	0	1	0	0	1	0	0	0	0	0	1	0	0	1	0	0	1	0	0	0	0	0	1	6 people or more	6 people or more	1 to 2 people	1	0	\N	\N	\N	\N	\N	0	1	1	0	1	0	0	0
 180535647	2021-05-27 00:00:00	0	\N	\N	\N	\N	\N	\N	Has reduced to almost zero	0	1	0	1	1	0	1	0	1	0	0	0	0	0	0	1	1	0	1	0	1	0	0	0	1	3 to 5 people	3 to 5 people	Not sufficient for myself	0	0	\N	\N	\N	\N	\N	0	1	0	0	0	0	0	0
 172149666	2021-04-17 00:00:00	0	\N	\N	\N	\N	\N	\N	25% remaining	1	1	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0	0	1	3 to 5 people	3 to 5 people	Not sufficient for myself	0	0	\N	\N	\N	\N	\N	0	1	0	1	1	0	0	0
@@ -7345,7 +9742,7 @@ COPY public.workers_preparedness_downloads_data (id, "timestamp", have_alternati
 -- Data for Name: workers_univariate_stats; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.workers_univariate_stats (variable, value, label_en, label_ne, "variableGroup", total, "percOfTotal", index) FROM stdin;
+COPY public.workers_univariate_stats (variable, value, label_en, label_ne, variablegroup, total, percoftotal, index) FROM stdin;
 i_lvlhd_domicile_chng_self_fml	0	No	परेन	impact	115	0.44573643410852715	1
 i_lvlhd_domicile_chng_self_fml	1	Yes	पर्यो	impact	143	0.5542635658914729	2
 i_empl_jb_prsnt_status	4	No, I have left all tourism-related work	छैन, मैले पर्यटन क्षेत्र छाडिसकेको छु	impact	4	0.015503875968992248	3
@@ -7431,37 +9828,37 @@ n_rcvry_preferred_incentives	4	New employment opportunities	नयाँ रो�
 n_rcvry_preferred_incentives	9	Provision of social security system	सामाजिक सुरक्षाको व्यवस्था	need	140	0.5426356589147286	83
 n_rcvry_preferred_incentives	2	Employment-related training or retraining	रोजगारीमूलक तालिम वा पुन:प्रशिक्षण	need	142	0.5503875968992248	84
 n_rcvry_preferred_incentives	5	Subsidized loans	सहुलियत दरमा ऋण	need	168	0.6511627906976745	85
-o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	perception	14	0.05426356589147287	86
-o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	perception	75	0.29069767441860467	87
-o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	perception	82	0.3178294573643411	88
-o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	perception	87	0.3372093023255814	89
-o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	perception	3	0.011627906976744186	90
-o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	perception	5	0.01937984496124031	91
-o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	perception	15	0.05813953488372093	92
-o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	perception	77	0.29844961240310075	93
-o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	perception	158	0.6124031007751938	94
-o_impct_to_self_nxt_6_mnths	8	other	अन्य	perception	5	0.01937984496124031	95
-o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	perception	4	0.015503875968992248	96
-o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	perception	75	0.29069767441860467	97
-o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	perception	132	0.5116279069767442	98
-o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	perception	138	0.5348837209302325	99
-o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	perception	164	0.6356589147286822	100
-o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	perception	165	0.6395348837209303	101
-o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	perception	167	0.6472868217054264	102
-o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	perception	178	0.689922480620155	103
-o_rcvry_chllng_trsm_revival	6	other	अन्य	perception	8	0.031007751937984496	104
-o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	perception	1	0.003875968992248062	105
-o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	perception	74	0.2868217054263566	106
-o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	perception	153	0.5930232558139535	107
-o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	perception	163	0.6317829457364341	108
-o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	perception	181	0.7015503875968992	109
-o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	perception	213	0.8255813953488372	110
-o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	perception	5	0.01937984496124031	111
-o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	perception	16	0.06201550387596899	112
-o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	perception	18	0.06976744186046512	113
-o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	perception	20	0.07751937984496124	114
-o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	perception	43	0.16666666666666666	115
-o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	perception	156	0.6046511627906976	116
+o_econ_impact_how_long_months	1	Less than 6 months	६ महिना भन्दा कम	outlook	14	0.05426356589147287	86
+o_econ_impact_how_long_months	4	24 months or more	२४ महिना भन्दा बढी	outlook	75	0.29069767441860467	87
+o_econ_impact_how_long_months	3	13 to 24 months	१३ देखि २४ महिना सम्म	outlook	82	0.3178294573643411	88
+o_econ_impact_how_long_months	2	6 to 12 months	६ देखि १२ महिना सम्म	outlook	87	0.3372093023255814	89
+o_empl_status_to_nrml_how_long_months	4	I've left the tourism sector	म पर्यटन क्षेत्रमा अब काम नगर्ने भएको छु	outlook	3	0.011627906976744186	90
+o_empl_status_to_nrml_how_long_months	1	Immediately	तुरुन्तै	outlook	5	0.01937984496124031	91
+o_empl_status_to_nrml_how_long_months	2	Within 3 months	सुचारु भएको ३ महिना भित्र	outlook	15	0.05813953488372093	92
+o_empl_status_to_nrml_how_long_months	3	Within 12 months	सुचारु भएको १२ महिना भित्र	outlook	77	0.29844961240310075	93
+o_empl_status_to_nrml_how_long_months	5	Can't say	केहि भन्न सकिंदैन	outlook	158	0.6124031007751938	94
+o_impct_to_self_nxt_6_mnths	8	other	अन्य	outlook	5	0.01937984496124031	95
+o_impct_to_self_nxt_6_mnths	9	I won't have to suffer from Covid-19 in any way	मलाई कोभिड-१९ ले कुनै प्रकारको अवस्था भोग्नु नपर्ला	outlook	4	0.015503875968992248	96
+o_impct_to_self_nxt_6_mnths	1	Won't be able to pay house / room rent (partially)	घर/कोठा भाडा तिर्न सकिन्न (आम्सिक)	outlook	75	0.29069767441860467	97
+o_impct_to_self_nxt_6_mnths	6	Won't be able to acquire additional loans and borrowings	ऋण तथा सापटी लिन सकिन्न	outlook	132	0.5116279069767442	98
+o_impct_to_self_nxt_6_mnths	4	Won't be able to afford necessary educational services	शैक्षिक सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	outlook	138	0.5348837209302325	99
+o_impct_to_self_nxt_6_mnths	2	Won't be able to pay house / room rent (full)	घर/कोठा भाडा तिर्न सकिन्न (पूर्ण)	outlook	164	0.6356589147286822	100
+o_impct_to_self_nxt_6_mnths	3	Won't be able to meet necessary health care expenses	स्वास्थ्य सेवाको लागि आवश्यक खर्च जुटाउन सकिन्न	outlook	165	0.6395348837209303	101
+o_impct_to_self_nxt_6_mnths	5	Won't be able to meet fooding expenses	खानपिनको लागि आवश्यक खर्च जुटाउन सकिन्न	outlook	167	0.6472868217054264	102
+o_impct_to_self_nxt_6_mnths	7	Won't be able to pay off existing loans	ऋण तथा सापटी तिर्न सकिन्न	outlook	178	0.689922480620155	103
+o_rcvry_chllng_trsm_revival	6	other	अन्य	outlook	8	0.031007751937984496	104
+o_rcvry_chllng_trsm_revival	7	There are no challenges in the tourism sector that I am involved in	म संलग्न रहेको पर्यटन क्षेत्रमा कुनै किसिमका चुनौतीहरू छैनन्	outlook	1	0.003875968992248062	105
+o_rcvry_chllng_trsm_revival	5	Understanding the demands and needs of the source market correctly	स्रोत बजार (Source market) को मांग र आवश्यकता सही ढङ्गमा बुझ्ने	outlook	74	0.2868217054263566	106
+o_rcvry_chllng_trsm_revival	1	Winning tourists' confidence	कोभिड-१९ को सन्दर्भमा पर्यटकको बिश्वाश जित्ने	outlook	153	0.5930232558139535	107
+o_rcvry_chllng_trsm_revival	3	Overcoming financial challenges	आर्थिक चुनौतीहरू	outlook	163	0.6317829457364341	108
+o_rcvry_chllng_trsm_revival	4	Decreased number of tourists	पर्यटकको संख्यामा आउने कमि	outlook	181	0.7015503875968992	109
+o_rcvry_chllng_trsm_revival	2	Ensuring HHS Compliance	स्वास्थ्य र सुरक्षा उपायहरू सुनिश्चित गर्ने	outlook	213	0.8255813953488372	110
+o_econ_impact_fml_income_chng_21_v_19	6	Will exceed that of 2019	कुल आय बढ्छ होला	outlook	5	0.01937984496124031	111
+o_econ_impact_fml_income_chng_21_v_19	2	Will reduce by 25%	कुल आय एक-चौथाई (२५%)ले घट्छ होला	outlook	16	0.06201550387596899	112
+o_econ_impact_fml_income_chng_21_v_19	3	Will reduce by 50%	कुल आय आधि (५०%)ले घट्छ होला	outlook	18	0.06976744186046512	113
+o_econ_impact_fml_income_chng_21_v_19	1	Will stay the same	कुल आय लगभग उत्तिक्कै हुन्छ होला	outlook	20	0.07751937984496124	114
+o_econ_impact_fml_income_chng_21_v_19	4	Will reduce by 75%	कुल आय तीन-चौथाई (७५%)ले घट्छ होला	outlook	43	0.16666666666666666	115
+o_econ_impact_fml_income_chng_21_v_19	5	Will reduce to zero	कुल आय लगभग शुन्य (०%) हुन्छ होला	outlook	156	0.6046511627906976	116
 m_gender	2	Female	महिला	\N	25	0.09689922480620156	117
 m_gender	1	Male	पुरुष	\N	233	0.9031007751937985	118
 m_age	1	Less than 20 years	०-२० बर्ष	\N	6	0.023255813953488372	119

@@ -71,4 +71,4 @@ business_bivariate_stats['total'] = business_bivariate_stats['total'].astype(int
 business_bivariate_stats['yValue'] = business_bivariate_stats['yValue'].astype(int)
 business_bivariate_stats.columns = [ i.lower() for i in business_bivariate_stats.columns]
 business_bivariate_stats.to_sql('businesses_bivariate_stats ',  engine, index=False, if_exists='replace')
-# business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
+business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
