@@ -4,7 +4,7 @@ import psycopg2
 from sqlalchemy import create_engine
 from core.univariate import Univariate
 from core.bivariate import Bivariate
-from core.downloads import generate_download_data
+from core.downloads import generate_download_data, fix_workforce_downloads
 from core.helper_functions import workers_derived_variables, workers_derive_infection
 from core.constants import workers_mental_health_columns, workers_econ_effect_columns
 pd.options.mode.chained_assignment = None
@@ -23,15 +23,20 @@ workers_variable_map =  pd.read_excel('./data/generated_workers_variable_map.xls
 workers_labels_map = pd.read_excel('./data/generated_workers_labels_map.xlsx')
 workers_variable_column_map = pd.read_csv('./data/workforce_variable_column_map.csv')
 
-workers_impact_downloads_data, workers_preparedness_downloads_data, workers_needs_downloads_data, workers_outlook_downloads_data, workers_metadata_downloads_data = generate_download_data(
+workers_impact_downloads_data, workers_preparedness_downloads_data, workers_needs_downloads_data, workers_outlook_downloads_data = generate_download_data(
                                 raw_data=workers_raw_data, 
                                 variable_label_map=workers_labels_map,
                                 variable_column_map=workers_variable_column_map)
-workers_impact_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
-workers_preparedness_downloads_data.to_sql('workers_preparedness_downloads_data', engine, index=False, if_exists='replace')
-workers_needs_downloads_data.to_sql('workers_needs_downloads_data', engine, index=False, if_exists='replace')
-workers_outlook_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
-workers_metadata_downloads_data.to_sql('workers_impact_downloads_data', engine, index=False, if_exists='replace')
+trsm_major_work_district = fix_workforce_downloads(workers_raw_data, workers_labels_map)
+workers_impact_downloads_data['trsm_major_work_district'] = trsm_major_work_district
+workers_preparedness_downloads_data['trsm_major_work_district'] = trsm_major_work_district
+workers_needs_downloads_data['trsm_major_work_district'] = trsm_major_work_district
+workers_outlook_downloads_data['trsm_major_work_district'] = trsm_major_work_district
+
+workers_impact_downloads_data.to_csv('./data/downloads/workers_impact_downloads_data.csv', index=False)
+workers_preparedness_downloads_data.to_csv('./data/downloads/workers_preparedness_downloads_data.csv', index=False)
+workers_needs_downloads_data.to_csv('./data/downloads/workers_need_downloads_data.csv', index=False)
+workers_outlook_downloads_data.to_csv('./data/downloads/workers_outlook_downloads_data.csv', index=False)
 
 workers_raw_data.rename(workers_mental_health_columns, axis=1, inplace=True)
 workers_raw_data.rename(workers_econ_effect_columns, axis=1, inplace=True)

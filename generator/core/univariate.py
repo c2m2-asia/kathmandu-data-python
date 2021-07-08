@@ -4,7 +4,7 @@ import pandas as pd
 class Univariate():
     def __init__(self, raw_data, variable_map, labels_map):
         self.raw_data = raw_data
-        self.variable_map = variable_map[['variable', 'ques_ne', 'ques_en', 'askedTotal', 'queueIndex', 'selected', 'inputType', 'group', 'askedCondition', 'subGroups', 'highlights']]
+        self.variable_map = variable_map[['variable', 'ques_ne', 'ques_en', 'askedTotal', 'queueIndex', 'selected', 'inputType', 'group', 'askedCondition', 'subGroups', 'highlights', 'sortby']]
         self.labels_map = labels_map
         self.selected_variables = self.variable_map[self.variable_map['selected'] ==1]
         self.s_select_variables = self.selected_variables[self.selected_variables['inputType'] == 'single-select']['variable'].values.tolist()
@@ -71,7 +71,10 @@ class Univariate():
             variable_df['label_en'] = variable_df['variableLabel'].apply( lambda x: label_dict[x]['label_en'])
             variable_df['label_ne'] = variable_df['variableLabel'].apply( lambda x: label_dict[x]['label_ne'])
             variable_df['variableGroup'] = variable_df['variable'].apply( lambda x: group_dict[x]['group'])
-            variable_df.sort_values('total', inplace=True)
+            if self.variable_map[self.variable_map['variable']==i]['sortby'].values.tolist()[0] =='percentage':
+                variable_df.sort_values('total', inplace=True)
+            else:
+                variable_df.sort_values('value', inplace=True)
             variable_df['labelIndex'] = list(range(2, len(variable_df)+2))
             variable_df = variable_df[['variable', 'value', 'label_en', 'label_ne', 'variableGroup', 'total', 'askedTotal', 'variableLabel', 'labelIndex']]
             if len(s_select_univariate)==0:

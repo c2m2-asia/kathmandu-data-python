@@ -27,13 +27,26 @@ def generate_download_data(raw_data, variable_label_map, variable_column_map):
     downloads_data.replace('No','0', inplace=True)
     impact_columns = variable_column_map[variable_column_map['Group']=='Impact']['DownloadsDataColumns'].tolist()
     preparedness_columns = variable_column_map[variable_column_map['Group']=='Preparedness']['DownloadsDataColumns'].tolist()
-    needs_columns = variable_column_map[variable_column_map['Group']=='Needs']['DownloadsDataColumns'].tolist()
+    needs_columns = variable_column_map[variable_column_map['Group']=='Need']['DownloadsDataColumns'].tolist()
     outlook_columns = variable_column_map[variable_column_map['Group']=='Outlook']['DownloadsDataColumns'].tolist()
-    metadata_columns = variable_column_map[variable_column_map['Group']=='Metadata']['DownloadsDataColumns'].tolist()
     general_columns = variable_column_map[variable_column_map['Group']=='general']['DownloadsDataColumns'].tolist()
     impact_downloads_data = downloads_data[general_columns + impact_columns]
     preparedness_downloads_data = downloads_data[general_columns + preparedness_columns]
     needs_downloads_data = downloads_data[general_columns + needs_columns]
     outlook_downloads_data = downloads_data[general_columns + outlook_columns]
-    metadata_downloads_data = downloads_data[general_columns + metadata_columns]
-    return impact_downloads_data, preparedness_downloads_data, needs_downloads_data, outlook_downloads_data, metadata_downloads_data
+    return impact_downloads_data, preparedness_downloads_data, needs_downloads_data, outlook_downloads_data
+
+
+
+def fix_workforce_downloads(raw_data, labels_map):
+    major_work_districts = [ i for i in raw_data.columns if 'trsm_major' in i]
+    major_work_districts = raw_data[major_work_districts]
+    labels_dict = labels_map[labels_map['variable'] == 'district'][['value', 'label_en']].set_index('value').to_dict()['label_en']
+    labels_dict[0] = 0
+    for i in major_work_districts.columns:
+        major_work_districts[i] = major_work_districts[i].apply(func=lambda x: int(i.split('__')[1]) if x==1 else 0)
+        major_work_districts[i] = major_work_districts[i].apply(func=lambda x: labels_dict[x])
+    major_work_districts['trsm_major_work_district'] = major_work_districts.values.tolist()
+    major_work_districts['trsm_major_work_district'] = major_work_districts['trsm_major_work_district'].apply(lambda x: [i for i in x if i!=0])
+    major_work_districts['trsm_major_work_district'] = major_work_districts['trsm_major_work_district'].apply(lambda x: (', ').join(x))
+    return major_work_districts['trsm_major_work_district']

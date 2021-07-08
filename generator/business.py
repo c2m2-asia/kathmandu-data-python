@@ -2,6 +2,7 @@ import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
 from core.univariate import Univariate
+from core.maps import Maps
 from core.bivariate import Bivariate
 from core.downloads import generate_download_data
 from core.helper_functions import stopped_business_cond, business_derive_factors
@@ -21,16 +22,17 @@ business_raw_data.loc[business_raw_data['i_fin_savings_chng_2020_v_2019']==5, 'i
 business_labels_map = pd.read_excel('./data/generated_business_labels_map.xlsx')
 downloads_business_labels_map = pd.read_excel('./data/generated_business_labels_map_downloads.xlsx')
 business_variable_column_map = pd.read_csv('./data/business_variable_column_map.csv')
+maps_variable_map =  pd.read_excel('./data/map_viz_variable.xlsx')
 
-business_impact_downloads_data, business_preparedness_downloads_data, business_needs_downloads_data, business_outlook_downloads_data, business_metadata_downloads_data = generate_download_data(
+business_impact_downloads_data, business_preparedness_downloads_data, business_needs_downloads_data, business_outlook_downloads_data = generate_download_data(
                                 raw_data=business_raw_data, 
                                 variable_label_map=downloads_business_labels_map,
                                 variable_column_map=business_variable_column_map)
-business_impact_downloads_data.to_sql('business_impact_downloads_data', engine, index=False, if_exists='replace')
-business_preparedness_downloads_data.to_sql('business_preparedness_downloads_data', engine, index=False, if_exists='replace')
-business_needs_downloads_data.to_sql('business_needs_downloads_data', engine, index=False, if_exists='replace')
-business_outlook_downloads_data.to_sql('business_outlook_downloads_data', engine, index=False, if_exists='replace')
-business_metadata_downloads_data.to_sql('business_metadata_downloads_data', engine, index=False, if_exists='replace')
+business_impact_downloads_data.to_csv('./data/downloads/business_impact_downloads_data.csv', index=False)
+business_preparedness_downloads_data.to_csv('./data/downloads/business_preparedness_downloads_data.csv', index=False)
+business_needs_downloads_data.to_csv('./data/downloads/business_need_downloads_data.csv', index=False)
+business_outlook_downloads_data.to_csv('./data/downloads/business_outlook_downloads_data.csv', index=False)
+
 
 business_raw_data['o_perm_stop_biz_start_new_biz_job'] = stopped_business_cond(business_raw_data['o_perm_stop_biz_start_new__1'], 
                                                                  business_raw_data['o_perm_stop_biz_start_new__2'],
@@ -55,13 +57,17 @@ business_raw_data['n_rcvry_preferred_gov_policy__9'] = business_derive_factors(b
 business_raw_data['n_rcvry_preferred_gov_policy__3'] = business_derive_factors(business_raw_data, ['n_rcvry_preferred_gov_policy__3', 'n_rcvry_preferred_gov_policy__4'])
  
 
+business_maps = Maps(raw_data=business_raw_data, variable_map=maps_variable_map, labels_map=business_labels_map)
+map_visualization_data = business_maps.generate_data()
+map_visualization_data.to_sql('map_visualization_data',engine, index=False, if_exists='replace')
+
 business_univariate = Univariate(raw_data=business_raw_data, variable_map=business_variable_map, labels_map=business_labels_map)
 business_univariate_stats = business_univariate.generate_univariate()
 business_univariate.generate_variable_map(business_univariate_stats, 'business')
 business_univariate.labels_map.to_excel('./data/generated_business_labels_map.xlsx', index=False)
 business_univariate_stats.drop('askedTotal', axis=1, inplace=True)
 business_univariate_stats.columns = [ i.lower() for i in business_univariate_stats.columns]
-business_univariate_stats.to_sql('businesses_univariate_stats ', engine, index=False, if_exists='replace')
+business_univariate_stats.to_sql('businesses_univariate_stats', engine, index=False, if_exists='replace')
 # business_univariate_stats.to_csv('business_univariate_stats.csv', index=False)
 
 
@@ -70,5 +76,5 @@ business_bivariate_stats = business_bivariate.generate_bivariate()
 business_bivariate_stats['total'] = business_bivariate_stats['total'].astype(int)
 business_bivariate_stats['yValue'] = business_bivariate_stats['yValue'].astype(int)
 business_bivariate_stats.columns = [ i.lower() for i in business_bivariate_stats.columns]
-business_bivariate_stats.to_sql('businesses_bivariate_stats ',  engine, index=False, if_exists='replace')
-business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
+business_bivariate_stats.to_sql('businesses_bivariate_stats',  engine, index=False, if_exists='replace')
+# business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
