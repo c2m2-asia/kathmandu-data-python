@@ -16,3 +16,17 @@ workers_econ_effect_columns = {
                     'i_econ_covid_effects__6': 'i_econ_covid_effects_assets__2',
                     'i_econ_covid_effects__7': 'i_econ_covid_effects_assets__3'
                 }
+preferred_empl_incentives_columns = {
+    'n_rcvry_preferred_incentives__2': 'n_rcvry_preferred_empl_incentives__2',
+    'n_rcvry_preferred_incentives__3': 'n_rcvry_preferred_empl_incentives__3',
+    'n_rcvry_preferred_incentives__4': 'n_rcvry_preferred_empl_incentives__4'
+}
+
+preferred_fin_incentives_columns = {
+    'n_rcvry_preferred_incentives__8': 'n_rcvry_preferred_fin_incentives__8', 
+    'n_rcvry_preferred_incentives__9': 'n_rcvry_preferred_fin_incentives__9',
+    'n_rcvry_preferred_incentives__5': 'n_rcvry_preferred_fin_incentives__5',
+    'n_rcvry_preferred_incentives__6': 'n_rcvry_preferred_fin_incentives__6',
+    'n_rcvry_preferred_incentives__7': 'n_rcvry_preferred_fin_incentives__7',
+    'n_rcvry_preferred_incentives__10': 'n_rcvry_preferred_fin_incentives__10'
+}

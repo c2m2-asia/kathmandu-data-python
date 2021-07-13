@@ -77,6 +77,11 @@ class Univariate():
                 variable_df.sort_values('value', inplace=True)
             variable_df['labelIndex'] = list(range(2, len(variable_df)+2))
             variable_df = variable_df[['variable', 'value', 'label_en', 'label_ne', 'variableGroup', 'total', 'askedTotal', 'variableLabel', 'labelIndex']]
+            variable_df = self.sort_singleselect_values(variable_df)
+            if i in ['o_econ_impact_revenue_chng_21_v_19', 'o_econ_impact_wrkfrc_chng_21_v_19']:
+                variable_df.sort_values('labelIndex', inplace=True, ascending=False)
+            else:
+                variable_df.sort_values('labelIndex', inplace=True)
             if len(s_select_univariate)==0:
                 s_select_univariate = variable_df
             else:
@@ -111,10 +116,7 @@ class Univariate():
             variable_df['label_en'] = variable_df['variableLabel'].apply( lambda x: label_dict[x]['label_en'])
             variable_df['label_ne'] = variable_df['variableLabel'].apply( lambda x: label_dict[x]['label_ne'])
             variable_df['variableGroup'] = variable_df['variable'].apply( lambda x: group_dict[x]['group'])
-            variable_df.loc[variable_df['label_en']=='Other', 'labelIndex'] = 1
-            variable_df.loc[variable_df['label_en']=='other', 'labelIndex'] = 1
-            variable_df.loc[variable_df['label_en']=='Others', 'labelIndex'] = 1
-            variable_df.loc[variable_df['label_en']=='None of the above', 'labelIndex'] = 0
+            variable_df = self.sort_multiselect_values(variable_df)
             variable_df.sort_values('labelIndex', inplace=True)
             if len(m_select_univariate)==0:
                 m_select_univariate = variable_df
@@ -150,3 +152,22 @@ class Univariate():
         for i in df['variableLabel']:
             self.labels_map.loc[self.labels_map['variableLabel']==i, 'labelIndex'] = label_queue[i]
         
+    def sort_multiselect_values(self, variable_df):
+        variable_df.loc[variable_df['label_en']=='Other', 'labelIndex'] = 1
+        variable_df.loc[variable_df['label_en']=='other', 'labelIndex'] = 1
+        variable_df.loc[variable_df['label_en']=='Others', 'labelIndex'] = 1
+        variable_df.loc[variable_df['label_en']=='None of the above', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='Did not have to take any workforce-related actions', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='Did not have to take any workforce-related actions', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='We did not have to take any action', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='We are not taking any action currently', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=="We didn't employ any health and sanitation related measures", 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='We are not taking any action currently', 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=="We haven't implemented any safety measures for workers currently", 'labelIndex'] = 0
+        variable_df.loc[variable_df['label_en']=='We are not taking any action currently', 'labelIndex'] = 0
+        return variable_df
+
+    def sort_singleselect_values(self, variable_df):
+        variable_df.loc[variable_df['label_en']=='Other', 'labelIndex'] = 1
+        variable_df.loc[variable_df['label_en']=='Workforce size increased compared to 2019', 'labelIndex'] = 0
+        return variable_df
