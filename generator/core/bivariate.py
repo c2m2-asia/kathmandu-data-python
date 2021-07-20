@@ -36,7 +36,7 @@ class Bivariate():
                 x_label_dict, y_label_dict = self.create_label_dict(x_variable, y_variable, select_type='singleselect')
                 s_select_each = self.generate_total(s_select_raw, x_variable, y_variable, select_type='singleselect', xy_tuple=xy_tuple)
                 s_select_each = self.add_labels(s_select_each, x_label_dict, y_label_dict, x_variable, y_variable, select_type='singleselect')
-                s_select_each.sort_values('labelIndex', inplace=True)
+                s_select_each.sort_values('labelIndex', inplace=True, ascending=False)
                 if len(s_select_bivariate)==0:
                     s_select_bivariate = s_select_each
                 else:
@@ -62,7 +62,7 @@ class Bivariate():
                         variable_df = m_select_each_df
                     else:
                         variable_df = pd.concat((variable_df, m_select_each_df))
-                variable_df.sort_values('labelIndex', inplace=True)
+                variable_df.sort_values('labelIndex', inplace=True, ascending=False)
                 if len(m_select_bivariate)==0:
                     m_select_bivariate = variable_df
                 else:

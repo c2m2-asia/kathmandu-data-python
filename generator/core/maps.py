@@ -44,6 +44,7 @@ class Maps():
             total_dict = each_var_df['value'].value_counts().to_dict()
             each_var_df['perc_of_total'] = each_var_df['value'].apply(lambda x: percentage_dict[x]).astype(int)
             each_var_df['total'] = each_var_df['value'].apply(lambda x: total_dict[x])
+            each_var_df.sort_values('value', inplace=True)
             if len(s_select_df)==0:
                 s_select_df = each_var_df
             else:
@@ -73,7 +74,7 @@ class Maps():
             each_var_df['value'] = each_var_df['value'].astype(int)
             each_var_df['variable_value'] = i
             each_var_df['total'] = len(each_var_df)
-            each_var_df['perc_of_total'] =(each_var_df['total']/len(each_var_df)).astype(int)
+            each_var_df['perc_of_total'] = np.round((each_var_df['total']/asked_total)*100, )
             if len(m_select_df)==0:
                 m_select_df = each_var_df
             else:

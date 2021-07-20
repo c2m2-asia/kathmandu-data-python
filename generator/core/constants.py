@@ -30,3 +30,13 @@ preferred_fin_incentives_columns = {
     'n_rcvry_preferred_incentives__7': 'n_rcvry_preferred_fin_incentives__7',
     'n_rcvry_preferred_incentives__10': 'n_rcvry_preferred_fin_incentives__10'
 }
+
+
+custom_label_index = {  
+    'Total income was almost zero':5,
+    'Total income decreased by 25%':2,
+    'Total income decreased by 50%':3,
+    'Total income decreased by 75%':4,
+    'Total income was almost same as that of 2019':1,
+    'Total income exceeded that of 2019':0
+}

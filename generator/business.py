@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import psycopg2
 from sqlalchemy import create_engine
 from core.univariate import Univariate
@@ -22,6 +23,7 @@ business_raw_data = pd.read_excel('./raw/business_data.xlsx')
 business_raw_data.loc[business_raw_data['i_fin_savings_chng_2020_v_2019']==5, 'i_fin_savings_chng_2020_v_2019'] = 4
 business_labels_map = pd.read_excel('./data/generated_business_labels_map.xlsx')
 downloads_business_labels_map = pd.read_excel('./data/generated_business_labels_map_downloads.xlsx')
+maps_business_labels_map = pd.read_excel('./data/generated_business_labels_map_maps.xlsx')
 business_variable_column_map = pd.read_csv('./data/business_variable_column_map.csv')
 maps_variable_map =  pd.read_excel('./data/map_viz_variable.xlsx')
 
@@ -43,10 +45,20 @@ business_raw_data = prepare_data.prepare_business_data()
 
 
 # Data generation for maps based visualizations 
-business_maps = Maps(raw_data=business_raw_data, variable_map=maps_variable_map, labels_map=business_labels_map)
+business_maps = Maps(raw_data=business_raw_data, variable_map=maps_variable_map, labels_map=maps_business_labels_map)
 map_visualization_data = business_maps.generate_data()
 map_visualization_data.to_sql('map_visualization_data',engine, index=False, if_exists='replace')
+map_visualization_data.to_csv('map_visualization_data.csv', index=False)
 
+# Merge business types for bivariate visualization 
+business_raw_data.loc[business_raw_data['m_biz_type']==1, 'm_biz_type']=4
+business_raw_data.loc[business_raw_data['m_biz_type']==2, 'm_biz_type']=4
+business_raw_data.loc[business_raw_data['m_biz_type']==4, 'm_biz_type']=1
+business_raw_data.loc[business_raw_data['m_biz_type']==5, 'm_biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==6, 'm_biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==7, 'm_biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==8, 'm_biz_type']=1
+business_raw_data.loc[business_raw_data['m_biz_type']==9, 'm_biz_type']=np.nan
 
 # Data generation for Univariate Analysis
 business_univariate = Univariate(raw_data=business_raw_data, variable_map=business_variable_map, labels_map=business_labels_map)
