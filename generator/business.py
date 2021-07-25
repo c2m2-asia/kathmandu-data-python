@@ -51,14 +51,17 @@ map_visualization_data.to_sql('map_visualization_data',engine, index=False, if_e
 map_visualization_data.to_csv('map_visualization_data.csv', index=False)
 
 # Merge business types for bivariate visualization 
-business_raw_data.loc[business_raw_data['m_biz_type']==1, 'm_biz_type']=4
-business_raw_data.loc[business_raw_data['m_biz_type']==2, 'm_biz_type']=4
-business_raw_data.loc[business_raw_data['m_biz_type']==4, 'm_biz_type']=1
-business_raw_data.loc[business_raw_data['m_biz_type']==5, 'm_biz_type']=2
-business_raw_data.loc[business_raw_data['m_biz_type']==6, 'm_biz_type']=2
-business_raw_data.loc[business_raw_data['m_biz_type']==7, 'm_biz_type']=2
-business_raw_data.loc[business_raw_data['m_biz_type']==8, 'm_biz_type']=1
-business_raw_data.loc[business_raw_data['m_biz_type']==9, 'm_biz_type']=np.nan
+business_raw_data['biz_type'] = 0
+business_raw_data.loc[business_raw_data['m_biz_type']==1, 'biz_type']=4
+business_raw_data.loc[business_raw_data['m_biz_type']==2, 'biz_type']=4
+business_raw_data.loc[business_raw_data['m_biz_type']==3, 'biz_type']=3
+business_raw_data.loc[business_raw_data['m_biz_type']==4, 'biz_type']=1
+business_raw_data.loc[business_raw_data['m_biz_type']==5, 'biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==6, 'biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==7, 'biz_type']=2
+business_raw_data.loc[business_raw_data['m_biz_type']==8, 'biz_type']=1
+business_raw_data.loc[business_raw_data['m_biz_type']==9, 'biz_type']=9
+business_raw_data['m_biz_type']= business_raw_data['biz_type']
 
 # Data generation for Univariate Analysis
 business_univariate = Univariate(raw_data=business_raw_data, variable_map=business_variable_map, labels_map=business_labels_map)

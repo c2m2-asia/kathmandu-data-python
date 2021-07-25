@@ -5,7 +5,7 @@ from core.constants import custom_label_index
 class Univariate():
     def __init__(self, raw_data, variable_map, labels_map):
         self.raw_data = raw_data
-        self.variable_map = variable_map[['variable', 'ques_ne', 'ques_en', 'askedTotal', 'queueIndex', 'selected', 'inputType', 'group', 'askedCondition', 'subGroups', 'highlights', 'sortby']]
+        self.variable_map = variable_map[['variable', 'ques_ne', 'ques_en', 'askedTotal', 'queueIndex', 'selected', 'inputType', 'group', 'askedCondition', 'subGroups', 'highlights', 'sortby', 'surveyInfo', 'chartInfo']]
         self.labels_map = labels_map
         self.selected_variables = self.variable_map[self.variable_map['selected'] ==1]
         self.s_select_variables = self.selected_variables[self.selected_variables['inputType'] == 'single-select']['variable'].values.tolist()
@@ -146,6 +146,7 @@ class Univariate():
         self.variable_map['queueIndex'].fillna(0, inplace=True)
         final_variable_map = self.variable_map[self.variable_map['selected']==1]
         final_variable_map.sort_values('queueIndex', inplace=True)
+        final_variable_map['chartInfo'] = 'study of ' + final_variable_map['askedTotal'].astype('str') +' '+ final_variable_map['askedCondition']
         final_variable_map.to_excel('./data/generated_'+survey+'_variable_map.xlsx', index=False)
 
     def generate_label_map(self, df):
@@ -167,7 +168,6 @@ class Univariate():
         variable_df.loc[variable_df['label_en']=="We haven't implemented any safety measures for workers currently", 'labelIndex'] = 0
         variable_df.loc[variable_df['label_en']=='We are not taking any action currently', 'labelIndex'] = 0
         variable_df.loc[variable_df['label_en']=='No effect', 'labelIndex'] = 0
-
         return variable_df
 
     def sort_singleselect_values(self, variable_df):
