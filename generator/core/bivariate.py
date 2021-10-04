@@ -3,12 +3,25 @@ import pandas as pd
 pd.options.mode.chained_assignment = None
 
 class Bivariate():
+    """
+        Prepares data for Bivariate analysis
+        ----------------------------
+
+        Input: 
+            raw data: raw data of C2M2 Kathmandu survey in xlsx format (either business survey or workforce survey)
+            variable map: mapping of variable informations (e.g. input type, total responses etc.) in xlsx format
+            labels map: mapping of label and variables information in xlsx format
+        
+        ----------------------------
+    """
+
     def __init__(self, raw_data, variable_map, labels_map):
+        "Initialiaze Bivariate class with required parameters"
         self.raw_data = raw_data
         self.variable_map = variable_map
         self.labels_map = labels_map
-        self.selected_variables = self.variable_map[self.variable_map['selected'] ==1]
-        self.labels_map['variableLabel'] = self.variable_value(self.labels_map['variable'], self.labels_map['value'])
+        self.selected_variables = self.variable_map[self.variable_map['selected'] ==1] # Filter variables so that only selected ones are used foe bivariate analysis
+        self.labels_map['variableLabel'] = self.variable_value(self.labels_map['variable'], self.labels_map['value']) 
         self.groupby_columns = self.selected_variables[self.selected_variables['inputType'] == 'groupby']['variable'].values.tolist()
         self.s_select_variables = self.selected_variables[self.selected_variables['inputType'] == 'single-select']['variable'].values.tolist()
         self.m_select_variables = self.selected_variables[self.selected_variables['inputType'] == 'multi-select']['variable'].values.tolist()

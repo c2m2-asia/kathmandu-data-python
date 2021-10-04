@@ -3,6 +3,17 @@ import pandas as pd
 from core.constants import custom_label_index
 
 class Univariate():
+    """
+        Prepares data for Univariate analysis
+        ----------------------------
+
+        Input: 
+            raw data: raw data of C2M2 Kathmandu survey in xlsx format (either business survey or workforce survey)
+            variable map: mapping of variable informations (e.g. input type, total responses etc.) in xlsx format
+            labels map: mapping of label and variables information in xlsx format
+        
+        ----------------------------
+    """
     def __init__(self, raw_data, variable_map, labels_map):
         self.raw_data = raw_data
         self.variable_map = variable_map[['variable', 'ques_ne', 'ques_en', 'askedTotal', 'queueIndex', 'selected', 'inputType', 'group', 'askedCondition', 'subGroups', 'highlights', 'sortby', 'surveyInfo', 'chartInfo']]
