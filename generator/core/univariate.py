@@ -76,6 +76,8 @@ class Univariate():
                 variable_df.sort_values('total', inplace=True)
             else:
                 variable_df.sort_values('value', inplace=True)
+            if i in self.groupby_columns:
+                variable_df.sort_values('value',ascending=False, inplace=True)
             variable_df['labelIndex'] = list(range(2, len(variable_df)+2))
             variable_df = variable_df[['variable', 'value', 'label_en', 'label_ne', 'variableGroup', 'total', 'askedTotal', 'variableLabel', 'labelIndex']]
             variable_df = self.sort_singleselect_values(variable_df)

@@ -54,7 +54,7 @@ workers_univariate.labels_map.to_excel('./data/generated_workers_labels_map.xlsx
 workers_univariate_stats.drop('askedTotal', axis=1, inplace=True)
 workers_univariate_stats.columns = [ i.lower() for i in workers_univariate_stats.columns]
 workers_univariate_stats.to_sql('workers_univariate_stats', engine, index=False, if_exists='replace')
-workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
+# workers_univariate_stats.to_csv('workers_univariate_stats.csv', index=False)
 
 
 #Data Generation For Bivariate Analysis
@@ -62,4 +62,4 @@ workers_bivariate = Bivariate(raw_data=workers_raw_data, variable_map=workers_va
 workers_bivariate_stats = workers_bivariate.generate_bivariate()
 workers_bivariate_stats.columns = [ i.lower() for i in workers_bivariate_stats.columns]
 workers_bivariate_stats.to_sql('workers_bivariate_stats',  engine, index=False, if_exists='replace')
-workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)
+# workers_bivariate_stats.to_csv('workers_bivariate_stats.csv', index=False)

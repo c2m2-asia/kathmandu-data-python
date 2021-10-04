@@ -23,8 +23,10 @@ def generate_download_data(raw_data, variable_label_map, variable_column_map):
         i_label_map[-1] = np.nan
         downloads_data[i] = downloads_data[i].apply(lambda x: i_label_map[x])
     downloads_data.rename(columns = rename_dict, inplace=True)
-    downloads_data.replace('Yes', '1', inplace=True)
-    downloads_data.replace('No','0', inplace=True)
+    downloads_data.replace(1.0, True, inplace=True)
+    downloads_data.replace(0.0, False, inplace=True)
+    downloads_data.replace('Yes', True, inplace=True)
+    downloads_data.replace('No',False, inplace=True)
     impact_columns = variable_column_map[variable_column_map['Group']=='Impact']['DownloadsDataColumns'].tolist()
     preparedness_columns = variable_column_map[variable_column_map['Group']=='Preparedness']['DownloadsDataColumns'].tolist()
     needs_columns = variable_column_map[variable_column_map['Group']=='Need']['DownloadsDataColumns'].tolist()
@@ -50,3 +52,8 @@ def fix_workforce_downloads(raw_data, labels_map):
     major_work_districts['trsm_major_work_district'] = major_work_districts['trsm_major_work_district'].apply(lambda x: [i for i in x if i!=0])
     major_work_districts['trsm_major_work_district'] = major_work_districts['trsm_major_work_district'].apply(lambda x: (', ').join(x))
     return major_work_districts['trsm_major_work_district']
+
+
+def populate_null_values(downloads_data):
+    pass
+    # return downloads_data

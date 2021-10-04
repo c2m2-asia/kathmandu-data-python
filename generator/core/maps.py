@@ -32,7 +32,10 @@ class Maps():
         map_viz_df['latitude'] = map_viz_df['coordinates'].apply(func=lambda x: x[0])
         map_viz_df['longitude'] = map_viz_df['coordinates'].apply(func=lambda x: x[1])
         map_viz_df['index'] = range(1,len(map_viz_df)+1)
-        map_viz_df.drop(['variable_value', 'coordinates', 'labelIndex'], axis=1, inplace=True)
+        # for i in self.variable_map['variable'].unique():
+        #     print(i, map_viz_df[map_viz_df['variable']==i]['asked_total'].values.tolist())
+        self.variable_map['asked_total'] = self.variable_map['variable'].apply(lambda x: map_viz_df[map_viz_df['variable']==x]['asked_total'][:1].values.tolist()[0])
+        map_viz_df.drop(['variable_value', 'coordinates', 'labelIndex', 'asked_total'], axis=1, inplace=True)
         map_viz_df.columns = ['businessname', 'submissiondate', 'businesstype', 'variable', 'value',
                    'percoftotal', 'total', 'label_en', 'label_ne', 'latitude','longitude', 'index']
         return map_viz_df
@@ -56,6 +59,7 @@ class Maps():
             each_var_df['total'] = each_var_df['value'].apply(lambda x: total_dict[x])
             each_var_df['labelIndex'] = each_var_df['variable_value'].apply(lambda x: self.labels_map[self.labels_map['variableLabel']==x]['labelIndex'].tolist()[0])
             each_var_df.sort_values('labelIndex', inplace=True, ascending=False)
+            each_var_df['asked_total'] = len(each_var_df)
             if len(s_select_df)==0:
                 s_select_df = each_var_df
             else:
@@ -87,6 +91,7 @@ class Maps():
             each_var_df['total'] = len(each_var_df)
             each_var_df['perc_of_total'] = np.round((each_var_df['total']/asked_total)*100, 0)
             each_var_df['labelIndex'] = each_var_df['variable_value'].apply(lambda x: self.labels_map[self.labels_map['variableLabel']==x]['labelIndex'].tolist()[0])
+            each_var_df['asked_total'] = asked_total
             if len(m_select_df)==0:
                 m_select_df = each_var_df
             else:
@@ -111,3 +116,6 @@ class Maps():
             elif (date > pd.to_datetime('2021-04-28')):
                 output.append(2)
         return output
+
+    def generate_variable_map(self):
+        self.variable_map.to_excel('./data/map_viz_variable.xlsx', index=False)

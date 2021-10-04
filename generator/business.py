@@ -49,6 +49,7 @@ business_maps = Maps(raw_data=business_raw_data, variable_map=maps_variable_map,
 map_visualization_data = business_maps.generate_data()
 map_visualization_data.to_sql('map_visualization_data',engine, index=False, if_exists='replace')
 map_visualization_data.to_csv('map_visualization_data.csv', index=False)
+# business_maps.generate_variable_map()
 
 # Merge business types for bivariate visualization 
 business_raw_data['biz_type'] = 0
@@ -71,7 +72,7 @@ business_univariate.labels_map.to_excel('./data/generated_business_labels_map.xl
 business_univariate_stats.drop('askedTotal', axis=1, inplace=True)
 business_univariate_stats.columns = [ i.lower() for i in business_univariate_stats.columns]
 business_univariate_stats.to_sql('businesses_univariate_stats', engine, index=False, if_exists='replace')
-business_univariate_stats.to_csv('business_univariate_stats.csv', index=False)
+# business_univariate_stats.to_csv('business_univariate_stats.csv', index=False)
 
 
 # Data Generation For Bivariate Analysis
@@ -81,4 +82,4 @@ business_bivariate_stats['total'] = business_bivariate_stats['total'].astype(int
 business_bivariate_stats['yValue'] = business_bivariate_stats['yValue'].astype(int)
 business_bivariate_stats.columns = [ i.lower() for i in business_bivariate_stats.columns]
 business_bivariate_stats.to_sql('businesses_bivariate_stats',  engine, index=False, if_exists='replace')
-business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
+# business_bivariate_stats.to_csv('business_bivariate_stats.csv', index=False)
