@@ -31,5 +31,5 @@ To generate data for workforce survey
 ```
 To generate sql dump form postgres server
 ```bash
-`pg_dump -U <POSTGRES_USER> -h localhost <POSTRGRES_DATABASE> > <DUMP_FILE_NAME>
+  pg_dump -U <POSTGRES_USER> -h localhost <POSTRGRES_DATABASE> > <DUMP_FILE_NAME>
 ```
